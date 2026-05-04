@@ -739,6 +739,100 @@
     line-height: 1.55;
   }
   .t2-build-list code { font-size: 0.82em; }
+
+  /* ─── Tab 8 — Marketing initiative briefs ─── */
+  .t8-intro {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin: 0 0 36px;
+  }
+  .t8-brief {
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--lever-color, var(--border-strong));
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 26px 32px 28px;
+    margin: 28px 0;
+  }
+  .t8-brief.lever-ltv         { --lever-color: #C7943A; }
+  .t8-brief.lever-measurement { --lever-color: #5A7A95; }
+  .t8-brief.lever-retention   { --lever-color: #6A8C5A; }
+  .t8-brief.lever-expansion   { --lever-color: #B07A5A; }
+  .t8-brief.lever-organic     { --lever-color: #8A6A9C; }
+
+  .t8-brief-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .t8-brief-num {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+  }
+  .t8-brief-lever {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lever-color);
+    font-weight: 500;
+  }
+  .t8-brief-lever::before {
+    content: "● ";
+    color: var(--lever-color);
+  }
+  .t8-brief-title {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 4px 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .t8-brief-pitch {
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    line-height: 1.55;
+  }
+  .t8-fields {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 0 24px;
+    margin: 0;
+  }
+  .t8-fields dt {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 14px 0 0;
+    border-top: 1px dashed var(--border);
+    align-self: start;
+    line-height: 1.5;
+  }
+  .t8-fields dd {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+    line-height: 1.6;
+    padding: 14px 0 14px;
+    border-top: 1px dashed var(--border);
+  }
+  .t8-fields dt:first-of-type, .t8-fields dd:first-of-type { border-top: none; padding-top: 0; }
+  .t8-fields dd:last-of-type { padding-bottom: 0; }
+  .t8-fields code { font-size: 0.86em; }
+  @media (max-width: 720px) {
+    .t8-fields { grid-template-columns: 1fr; gap: 0; }
+    .t8-fields dt { padding-top: 14px; padding-bottom: 4px; }
+    .t8-fields dd { padding-top: 0; border-top: none; padding-bottom: 14px; }
+    .t8-fields dt:first-of-type { padding-top: 0; }
+  }
 </style>
 </head>
 <body>
@@ -1494,9 +1588,202 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
     <div class="panel-header">
       <div class="panel-eyebrow">08 · Marketing Initiatives</div>
       <h1 class="panel-title">Five campaign briefs</h1>
-      <p class="panel-lede">Tab 8 placeholder — the marketing-strategy showcase. Five expandable initiative cards with full brief structure.</p>
+      <p class="panel-lede">Each brief is built on the spine. The colored bar at the top of every card is its primary lever — where the marketing investment is meant to move the metric.</p>
     </div>
-    <div class="placeholder">Tab 8 content pending</div>
+
+    <p class="t8-intro">Five levers, five complementary motions. <strong style="color: var(--ink);">LTV</strong> lifts pLTV directly. <strong style="color: var(--ink);">Measurement</strong> lifts the trustworthiness of every other initiative. <strong style="color: var(--ink);">Retention</strong> closes the cohort cliff. <strong style="color: var(--ink);">Expansion</strong> buys cheaper installs while T1 prices climb. <strong style="color: var(--ink);">Organic</strong> compounds the portfolio's existing reach. None of the five is ranked above the others — a UA leadership team running all five at once is operating at a different altitude than one running on volume KPIs alone.</p>
+
+    <!-- ─── Brief 1 — LTV LEVER ─── -->
+    <article class="t8-brief lever-ltv">
+      <div class="t8-brief-meta">
+        <span class="t8-brief-num">01 / 05</span>
+        <span class="t8-brief-lever">LTV lever</span>
+      </div>
+      <h2 class="t8-brief-title">High-Value User Lookalike Loop</h2>
+      <p class="t8-brief-pitch">Shift acquisition mix toward higher-LTV users by seeding lookalikes from our top-5%-spender cohort across Meta, Moloco, ASA Custom Product Pages, and TikTok.</p>
+      <dl class="t8-fields">
+        <dt>Insight</dt>
+        <dd>The top 5% of US iOS players generate roughly 20% of global gaming revenue (Moloco, 2025). On our spine, that 5% maps to a specific cohort: D30 retention 3.6× the portfolio average, ad-revenue per user 2.1×, IAP penetration 7×. We have the feature set to seed lookalikes against this cohort — we've never wired the loop.</dd>
+
+        <dt>Hypothesis</dt>
+        <dd>Acquisition campaigns seeded with first-party lookalikes of our top-5% spenders will deliver D30 pLTV at least 35% above blended portfolio average, even at a CPI premium of 25–40%. The economics work because the LTV gap is bigger than the CPI gap.</dd>
+
+        <dt>Target audience</dt>
+        <dd>Lookalike audiences seeded from US/CA/UK/AU iOS top-5%-spender cohorts in Solitaire and TriPeaks (the two titles with mature LTV signal). 1% lookalikes for precision, 3% lookalikes for volume.</dd>
+
+        <dt>Channel mix</dt>
+        <dd>Meta (CAPI custom audience uploads, 1% and 3% lookalikes), Moloco (1P audience seeding via direct-deal lane), ASA Custom Product Pages (per-cohort variants), TikTok (1P upload + Pixel for retargeting). Excluded: Google UAC — its black-box audience model dilutes custom seeds in the bid lattice.</dd>
+
+        <dt>Creative direction</dt>
+        <dd>Three concept tracks. <em>(1) Mastery</em> — leaning into win-streaks and progression cues, the strongest behavior signal in top-5% retention. <em>(2) Daily ritual</em> — top-5% players play 6.2 days per week vs. 2.4 portfolio average. <em>(3) High-stakes moments</em> — late-game scenarios, not tutorial gameplay. All three avoid the "free coins" hook entirely; it over-indexes for low-LTV reward-seekers.</dd>
+
+        <dt>Budget &amp; timeline</dt>
+        <dd>$220K over 8 weeks. Weeks 1–2 audience build + creative production. Weeks 3–6 spend ramp ($30K/wk → $60K/wk). Weeks 7–8 readout. Split: $90K Meta · $60K Moloco · $40K ASA CPP · $30K TikTok.</dd>
+
+        <dt>KPI &amp; guardrails</dt>
+        <dd>Primary: D30 pLTV (lookalike cohort) ≥ 1.35× portfolio average. Guardrails: D7 retention ≥ 11% (vs. 12% portfolio); install volume ≥ 6,000 in test window; CPI ≤ 1.45× portfolio blended average. Secondary: D60 ad-revenue-per-installer.</dd>
+
+        <dt>Test design</dt>
+        <dd>Treatment: lookalike-seeded campaigns. Control: matched same-channel same-creative campaigns running broad targeting on the same titles, geos, window. Bayesian readout alongside frequentist — posterior P(treatment LTV ≥ 1.35× control) &gt; 0.85 is the bar. Statistical readout end of week 6 once D30 cohort matures.</dd>
+
+        <dt>Risks</dt>
+        <dd>(1) Lookalike-1% audiences shrink fast; mitigate with 3% pools for volume. (2) Moloco's direct-deal seeding is the channel currently flagged in Tab 2 Section D — hold its allocation at $30K until the SDK regression resolves. (3) iOS post-ATT signal loss may undercount D30 LTV on the opted-out cohort; cross-check against the SKAN CV-bucket distribution computed by the Section F view.</dd>
+      </dl>
+    </article>
+
+    <!-- ─── Brief 2 — MEASUREMENT LEVER ─── -->
+    <article class="t8-brief lever-measurement">
+      <div class="t8-brief-meta">
+        <span class="t8-brief-num">02 / 05</span>
+        <span class="t8-brief-lever">Measurement lever</span>
+      </div>
+      <h2 class="t8-brief-title">SKAN-Optimized Creative Iteration Engine</h2>
+      <p class="t8-brief-pitch">A two-week creative-test cadence purpose-built for post-ATT measurement, with a CV-mapping that makes signal legible even when probabilistic data is sparse.</p>
+      <dl class="t8-fields">
+        <dt>Insight</dt>
+        <dd>Tab 2 Section E shows D4 (creative-ID propagation) is the weakest dimension across half our ad networks — Meta scores 1/5, UAC 2/5. Without creative-level granularity on opted-out iOS, conventional A/B creative testing fails silently. The fix isn't more impressions; it's a conversion-value mapping that makes a 14-day SKAN window readable by creative variant.</dd>
+
+        <dt>Hypothesis</dt>
+        <dd>A 6-bucket CV mapping aligned to D0–D7 in-app events (level-5 reached, 3rd session, ad-impression-ARPU &gt; $0.10, etc.) will let us read creative winners at 95% confidence on iOS within 14 days, vs. the current 4-week-or-never status. Tested winners will produce a 6-month CTR-decay slope at least 20% slower than the portfolio creative average.</dd>
+
+        <dt>Target audience</dt>
+        <dd>All paid iOS traffic across Solitaire, Spider Solitaire, TriPeaks, Bubble Shooter Pop. Android cohort runs as a deterministic check (probabilistic creative attribution still works there) — Android winners predict iOS winners ~70% of the time, and that's the model we'll use to triage iOS variants faster.</dd>
+
+        <dt>Channel mix</dt>
+        <dd>Networks where D4 ≥ 4/5 in our framework — AppLovin, Moloco, InMobi, Liftoff, ASA. Excluded from this engine: Meta (1/5 propagation, runs separate AAA workflow) and UAC (2/5, separate experimentation track). Phase-2 expansion to Unity Ads (3/5) once we earn creative-ID parity from their team.</dd>
+
+        <dt>Creative direction</dt>
+        <dd>Every two weeks, ship a 4-variant test on each (title × network × OS) cell. Variants must vary on exactly one dimension — hook (0–3s), pacing, CTA, or audio. Ban "one-arm" creative changes; that's how we get unreadable tests. Keep a permanent control creative for cross-test calibration. Each creative spends 14 days live, then retires regardless — fatigue dominates after that (Tab 4 fatigue curve).</dd>
+
+        <dt>Budget &amp; timeline</dt>
+        <dd>$30K/cell/cycle × ~12 active cells = $360K/cycle, ongoing. First cycle weeks 1–3, second cycle weeks 4–6, etc. CV mapping is a 2-week up-front engineering investment that pays off cycle-after-cycle.</dd>
+
+        <dt>KPI &amp; guardrails</dt>
+        <dd>Primary: 95%-confidence creative-winner identification within 14 days on ≥ 60% of (title × network × iOS) cells. Guardrails: blended CPI not up &gt; 5%; D7 retention parity within 1pp of pre-engine baseline; iteration cycle time dropping not increasing. Secondary: 6-month CTR-decay slope improvement on tested winners.</dd>
+
+        <dt>Test design</dt>
+        <dd>This is the test infrastructure, not a single test. The validation experiment is a meta-test: run the engine on Solitaire iOS for 6 weeks; compare creative-winner rank-correlation between the SKAN-readable cycle and the deterministic Android cohort cycle. If they're aligned (Spearman ρ &gt; 0.6), the engine works. If not, the CV mapping needs revision.</dd>
+
+        <dt>Risks</dt>
+        <dd>(1) CV mapping is a one-shot bet per app — wrong mapping costs months. Mitigate by piloting on Solitaire only first, validating against Android, then porting. (2) SKAN postback-completeness drops will read as creative regressions (false signals); the Tab 2 Section I postback alert needs to be live <em>before</em> launch. (3) Creative producers will resist the 14-day rotation cap. Frame it as "we're paying for the 14 best days, not the slow tail" and bring them into the design.</dd>
+      </dl>
+    </article>
+
+    <!-- ─── Brief 3 — RETENTION LEVER ─── -->
+    <article class="t8-brief lever-retention">
+      <div class="t8-brief-meta">
+        <span class="t8-brief-num">03 / 05</span>
+        <span class="t8-brief-lever">Retention lever</span>
+      </div>
+      <h2 class="t8-brief-title">Re-Engagement Engine for Dormant High-D7 Cohorts</h2>
+      <p class="t8-brief-pitch">Identify users who showed strong D1–D7 engagement but churned by D30; build a SKAN-aware retargeting playbook paired with in-app event hooks tied to live ops.</p>
+      <dl class="t8-fields">
+        <dt>Insight</dt>
+        <dd>Our D30 retention cliff sits between D7 and D14. ~62% of users who hit D7 retention churn within the next 7 days — and within that group, ~40% never see a live-ops event because the live-ops cadence kicks in at week 3. We're losing a high-engagement cohort to a content gap we control.</dd>
+
+        <dt>Hypothesis</dt>
+        <dd>Retargeting the dormant-D7-strong cohort with a campaign timed to a specific live-ops event will produce ≥ 18% reactivation rate within 14 days of touch, and reactivated users will show D60 retention parity with the never-churned D30 cohort within ±15%. Implication: re-engagement here isn't a discounted UA channel — it's a cheaper-than-acquisition way to add a known-good user.</dd>
+
+        <dt>Target audience</dt>
+        <dd>Users with D1 retention TRUE, D7 retention TRUE, last_session NULL for 14–21 days. Cohort scope: Solitaire iOS US/CA/UK and TriPeaks Android US — the two cells with cleanest in-app event tracking. Estimated cohort size: ~340K users on a rolling 30-day basis.</dd>
+
+        <dt>Channel mix</dt>
+        <dd>Meta (CAPI custom audience), Moloco (direct-deal user-list seeding), TikTok (Pixel-based retargeting). Push notifications + email run as a parallel zero-cost channel and serve as a control arm — paid channels need to outperform owned-media reactivation by enough to justify the spend.</dd>
+
+        <dt>Creative direction</dt>
+        <dd>Three tracks tied to the live-ops calendar. <em>(1) Tournament returning</em> — when a Solitaire weekly tournament launches, message dormant users 24h before. <em>(2) Streak rescue</em> — for users with a documented win-streak history, message at the day-mark when their streak would have continued. <em>(3) New jigsaw event</em> — Solitaire's recent jigsaw rollout has higher D1-back rates than any other live-op; lean in. Avoid generic "we miss you" copy — it tests poorly across the casual-card category.</dd>
+
+        <dt>Budget &amp; timeline</dt>
+        <dd>$140K over 12 weeks. Three 4-week test waves, each tied to a different live-ops cycle: Solitaire tournament (week 1), TriPeaks event (week 5), Solitaire jigsaw (week 9). Split: $70K Meta · $40K Moloco · $30K TikTok.</dd>
+
+        <dt>KPI &amp; guardrails</dt>
+        <dd>Primary: 14-day reactivation rate ≥ 18% on paid arms vs. push/email control. Secondary: D60 retention parity with never-churned cohort within ±15%. Guardrails: D14 ad-ARPU on reactivated cohort ≥ pre-churn ad-ARPU (otherwise the reactivated user isn't worth the spend); cost-per-reactivation ≤ 0.5× current iOS US blended CPI.</dd>
+
+        <dt>Test design</dt>
+        <dd>User-level holdout: 80/20 treatment/control within the dormant cohort. Treatment receives paid retargeting; control receives only push/email. Compare 14-day reactivation, then D60 retention, then D60 ad-revenue. Bayesian readout — posterior P(treatment reactivation ≥ control + 6pp) &gt; 0.9 is the bar. <strong>User-level randomization</strong> at the AppsFlyer audience layer is non-negotiable; campaign-level randomization invalidates the readout.</dd>
+
+        <dt>Risks</dt>
+        <dd>(1) iOS opt-out cohort can't be retargeted on Meta-by-IDFA — rely on email-hash custom audiences where consented at signup. (2) Live-ops event cadence is owned by Product; campaigns timed to events that get pushed/canceled are dead spend. Lock launch dates with Product before booking media. (3) Reactivation campaigns can poach users who would have come back organically — the holdout structure controls for this, which is exactly why the user-level randomization point above isn't optional.</dd>
+      </dl>
+    </article>
+
+    <!-- ─── Brief 4 — EXPANSION LEVER ─── -->
+    <article class="t8-brief lever-expansion">
+      <div class="t8-brief-meta">
+        <span class="t8-brief-num">04 / 05</span>
+        <span class="t8-brief-lever">Expansion lever</span>
+      </div>
+      <h2 class="t8-brief-title">Emerging Markets Expansion Sprint — BR, MX, ID, PH</h2>
+      <p class="t8-brief-pitch">Six-week pilot across four high-growth emerging markets, scoped from day one with a geo-holdout incrementality structure rather than a self-attribution bet.</p>
+      <dl class="t8-fields">
+        <dt>Insight</dt>
+        <dd>Top 1% iOS bid prices rose 140% in 2024 (Moloco). T1 markets are getting structurally more expensive every quarter, while iOS share in Brazil, Mexico, Indonesia, and the Philippines is climbing — and casual-card retention in these markets is within 8% of T1 averages on the data we already have. The bid-pressure delta is real; the retention delta isn't.</dd>
+
+        <dt>Hypothesis</dt>
+        <dd>Solitaire iOS in BR/MX and Solitaire Android in ID/PH will deliver D30 ROAS within 20% of US/UK at less than 60% of US/UK CPI. Even if D30 ROAS is somewhat softer, blended portfolio CPI drops materially because the marginal CPI savings translate to incremental scaled installs.</dd>
+
+        <dt>Target audience</dt>
+        <dd>BR: iOS 18–44, urban. MX: iOS 18–44, T1+T2 cities. ID: Android, all-SES (Android device-price spread is wide). PH: Android 18–44. All campaigns scoped to local-language creative — generic English creative is the #1 expansion-failure mode in casual card.</dd>
+
+        <dt>Channel mix</dt>
+        <dd>Google UAC (broad reach in EM), Moloco (strong BR/MX inventory mix), TikTok (massive scale in ID/PH), AppLovin (strong Android performance), ASA (BR + MX only — App Store presence in ID/PH is much smaller than Google Play). Excluded for this sprint: Meta and Unity — too expensive a learning curve to run alongside a tight 6-week cycle.</dd>
+
+        <dt>Creative direction</dt>
+        <dd>Localized hooks, not translated hooks. <em>(1) BR</em> — "jogo offline" (offline play) tests strongly; Brazilians flag mobile-data sensitivity in casual gaming. <em>(2) MX</em> — family-friendly framing, "jugar con la familia" angles. <em>(3) ID/PH</em> — short-session emphasis (1–3 minute play windows); light-mode visuals for low-end Android screens. Native-language voiceover on video formats, not subtitles.</dd>
+
+        <dt>Budget &amp; timeline</dt>
+        <dd>$180K over 6 weeks. Week 1: localization + baseline data pulls. Weeks 2–5: spend ramp. Week 6: readout. Per-market split: $50K BR · $50K MX · $40K ID · $40K PH. Reserve: $0 — emerging-markets pilots fail by being half-funded; commit fully or don't run.</dd>
+
+        <dt>KPI &amp; guardrails</dt>
+        <dd>Primary: D30 ROAS ≥ 0.8× US/UK D30 ROAS in matching titles. Guardrails: D7 retention not below 9% (lower edge of portfolio range); blended CPI ≤ $1.20 in BR/MX iOS and ≤ $0.60 in ID/PH Android. Secondary: ad-ARPU per installer ≥ 0.7× T1 — if below 0.5×, reconsider entry.</dd>
+
+        <dt>Test design</dt>
+        <dd>Geo-holdout incrementality from day one. Within each pilot market, 4 high-population DMAs as treatment, 4 as control (paid spend held off in control DMAs for the full 6 weeks). Pre-period parallel-trends check on organic install volume in weeks −3 to −1 to validate matching. Read incremental rate at week 6; compare to network-attributed install count to set the discount factor going forward — <strong>this is a Tab 2 feedback-loop write</strong>.</dd>
+
+        <dt>Risks</dt>
+        <dd>(1) EM ad-revenue eCPMs run 30–50% lower than T1, which compresses pLTV — model it correctly upfront, don't pretend T1 monetization translates. (2) Currency volatility (BRL, MXN, IDR, PHP) will distort week-over-week ROAS if not USD-anchored at spend time; the Section F view does USD-conversion at point-of-spend, lean on it. (3) Local-language creative production at speed risks tone-deafness; budget includes a 1-week native-speaker QA loop before launch — non-negotiable.</dd>
+      </dl>
+    </article>
+
+    <!-- ─── Brief 5 — ORGANIC LEVER (closes the data-fragmentation thread) ─── -->
+    <article class="t8-brief lever-organic">
+      <div class="t8-brief-meta">
+        <span class="t8-brief-num">05 / 05</span>
+        <span class="t8-brief-lever">Organic lever · the inside game</span>
+      </div>
+      <h2 class="t8-brief-title">Cross-Title Portfolio Synergy</h2>
+      <p class="t8-brief-pitch">Formalize cross-promotion between Solitaire ↔ Spider Solitaire ↔ TriPeaks ↔ Bubble Shooter Pop, treating the portfolio as our largest organic UA channel — and tie it back to the data-fragmentation problem the workbench was built to solve.</p>
+      <dl class="t8-fields">
+        <dt>Insight</dt>
+        <dd>Our flagship Solitaire app has reached ~100M global players. The cross-title overlap visible in our internal warehouse — users with installs across two of our games — sits at ~3.4%. Industry benchmarks for studios that actively cross-promote run 12–18%. We're sitting on the largest piece of paid-equivalent UA inventory in the portfolio and not using it.</dd>
+
+        <dt>Hypothesis</dt>
+        <dd>A formalized cross-promotion engine produces ≥ 9% lift in second-title installs from the existing Solitaire active-user base, at effectively zero incremental media cost (the inventory is our own ad slots). Second-title users acquired via cross-promotion show D30 retention at par with paid-acquired users — and likely 20–40% higher, because demonstrated genre-affinity is a stronger signal than any algorithmic targeting.</dd>
+
+        <dt>Target audience</dt>
+        <dd>Solitaire DAU as the seed cohort; promotion targeting depends on title pair. Solitaire → Spider Solitaire (high genre overlap). Solitaire → TriPeaks (lateral casual move). Solitaire → Bubble Shooter Pop (broader casual cross-sell). All four titles seeded back to each other in the inverse direction.</dd>
+
+        <dt>Channel mix</dt>
+        <dd>Owned-and-operated entirely. In-app cross-promo ad slots, end-of-game-state interstitials, app-launch promo carousels, and a coordinated push-notification calendar for cross-title event launches. No paid media in this initiative — that's the point.</dd>
+
+        <dt>Creative direction</dt>
+        <dd>Treat cross-promo creative with the same rigor as paid creative: A/B-tested, fatigue-tracked, refresh cadence locked. Common failure mode: treating cross-promo as "free" and shipping low-effort creative — that wastes the inventory and trains users to ignore it. Three tracks: <em>(1) genre-bridge</em> ("Loved Solitaire? Try Spider"); <em>(2) live-ops cross-pull</em> (Solitaire jigsaw → TriPeaks Pyramid event); <em>(3) achievement-bridge</em> (your Solitaire streak → TriPeaks first-day reward).</dd>
+
+        <dt>Budget &amp; timeline</dt>
+        <dd>$25K total — for instrumentation, creative production, and analytics tooling. No media spend. 8-week build, ongoing operation. Weeks 1–3: cross-title attribution layer build (the hard part). Weeks 4–5: creative production. Weeks 6–7: pilot across two title pairs. Week 8: readout, then scale to full portfolio.</dd>
+
+        <dt>KPI &amp; guardrails</dt>
+        <dd>Primary: ≥ 9% second-title install lift on seeded title pairs by week 6, vs. unseeded baseline. Secondary: D30 retention parity with paid-acquired cohort within ±15%. Guardrails: primary-title D7 retention <strong>not</strong> down (cross-promo can't eat into the host title's engagement); cross-promo ad-slot replacement-cost ≤ $40K/quarter portfolio-wide (those slots currently sell to third-party networks).</dd>
+
+        <dt>Test design</dt>
+        <dd>User-level randomized holdout within Solitaire DAU: 50% see cross-promo creative, 50% see standard third-party ad inventory. Compare second-title install rate, primary-title D7 retention, and primary-title ad-revenue between arms. Run for 6 weeks to capture D30 retention readout on the second-title cohort.</dd>
+
+        <dt>Risks</dt>
+        <dd>(1) <strong>The cross-title attribution layer is itself a Tab 2 fragmentation problem.</strong> One player playing two of our games is a single user across two install_id streams that don't currently share a join key. Solving this is the harder half of this initiative — and it's also the foundation for portfolio-level pLTV modeling. (2) Cross-promo slots currently produce ~$160K/quarter in third-party ad revenue across the portfolio; this initiative trades some of that for second-title installs. The math has to be done carefully — at what cross-promo conversion rate does the trade clear? Build the model before launching. (3) Primary-title cannibalization is the cardinal risk: if Solitaire DAU spend less time on Solitaire because they're now playing TriPeaks, the primary-title ad-revenue hit could exceed the second-title lift. The user-level holdout is what tells us whether this is happening.</dd>
+      </dl>
+    </article>
+
+    <p class="footnote">Five briefs, five levers. The thing they share is the spine. None of them work without the trust framework, the reconciliation, and the feedback loop in Tab 2 — which is why Tab 2 is built first.</p>
   </section>
 
   <section class="tab-panel layout-narrative" data-panel="9">
