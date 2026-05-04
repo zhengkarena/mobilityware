@@ -1287,6 +1287,331 @@
     margin-bottom: 4px;
   }
   @media (max-width: 1024px) { .t1-actions { grid-template-columns: 1fr; } }
+
+  /* ─── Tab 3 — Channel Performance ─── */
+  .t3-section { margin: 48px 0; }
+  .t3-section:first-of-type { margin-top: 8px; }
+  .t3-section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .t3-section-eyebrow .marker { color: var(--amber); margin-right: 8px; }
+  .t3-section h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .t3-section .t3-sub {
+    font-size: 0.92rem;
+    color: var(--ink-muted);
+    max-width: 760px;
+    line-height: 1.55;
+    margin: 0 0 18px;
+  }
+
+  /* Channel breakdown table */
+  .t3-table-wrap {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+    background: var(--bg-card);
+  }
+  table.t3-channel {
+    width: 100%;
+    min-width: 1080px;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+  }
+  table.t3-channel th, table.t3-channel td {
+    text-align: right;
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.t3-channel th:first-child, table.t3-channel td:first-child,
+  table.t3-channel th.left, table.t3-channel td.left { text-align: left; }
+  table.t3-channel thead th {
+    background: var(--bg-inset);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.68rem;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border-strong);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+  }
+  table.t3-channel thead th:hover { color: var(--ink-soft); }
+  table.t3-channel thead th .arrow {
+    display: inline-block;
+    width: 0; height: 0;
+    margin-left: 5px;
+    opacity: 0;
+    transition: opacity .15s ease;
+  }
+  table.t3-channel thead th.sorted .arrow { opacity: 0.7; }
+  table.t3-channel thead th.sorted.asc .arrow {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 5px solid var(--amber);
+  }
+  table.t3-channel thead th.sorted.desc .arrow {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--amber);
+  }
+  table.t3-channel thead th.sorted { color: var(--ink); }
+  table.t3-channel tbody td { color: var(--ink-soft); }
+  table.t3-channel tbody td.channel {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  table.t3-channel tbody td.os {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+  table.t3-channel tbody tr:hover td { background: rgba(255,255,255,0.012); }
+  table.t3-channel tbody tr:last-child td { border-bottom: none; }
+  table.t3-channel tbody tr.totals {
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border-strong);
+  }
+  table.t3-channel tbody tr.totals td {
+    font-weight: 600;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+  }
+  /* outlier muted color hints */
+  table.t3-channel td.good  { color: var(--positive); }
+  table.t3-channel td.bad   { color: var(--negative); }
+  table.t3-channel td.naught { color: var(--ink-faint); font-style: italic; }
+  table.t3-channel td .trust { justify-content: flex-end; }
+
+  /* iOS vs Android side-by-side */
+  .t3-os-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .t3-os-card {
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--os-color, var(--border-strong));
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 22px 26px;
+  }
+  .t3-os-card.ios     { --os-color: var(--slate); }
+  .t3-os-card.android { --os-color: var(--sage);  }
+  .t3-os-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .t3-os-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .t3-os-share {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--os-color);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .t3-os-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .t3-os-grid .m { display: flex; flex-direction: column; gap: 2px; }
+  .t3-os-grid .m .lbl {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .t3-os-grid .m .val {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .t3-os-note {
+    border-top: 1px dashed var(--border);
+    padding-top: 10px;
+    font-size: 0.86rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+  @media (max-width: 720px) { .t3-os-split { grid-template-columns: 1fr; } }
+
+  /* 90-day CPI trend chart */
+  .t3-chart-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px 16px;
+  }
+  .t3-chart-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .t3-chart-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--ink); font-weight: 500; }
+  .t3-chart-cap   { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .t3-chart-canvas { height: 280px; position: relative; }
+
+  /* Reallocation simulator */
+  .t3-sim {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 24px 28px;
+  }
+  .t3-sim-output {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--bg-inset);
+    margin-bottom: 22px;
+  }
+  .t3-sim-output .o {
+    padding: 14px 18px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .t3-sim-output .o:last-child { border-right: none; }
+  .t3-sim-output .o-lbl {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .t3-sim-output .o-val {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .t3-sim-output .o-delta { font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-muted); }
+  .t3-sim-output .o-delta.good { color: var(--positive); }
+  .t3-sim-output .o-delta.bad  { color: var(--negative); }
+  @media (max-width: 720px) { .t3-sim-output { grid-template-columns: repeat(2, 1fr); } .t3-sim-output .o:nth-child(2) { border-right: none; } }
+
+  .t3-sim-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .t3-sim-actions button {
+    appearance: none;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-strong);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 7px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all .15s ease;
+    letter-spacing: 0.04em;
+  }
+  .t3-sim-actions button:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .t3-sim-actions button.primary { color: var(--amber); border-color: var(--amber); background: rgba(199,148,58,.06); }
+  .t3-sim-actions button.primary:hover { background: rgba(199,148,58,.10); }
+
+  .t3-sim-rows {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .t3-sim-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 90px 80px;
+    gap: 14px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .t3-sim-row:last-child { border-bottom: none; }
+  .t3-sim-name {
+    font-family: var(--font-display);
+    font-size: 0.94rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .t3-sim-row input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: transparent;
+    margin: 0;
+  }
+  .t3-sim-row input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: var(--border-strong); border-radius: 2px; }
+  .t3-sim-row input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: var(--amber); margin-top: -5.5px; cursor: pointer; }
+  .t3-sim-row input[type="range"]::-moz-range-track { height: 3px; background: var(--border-strong); border-radius: 2px; }
+  .t3-sim-row input[type="range"]::-moz-range-thumb { height: 14px; width: 14px; border-radius: 50%; background: var(--amber); border: none; cursor: pointer; }
+  .t3-sim-spend {
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    color: var(--ink);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .t3-sim-delta {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--ink-muted);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .t3-sim-delta.up   { color: var(--sage); }
+  .t3-sim-delta.down { color: var(--terra); }
+  @media (max-width: 720px) { .t3-sim-row { grid-template-columns: 1fr; gap: 4px; } }
+
+  .t3-narrative {
+    max-width: 880px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .t3-narrative h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .t3-narrative p { margin-bottom: 14px; }
 </style>
 </head>
 <body>
@@ -2172,11 +2497,420 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
 
   <section class="tab-panel layout-dashboard" data-panel="3">
     <div class="panel-header">
-      <div class="panel-eyebrow">03 · Channel Deep-Dive</div>
-      <h1 class="panel-title">Channel performance</h1>
-      <p class="panel-lede">Tab 3 placeholder — channel table, iOS vs Android split, 90-day CPI trend, SQL block, reallocation simulator.</p>
+      <div class="panel-eyebrow">03 · Channel Performance Deep-Dive</div>
+      <h1 class="panel-title">Channel mix isn't fungible</h1>
+      <p class="panel-lede">Ten channels, two operating systems, one trust framework that ties them together. The numbers below all read from <code>fact_ua_daily</code>; the trust column carries the same composite score as Tab 2 Section&nbsp;E.</p>
     </div>
-    <div class="placeholder">Tab 3 content pending</div>
+
+    <!-- ─── Section A — Per-channel breakdown table ─── -->
+    <div class="t3-section">
+      <div class="t3-section-eyebrow"><span class="marker">A</span>30-day channel scorecard</div>
+      <h2>Where the $4.21M went</h2>
+      <p class="t3-sub">Click any column to sort. Trust scores are the same composite shown in Tab 2 Section&nbsp;E. SKAN share is the SKAN-attributed install fraction; ASA is deterministic and bypasses SKAN.</p>
+
+      <div class="t3-table-wrap">
+        <table class="t3-channel">
+          <thead>
+            <tr>
+              <th class="left" data-sort="channel">Channel <span class="arrow"></span></th>
+              <th class="left" data-sort="os">OS <span class="arrow"></span></th>
+              <th data-sort="spend">Spend 30d <span class="arrow"></span></th>
+              <th data-sort="installs">Installs <span class="arrow"></span></th>
+              <th data-sort="cpi">CPI <span class="arrow"></span></th>
+              <th data-sort="roas7">ROAS D7 <span class="arrow"></span></th>
+              <th data-sort="roas30">ROAS D30 <span class="arrow"></span></th>
+              <th data-sort="ret">D7 Ret <span class="arrow"></span></th>
+              <th data-sort="skan">SKAN share <span class="arrow"></span></th>
+              <th data-sort="trust">Trust <span class="arrow"></span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="Google UAC">Google UAC</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="1179000">$1,179K</td>
+              <td data-col="installs"  data-val="556000">556K</td>
+              <td data-col="cpi"       data-val="2.12">$2.12</td>
+              <td data-col="roas7"     data-val="18.7">18.7%</td>
+              <td data-col="roas30"    data-val="50.5">50.5%</td>
+              <td data-col="ret"       data-val="14.2">14.2%</td>
+              <td data-col="skan"      data-val="35">35%</td>
+              <td data-col="trust"     data-val="3"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="Meta">Meta</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="758000">$758K</td>
+              <td data-col="installs"  data-val="259000">259K</td>
+              <td class="bad" data-col="cpi" data-val="2.93">$2.93</td>
+              <td class="bad" data-col="roas7" data-val="14.6">14.6%</td>
+              <td class="bad" data-col="roas30" data-val="37.2">37.2%</td>
+              <td data-col="ret"       data-val="12.8">12.8%</td>
+              <td data-col="skan"      data-val="48">48%</td>
+              <td data-col="trust"     data-val="2"><span class="trust score-2"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="Apple Search Ads">Apple Search Ads</td>
+              <td class="left os"      data-col="os"      data-val="iOS">iOS</td>
+              <td data-col="spend"     data-val="547000">$547K</td>
+              <td data-col="installs"  data-val="167000">167K</td>
+              <td class="bad" data-col="cpi" data-val="3.28">$3.28</td>
+              <td class="good" data-col="roas7" data-val="23.9">23.9%</td>
+              <td class="good" data-col="roas30" data-val="68.1">68.1%</td>
+              <td class="good" data-col="ret" data-val="16.0">16.0%</td>
+              <td class="naught" data-col="skan" data-val="0">—</td>
+              <td data-col="trust"     data-val="5"><span class="trust score-5"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="AppLovin">AppLovin</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="505000">$505K</td>
+              <td data-col="installs"  data-val="266000">266K</td>
+              <td data-col="cpi"       data-val="1.90">$1.90</td>
+              <td data-col="roas7"     data-val="19.5">19.5%</td>
+              <td data-col="roas30"    data-val="54.6">54.6%</td>
+              <td data-col="ret"       data-val="13.5">13.5%</td>
+              <td data-col="skan"      data-val="32">32%</td>
+              <td data-col="trust"     data-val="4"><span class="trust score-4"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="Unity Ads">Unity Ads</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="421000">$421K</td>
+              <td data-col="installs"  data-val="211000">211K</td>
+              <td data-col="cpi"       data-val="2.00">$2.00</td>
+              <td data-col="roas7"     data-val="17.5">17.5%</td>
+              <td data-col="roas30"    data-val="49.9">49.9%</td>
+              <td data-col="ret"       data-val="13.1">13.1%</td>
+              <td data-col="skan"      data-val="30">30%</td>
+              <td data-col="trust"     data-val="3"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="Moloco">Moloco <span style="font-family:var(--font-mono);font-size:0.66rem;color:var(--amber);letter-spacing:0.06em;text-transform:uppercase;margin-left:6px">SDK flag</span></td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="274000">$274K</td>
+              <td data-col="installs"  data-val="123000">123K</td>
+              <td data-col="cpi"       data-val="2.22">$2.22</td>
+              <td class="good" data-col="roas7" data-val="22.0">22.0%</td>
+              <td class="good" data-col="roas30" data-val="58.3">58.3%</td>
+              <td class="good" data-col="ret" data-val="14.7">14.7%</td>
+              <td data-col="skan"      data-val="42">42%</td>
+              <td data-col="trust"     data-val="4"><span class="trust score-4"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="ironSource">ironSource</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="211000">$211K</td>
+              <td data-col="installs"  data-val="120000">120K</td>
+              <td class="good" data-col="cpi" data-val="1.76">$1.76</td>
+              <td data-col="roas7"     data-val="16.8">16.8%</td>
+              <td data-col="roas30"    data-val="47.9">47.9%</td>
+              <td data-col="ret"       data-val="12.5">12.5%</td>
+              <td data-col="skan"      data-val="28">28%</td>
+              <td data-col="trust"     data-val="3"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="TikTok">TikTok</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="147000">$147K</td>
+              <td data-col="installs"  data-val="58000">58K</td>
+              <td data-col="cpi"       data-val="2.52">$2.52</td>
+              <td data-col="roas7"     data-val="18.5">18.5%</td>
+              <td data-col="roas30"    data-val="51.8">51.8%</td>
+              <td data-col="ret"       data-val="13.4">13.4%</td>
+              <td data-col="skan"      data-val="38">38%</td>
+              <td data-col="trust"     data-val="3"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="InMobi">InMobi</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="84000">$84K</td>
+              <td data-col="installs"  data-val="43000">43K</td>
+              <td data-col="cpi"       data-val="1.94">$1.94</td>
+              <td data-col="roas7"     data-val="19.6">19.6%</td>
+              <td data-col="roas30"    data-val="53.9">53.9%</td>
+              <td data-col="ret"       data-val="13.8">13.8%</td>
+              <td data-col="skan"      data-val="36">36%</td>
+              <td data-col="trust"     data-val="4"><span class="trust score-4"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr>
+              <td class="left channel" data-col="channel" data-val="Liftoff">Liftoff</td>
+              <td class="left os"      data-col="os"      data-val="iOS+And">iOS · And</td>
+              <td data-col="spend"     data-val="84000">$84K</td>
+              <td data-col="installs"  data-val="40000">40K</td>
+              <td data-col="cpi"       data-val="2.12">$2.12</td>
+              <td data-col="roas7"     data-val="17.4">17.4%</td>
+              <td data-col="roas30"    data-val="48.7">48.7%</td>
+              <td data-col="ret"       data-val="13.0">13.0%</td>
+              <td data-col="skan"      data-val="33">33%</td>
+              <td data-col="trust"     data-val="4"><span class="trust score-4"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td>
+            </tr>
+            <tr class="totals">
+              <td class="left">Portfolio</td>
+              <td class="left">—</td>
+              <td>$4,210K</td>
+              <td>1,843K</td>
+              <td>$2.28</td>
+              <td>18.7%</td>
+              <td>51.3%</td>
+              <td>13.9%</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ─── Section B — iOS vs Android side-by-side ─── -->
+    <div class="t3-section">
+      <div class="t3-section-eyebrow"><span class="marker">B</span>iOS vs Android</div>
+      <h2>Two operating systems, two economies</h2>
+      <p class="t3-sub">The 30-day rollup split by OS. Same metrics, different stories — post-ATT, iOS economics are categorically different from Android.</p>
+
+      <div class="t3-os-split">
+        <div class="t3-os-card ios">
+          <div class="t3-os-head">
+            <div class="t3-os-name">iOS</div>
+            <div class="t3-os-share">42.5% of spend · 31.8% of installs</div>
+          </div>
+          <div class="t3-os-grid">
+            <div class="m"><span class="lbl">Spend 30d</span><span class="val">$1.79M</span></div>
+            <div class="m"><span class="lbl">Installs</span><span class="val">587K</span></div>
+            <div class="m"><span class="lbl">CPI</span><span class="val">$3.05</span></div>
+            <div class="m"><span class="lbl">ROAS D7</span><span class="val">22.0%</span></div>
+            <div class="m"><span class="lbl">ROAS D30</span><span class="val">57.0%</span></div>
+            <div class="m"><span class="lbl">D7 Ret</span><span class="val">15.0%</span></div>
+            <div class="m"><span class="lbl">SKAN share</span><span class="val">78%</span></div>
+            <div class="m"><span class="lbl">Top channel</span><span class="val">ASA</span></div>
+            <div class="m"><span class="lbl">Trust avg</span><span class="val">3.7 / 5</span></div>
+          </div>
+          <p class="t3-os-note">Higher CPI ($3.05 vs $1.92), higher ROAS D7 (22.0% vs 16.3%), higher D7 retention. iOS users are more expensive and worth more. The SKAN share at 78% is the post-ATT reality — most paid iOS attribution flows through the conversion-value pipeline rather than user-level identity.</p>
+        </div>
+        <div class="t3-os-card android">
+          <div class="t3-os-head">
+            <div class="t3-os-name">Android</div>
+            <div class="t3-os-share">57.5% of spend · 68.2% of installs</div>
+          </div>
+          <div class="t3-os-grid">
+            <div class="m"><span class="lbl">Spend 30d</span><span class="val">$2.42M</span></div>
+            <div class="m"><span class="lbl">Installs</span><span class="val">1.26M</span></div>
+            <div class="m"><span class="lbl">CPI</span><span class="val">$1.92</span></div>
+            <div class="m"><span class="lbl">ROAS D7</span><span class="val">16.3%</span></div>
+            <div class="m"><span class="lbl">ROAS D30</span><span class="val">47.0%</span></div>
+            <div class="m"><span class="lbl">D7 Ret</span><span class="val">13.2%</span></div>
+            <div class="m"><span class="lbl">SKAN share</span><span class="val">—</span></div>
+            <div class="m"><span class="lbl">Top channel</span><span class="val">Google UAC</span></div>
+            <div class="m"><span class="lbl">Trust avg</span><span class="val">3.6 / 5</span></div>
+          </div>
+          <p class="t3-os-note">Lower CPI, lower ROAS, but cleaner attribution end-to-end via Play Install Referrer + GAID. Android is the volume engine; the deterministic chain makes it the cohort our retention and pLTV models can be most confident about (Tab&nbsp;2 Section&nbsp;G). Where iOS is expensive and partial, Android is cheap and complete.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Section C — 90-day CPI trend ─── -->
+    <div class="t3-section">
+      <div class="t3-section-eyebrow"><span class="marker">C</span>90-day CPI trend</div>
+      <h2>Where the auction pressure shows up</h2>
+      <p class="t3-sub">Six largest channels by spend. Daily CPI with realistic weekly cyclicality — procurement cycles + auction-driven volatility, not smoothed.</p>
+
+      <div class="t3-chart-wrap">
+        <div class="t3-chart-head">
+          <div class="t3-chart-title">CPI · top 6 channels · 90 days</div>
+          <div class="t3-chart-cap">2026-02-04 → 2026-05-04 · daily · USD</div>
+        </div>
+        <div class="t3-chart-canvas"><canvas id="t3-cpi-chart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ─── Section D — SQL view ─── -->
+    <div class="t3-section">
+      <div class="t3-section-eyebrow"><span class="marker">D</span>The query behind the table</div>
+      <h2>One rollup, on top of the spine</h2>
+      <p class="t3-sub">This is the canonical per-channel ROAS rollup. It reads from <code>fact_ua_daily</code> (Tab 2 Section&nbsp;F) and joins the trust ref + LTV projection — it doesn't reconstruct anything the spine already gives us.</p>
+
+      <div class="t2-sql-frame">
+        <div class="t2-sql-head">
+          <span>per_channel_roas_rollup.sql</span>
+          <span class="lang">BigQuery</span>
+        </div>
+        <pre class="code"><code id="sql-channel-rollup"></code></pre>
+      </div>
+
+      <script type="text/x-sql" data-target="sql-channel-rollup">
+-- per_channel_roas_rollup — 30-day channel scorecard, reads from fact_ua_daily (Tab 2 Section F).
+
+WITH base AS (
+  SELECT *
+  FROM `mw-ua.fact.fact_ua_daily`
+  WHERE report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+                        AND DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
+),
+
+trust_scores AS (
+  SELECT channel, composite_trust_score
+  FROM `mw-ua.ref.network_trust_scores`
+  WHERE as_of_date = (SELECT MAX(as_of_date) FROM `mw-ua.ref.network_trust_scores`)
+),
+
+ltv_projection AS (
+  SELECT channel, os, d7_to_d30_multiplier
+  FROM `mw-ua.ref.ltv_projection_curves`
+  WHERE curve_version = 'v3'
+),
+
+rollup AS (
+  SELECT
+    channel, os,
+    SUM(spend_usd)                                                            AS spend_30d,
+    SUM(blended_installs)                                                     AS installs_30d,
+    SAFE_DIVIDE(SUM(skan_installs), NULLIF(SUM(blended_installs), 0))         AS skan_share,
+    -- Trailing 3-day window for SKAN-heavy channels — postbacks arrive after attribution,
+    -- so anything inside the last 3 days systematically under-reports ROAS.
+    SUM(IF(report_date <= DATE_SUB(CURRENT_DATE(), INTERVAL 4 DAY)
+        OR SAFE_DIVIDE(skan_installs, blended_installs) < 0.40,
+        COALESCE(ad_revenue_d7, 0) + COALESCE(iap_revenue_d7, 0), 0))         AS revenue_d7_safe,
+    SUM(IF(report_date <= DATE_SUB(CURRENT_DATE(), INTERVAL 4 DAY)
+        OR SAFE_DIVIDE(skan_installs, blended_installs) < 0.40,
+        spend_usd, 0))                                                        AS spend_d7_safe,
+    AVG(skan_postback_completeness)                                           AS postback_completeness
+  FROM base
+  GROUP BY channel, os
+)
+
+SELECT
+  r.channel,
+  r.os,
+  r.spend_30d,
+  r.installs_30d,
+  SAFE_DIVIDE(r.spend_30d, r.installs_30d)                                    AS cpi,
+  SAFE_DIVIDE(r.revenue_d7_safe, NULLIF(r.spend_d7_safe, 0))                  AS roas_d7,
+  SAFE_DIVIDE(r.revenue_d7_safe, NULLIF(r.spend_d7_safe, 0))
+    * COALESCE(p.d7_to_d30_multiplier, 2.7)                                   AS roas_d30,
+  r.skan_share,
+  r.postback_completeness,
+  t.composite_trust_score
+FROM rollup r
+LEFT JOIN trust_scores  t USING (channel)
+LEFT JOIN ltv_projection p USING (channel, os)
+WHERE r.spend_30d > 0
+ORDER BY r.spend_30d DESC
+;
+      </script>
+    </div>
+
+    <!-- ─── Section E — Reallocation simulator ─── -->
+    <div class="t3-section">
+      <div class="t3-section-eyebrow"><span class="marker">E</span>Reallocation simulator</div>
+      <h2>Move the money, watch the curves</h2>
+      <p class="t3-sub">Each slider has its own diminishing-returns curve based on the channel's profile — ASA hits a ceiling fast (small auction inventory), Moloco and InMobi run linear longer. Click <em>"My recommended"</em> to see the move I'd make on this portfolio today; the narrative below explains why.</p>
+
+      <div class="t3-sim">
+        <div class="t3-sim-output">
+          <div class="o">
+            <span class="o-lbl">Total spend</span>
+            <span class="o-val" id="sim-out-spend">—</span>
+            <span class="o-delta" id="sim-out-spend-delta">—</span>
+          </div>
+          <div class="o">
+            <span class="o-lbl">Total installs</span>
+            <span class="o-val" id="sim-out-installs">—</span>
+            <span class="o-delta" id="sim-out-installs-delta">—</span>
+          </div>
+          <div class="o">
+            <span class="o-lbl">Blended CPI</span>
+            <span class="o-val" id="sim-out-cpi">—</span>
+            <span class="o-delta" id="sim-out-cpi-delta">—</span>
+          </div>
+          <div class="o">
+            <span class="o-lbl">Blended ROAS D30</span>
+            <span class="o-val" id="sim-out-roas">—</span>
+            <span class="o-delta" id="sim-out-roas-delta">—</span>
+          </div>
+        </div>
+
+        <div class="t3-sim-actions">
+          <button id="sim-reset">Reset to current</button>
+          <button id="sim-recommended" class="primary">My recommended allocation →</button>
+        </div>
+
+        <div class="t3-sim-rows">
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">Google UAC</div>
+            <input type="range" id="sim-uac" min="0" max="2400" value="1179" step="10">
+            <div class="t3-sim-spend" id="sim-spend-uac">$1,179K</div>
+            <div class="t3-sim-delta" id="sim-delta-uac">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">Meta</div>
+            <input type="range" id="sim-meta" min="0" max="1500" value="758" step="10">
+            <div class="t3-sim-spend" id="sim-spend-meta">$758K</div>
+            <div class="t3-sim-delta" id="sim-delta-meta">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">Apple Search Ads</div>
+            <input type="range" id="sim-asa" min="0" max="1100" value="547" step="10">
+            <div class="t3-sim-spend" id="sim-spend-asa">$547K</div>
+            <div class="t3-sim-delta" id="sim-delta-asa">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">AppLovin</div>
+            <input type="range" id="sim-applovin" min="0" max="1000" value="505" step="10">
+            <div class="t3-sim-spend" id="sim-spend-applovin">$505K</div>
+            <div class="t3-sim-delta" id="sim-delta-applovin">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">Unity Ads</div>
+            <input type="range" id="sim-unity" min="0" max="850" value="421" step="10">
+            <div class="t3-sim-spend" id="sim-spend-unity">$421K</div>
+            <div class="t3-sim-delta" id="sim-delta-unity">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">Moloco</div>
+            <input type="range" id="sim-moloco" min="0" max="600" value="274" step="5">
+            <div class="t3-sim-spend" id="sim-spend-moloco">$274K</div>
+            <div class="t3-sim-delta" id="sim-delta-moloco">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">ironSource</div>
+            <input type="range" id="sim-ironsource" min="0" max="450" value="211" step="5">
+            <div class="t3-sim-spend" id="sim-spend-ironsource">$211K</div>
+            <div class="t3-sim-delta" id="sim-delta-ironsource">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">TikTok</div>
+            <input type="range" id="sim-tiktok" min="0" max="350" value="147" step="5">
+            <div class="t3-sim-spend" id="sim-spend-tiktok">$147K</div>
+            <div class="t3-sim-delta" id="sim-delta-tiktok">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">InMobi</div>
+            <input type="range" id="sim-inmobi" min="0" max="220" value="84" step="2">
+            <div class="t3-sim-spend" id="sim-spend-inmobi">$84K</div>
+            <div class="t3-sim-delta" id="sim-delta-inmobi">0%</div>
+          </div>
+          <div class="t3-sim-row">
+            <div class="t3-sim-name">Liftoff</div>
+            <input type="range" id="sim-liftoff" min="0" max="220" value="84" step="2">
+            <div class="t3-sim-spend" id="sim-spend-liftoff">$84K</div>
+            <div class="t3-sim-delta" id="sim-delta-liftoff">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Section F — Narrative read ─── -->
+    <div class="t3-section">
+      <div class="t3-section-eyebrow"><span class="marker">F</span>The read</div>
+      <h2>Where I'd reallocate, and why</h2>
+      <div class="t3-narrative">
+        <p>Two channels in the table above tell the entire story of this portfolio. <strong>ASA</strong> sits at trust 5/5, ROAS D30 68.1%, D7 retention 16.0% — the cleanest paid traffic we have, and the cell most likely to be under-funded relative to its incremental contribution. <strong>Meta</strong> sits at trust 2/5, ROAS D30 37.2%, with a Tab 6 geo-holdout finding that platform-attributed installs over-state real causation by roughly 2.4×. The reported 37.2% ROAS, after applying the 0.41 incrementality discount, lands closer to <strong>15% true incremental ROAS</strong> — well below every other channel in the table. The asymmetry isn't subtle.</p>
+
+        <p>The recommended allocation pulls $300K out of Meta and pushes it into three places. <strong>$80K to ASA</strong> — even with ASA's hard auction ceiling, the $547K → $627K move stays inside the linear range; the simulator shows ROAS softening only ~3pp. <strong>$130K to Moloco</strong> — trust 4/5, ROAS D30 58.3%, currently flagged for an SDK regression (Section&nbsp;D worked example) but the underlying trust is structurally sound. The flag will resolve. <strong>$60K to InMobi</strong> — trust 4/5, the widest linear range in the portfolio, currently under-funded at 2% of spend despite better unit economics than several channels twice its size. <strong>$30K to AppLovin</strong> — incidental, keeps spend distribution clean. The blended ROAS D30 lifts from 51.3% to roughly 52.5% on face value. On an incrementality-adjusted basis the lift is materially larger because the dollars pulled from Meta were already producing thinner causation than the spine reported.</p>
+
+        <p>The thing this simulator quietly demonstrates is that channel mix is not a slider you can move freely. ASA's curve gets steep fast — try doubling its spend in the simulator and you'll see ROAS collapse. Moloco's curve is gentle for ~80% growth before the slope shifts. The job of channel allocation isn't to maximize any single channel; it's to know each curve and operate just inside its sweet spot. The trust framework in Section&nbsp;E gives us the prior for which channels deserve the marginal dollar; the geo-holdout in Tab&nbsp;6 calibrates that prior with measured causation. Together that's how we move the portfolio without guessing.</p>
+      </div>
+    </div>
   </section>
 
   <section class="tab-panel layout-dashboard" data-panel="4">
@@ -2979,6 +3713,201 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
   // Tab 1 is the default-active tab — initialize its chart now since the click handler won't fire.
   if (document.querySelector('.tab-panel[data-panel="1"].is-active')) {
     requestAnimationFrame(() => window.__chartInit['1']());
+  }
+
+  // ─── Tab 3 sortable table ───
+  function makeSortable(tableEl) {
+    const headers = tableEl.querySelectorAll('thead th[data-sort]');
+    let state = { col: null, dir: 'desc' };
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.dataset.sort;
+        if (state.col === col) state.dir = state.dir === 'asc' ? 'desc' : 'asc';
+        else { state.col = col; state.dir = 'desc'; }
+        const tbody = tableEl.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr:not(.totals)'));
+        const totalsRow = tbody.querySelector('tr.totals');
+        rows.sort((a, b) => {
+          const ac = a.querySelector(`td[data-col="${col}"]`);
+          const bc = b.querySelector(`td[data-col="${col}"]`);
+          const av = ac ? ac.dataset.val : '';
+          const bv = bc ? bc.dataset.val : '';
+          const an = parseFloat(av), bn = parseFloat(bv);
+          if (!isNaN(an) && !isNaN(bn)) return state.dir === 'asc' ? an - bn : bn - an;
+          return state.dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+        });
+        rows.forEach(r => tbody.insertBefore(r, totalsRow));
+        headers.forEach(h => { h.classList.remove('sorted', 'asc', 'desc'); });
+        th.classList.add('sorted', state.dir);
+      });
+    });
+  }
+  document.querySelectorAll('table.t3-channel').forEach(makeSortable);
+
+  // ─── Tab 3 — 90-day CPI trend chart ───
+  window.__chartInit['3'] = (function() {
+    let drawn = false;
+    return function() {
+      if (drawn) return;
+      const canvas = document.getElementById('t3-cpi-chart');
+      if (!canvas || !window.Chart) return;
+      const days = 90, labels = [];
+      const today = new Date('2026-05-04');
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(today); d.setDate(d.getDate() - i);
+        labels.push(`${d.getMonth() + 1}/${d.getDate()}`);
+      }
+      function gen(seed, mean, opts) {
+        const r = mulberry32(seed);
+        const out = [];
+        // weekly cycle: simulate weekly procurement cycles + day-to-day noise
+        for (let i = 0; i < days; i++) {
+          const week = Math.floor(i / 7);
+          const wkBase = mean * (1 + Math.sin(week * 0.6) * 0.04 + (r() - 0.5) * 0.06);
+          let v = wkBase * (1 + (r() - 0.5) * 0.10);
+          if (opts && opts.recentRise && i >= days - 14) v *= 1 + 0.005 * (i - (days - 14));
+          if (opts && opts.recentVolatility && i >= days - 14) v *= 1 + (r() - 0.5) * 0.18;
+          if (opts && opts.upTrend) v *= 1 + 0.0008 * i;
+          out.push(+v.toFixed(2));
+        }
+        return out;
+      }
+      const lines = [
+        { name: 'Google UAC', mean: 2.12, color: PALETTE.crimson, seed: 31, opts: { upTrend: true } },
+        { name: 'Meta',       mean: 2.93, color: PALETTE.amber,   seed: 32, opts: { recentRise: true } },
+        { name: 'ASA',        mean: 3.28, color: PALETTE.sage,    seed: 33, opts: { recentVolatility: true } },
+        { name: 'AppLovin',   mean: 1.90, color: PALETTE.slate,   seed: 34, opts: {} },
+        { name: 'Unity',      mean: 2.00, color: PALETTE.plum,    seed: 35, opts: { upTrend: true } },
+        { name: 'Moloco',     mean: 2.22, color: PALETTE.terra,   seed: 36, opts: { recentVolatility: true } }
+      ];
+      new Chart(canvas, {
+        type: 'line',
+        data: { labels, datasets: lines.map(l => ({
+          label: l.name,
+          data: gen(l.seed, l.mean, l.opts),
+          borderColor: l.color,
+          backgroundColor: 'transparent',
+          borderWidth: 1.4,
+          pointRadius: 0,
+          tension: 0.2
+        })) },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', align: 'start', labels: { boxWidth: 10, boxHeight: 2, padding: 12, font: { size: 10 } } },
+            tooltip: { mode: 'index', intersect: false, callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y.toFixed(2)}` } }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.025)' }, ticks: { maxTicksLimit: 9, color: '#5E5C56', font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.035)' }, ticks: { color: '#8E8C84', font: { size: 10 }, callback: v => '$' + v.toFixed(2) } }
+          },
+          interaction: { mode: 'index', intersect: false }
+        }
+      });
+      drawn = true;
+    };
+  })();
+
+  // ─── Tab 3 — Channel reallocation simulator ───
+  // Each channel: base spend ($K), CPI, ROAS_D30 (%), and curve elasticities.
+  // CPI rises and ROAS falls as spend exceeds base; both reverse below base.
+  // Elasticity captures how steeply: ASA hits a hard ceiling early, Moloco/InMobi run linear longer.
+  const SIM_CHANNELS = [
+    { key: 'uac',        name: 'Google UAC',  spend: 1179, cpi: 2.12, roas: 50.5, cpiE: 0.10, roasE: 0.12 },
+    { key: 'meta',       name: 'Meta',        spend:  758, cpi: 2.93, roas: 37.2, cpiE: 0.13, roasE: 0.18 },
+    { key: 'asa',        name: 'ASA',         spend:  547, cpi: 3.28, roas: 68.1, cpiE: 0.40, roasE: 0.30 },
+    { key: 'applovin',   name: 'AppLovin',    spend:  505, cpi: 1.90, roas: 54.6, cpiE: 0.10, roasE: 0.10 },
+    { key: 'unity',      name: 'Unity',       spend:  421, cpi: 2.00, roas: 49.9, cpiE: 0.12, roasE: 0.10 },
+    { key: 'moloco',     name: 'Moloco',      spend:  274, cpi: 2.22, roas: 58.3, cpiE: 0.08, roasE: 0.10 },
+    { key: 'ironsource', name: 'ironSource',  spend:  211, cpi: 1.76, roas: 47.9, cpiE: 0.10, roasE: 0.10 },
+    { key: 'tiktok',     name: 'TikTok',      spend:  147, cpi: 2.52, roas: 51.8, cpiE: 0.15, roasE: 0.15 },
+    { key: 'inmobi',     name: 'InMobi',      spend:   84, cpi: 1.94, roas: 53.9, cpiE: 0.06, roasE: 0.08 },
+    { key: 'liftoff',    name: 'Liftoff',     spend:   84, cpi: 2.12, roas: 48.7, cpiE: 0.08, roasE: 0.10 }
+  ];
+  // "My recommended" preset — pull from Meta (trust 2/5, low incremental rate),
+  // push into ASA, Moloco, AppLovin, InMobi (high trust, better fit).
+  const SIM_RECOMMENDED = {
+    uac: 1179, meta: 458, asa: 627, applovin: 535, unity: 421,
+    moloco: 404, ironsource: 211, tiktok: 147, inmobi: 144, liftoff: 84
+  };
+
+  function simEffectiveCpi(spend, c) {
+    if (spend <= 0) return c.cpi;
+    const ratio = spend / c.spend;
+    const adj = c.cpiE * Math.log(ratio);
+    return c.cpi * (1 + Math.max(-0.30, Math.min(1.20, adj)));
+  }
+  function simEffectiveRoas(spend, c) {
+    if (spend <= 0) return 0;
+    const ratio = spend / c.spend;
+    const adj = -c.roasE * Math.log(ratio);
+    return Math.max(c.roas * 0.10, c.roas * (1 + Math.max(-0.50, Math.min(0.40, adj))));
+  }
+
+  function simRender() {
+    let totalSpend = 0, totalInstalls = 0, weightedRoasNum = 0;
+    SIM_CHANNELS.forEach(c => {
+      const slider = document.getElementById('sim-' + c.key);
+      if (!slider) return;
+      const newSpend = +slider.value;
+      const cpi = simEffectiveCpi(newSpend, c);
+      const roas = simEffectiveRoas(newSpend, c);
+      const installs = newSpend / cpi;
+      totalSpend += newSpend;
+      totalInstalls += installs;
+      weightedRoasNum += newSpend * roas;
+      const spendEl = document.getElementById('sim-spend-' + c.key);
+      const deltaEl = document.getElementById('sim-delta-' + c.key);
+      if (spendEl) spendEl.textContent = '$' + Math.round(newSpend).toLocaleString() + 'K';
+      if (deltaEl) {
+        const delta = newSpend - c.spend;
+        const pct = c.spend === 0 ? 0 : (delta / c.spend) * 100;
+        const sign = delta > 0 ? '+' : '';
+        deltaEl.textContent = sign + Math.round(pct) + '%';
+        deltaEl.classList.toggle('up', delta > 0);
+        deltaEl.classList.toggle('down', delta < 0);
+      }
+    });
+    const blendedCpi = totalSpend / totalInstalls;
+    const blendedRoas = weightedRoasNum / totalSpend;
+    const baseSpend = 4210, baseCpi = 2.28, baseRoas = 51.2, baseInstalls = 1843;
+    const setOut = (id, val, baseVal, fmt, betterUp) => {
+      const valEl = document.getElementById(id);
+      const dEl = document.getElementById(id + '-delta');
+      if (!valEl || !dEl) return;
+      valEl.textContent = fmt(val);
+      const diff = val - baseVal;
+      const pct = (diff / baseVal) * 100;
+      const sign = diff > 0 ? '+' : (diff < 0 ? '−' : '');
+      dEl.textContent = `${sign}${Math.abs(pct).toFixed(1)}% vs current`;
+      dEl.classList.remove('good', 'bad');
+      if (Math.abs(pct) < 0.05) return;
+      dEl.classList.add((diff > 0) === betterUp ? 'good' : 'bad');
+    };
+    setOut('sim-out-spend',    totalSpend,    baseSpend,    v => '$' + (v/1000).toFixed(2) + 'M', true);
+    setOut('sim-out-installs', totalInstalls, baseInstalls, v => (v/1000).toFixed(2) + 'M',      true);
+    setOut('sim-out-cpi',      blendedCpi,    baseCpi,      v => '$' + v.toFixed(2),              false);
+    setOut('sim-out-roas',     blendedRoas,   baseRoas,     v => v.toFixed(1) + '%',              true);
+  }
+  function simSet(values) {
+    SIM_CHANNELS.forEach(c => {
+      const slider = document.getElementById('sim-' + c.key);
+      if (slider) slider.value = values[c.key];
+    });
+    simRender();
+  }
+  if (document.getElementById('sim-uac')) {
+    SIM_CHANNELS.forEach(c => {
+      const slider = document.getElementById('sim-' + c.key);
+      if (slider) slider.addEventListener('input', simRender);
+    });
+    document.getElementById('sim-reset')?.addEventListener('click', () => {
+      const cur = {};
+      SIM_CHANNELS.forEach(c => cur[c.key] = c.spend);
+      simSet(cur);
+    });
+    document.getElementById('sim-recommended')?.addEventListener('click', () => simSet(SIM_RECOMMENDED));
+    simRender();
   }
 
   // ─── Tab 6 Experiment 2 parallel-trends chart ───
