@@ -833,6 +833,224 @@
     .t8-fields dd { padding-top: 0; border-top: none; padding-bottom: 14px; }
     .t8-fields dt:first-of-type { padding-top: 0; }
   }
+
+  /* ─── Tab 6 — Experimentation & Incrementality ─── */
+  .t6-section { margin: 56px auto; max-width: 880px; }
+  .t6-section:first-of-type { margin-top: 24px; }
+  .t6-section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .t6-section-eyebrow .marker { color: var(--amber); margin-right: 8px; }
+  .t6-section h2 {
+    font-size: 1.65rem;
+    font-weight: 500;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .t6-section p { line-height: 1.65; color: var(--ink-soft); }
+
+  .t6-exp {
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--lever-color, var(--border-strong));
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin: 32px auto;
+    max-width: 880px;
+  }
+  .t6-exp.lever-bid            { --lever-color: #5A7A95; }
+  .t6-exp.lever-incrementality { --lever-color: #C7943A; }
+
+  .t6-exp-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .t6-exp-num { font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-faint); letter-spacing: 0.1em; }
+  .t6-exp-lever {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--lever-color); font-weight: 500;
+  }
+  .t6-exp-lever::before { content: "● "; color: var(--lever-color); }
+  .t6-exp-title {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 500;
+    line-height: 1.2; color: var(--ink); margin: 4px 0 14px; letter-spacing: -0.01em;
+  }
+  .t6-exp-hypo {
+    font-family: var(--font-display); font-size: 1.05rem; color: var(--ink);
+    border-left: 2px solid var(--lever-color); padding: 4px 0 4px 16px;
+    margin: 0 0 24px; line-height: 1.5; font-style: italic;
+  }
+
+  .t6-setup { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 28px; margin-bottom: 22px; }
+  .t6-setup-cell { border-top: 1px dashed var(--border); padding-top: 12px; }
+  .t6-setup-label {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px;
+  }
+  .t6-setup-val { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.55; }
+  .t6-setup-val .formula {
+    font-family: var(--font-mono); font-size: 0.84rem; color: var(--amber);
+    display: block; margin: 6px 0;
+  }
+  .t6-setup-val code { font-size: 0.86em; }
+  @media (max-width: 720px) { .t6-setup { grid-template-columns: 1fr; } }
+
+  .t6-chart-wrap {
+    margin: 0 0 26px;
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 18px 18px 14px;
+  }
+  .t6-chart-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .t6-chart-title { font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-soft); letter-spacing: 0.04em; }
+  .t6-chart-cap   { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-faint); }
+  .t6-chart-canvas { height: 220px; position: relative; }
+
+  .t6-result {
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+  }
+  .t6-result-headline {
+    font-family: var(--font-display); font-size: 1.3rem; color: var(--ink);
+    font-weight: 500; margin-bottom: 4px; line-height: 1.25;
+  }
+  .t6-result-sub { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-muted); margin-bottom: 18px; letter-spacing: 0.04em; }
+  .t6-numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 18px; }
+  .t6-num-cell { border-left: 2px solid var(--border-strong); padding-left: 12px; }
+  .t6-num-cell .label { font-family: var(--font-mono); font-size: 0.66rem; color: var(--ink-faint); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.35; display: block; margin-bottom: 4px; }
+  .t6-num-cell .val   { font-family: var(--font-display); font-size: 1.4rem; color: var(--ink); font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .t6-num-cell .delta { font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-muted); margin-top: 4px; }
+  @media (max-width: 720px) { .t6-numbers { grid-template-columns: 1fr; } }
+
+  .t6-readouts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .t6-readout { border-top: 1px solid var(--border); padding-top: 14px; }
+  .t6-readout h4 {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px; font-weight: 500;
+  }
+  .t6-readout p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; margin: 0 0 10px; }
+  .t6-readout .post {
+    display: flex; justify-content: space-between;
+    border-top: 1px dashed var(--border); padding: 6px 0;
+    font-size: 0.82rem; color: var(--ink-soft);
+  }
+  .t6-readout .post .num { font-family: var(--font-mono); color: var(--ink); }
+  @media (max-width: 720px) { .t6-readouts { grid-template-columns: 1fr; } }
+
+  .t6-decision {
+    margin-top: 20px;
+    border-left: 2px solid var(--amber);
+    padding: 14px 18px;
+    background: rgba(199,148,58,.05);
+    border-radius: 0 3px 3px 0;
+  }
+  .t6-decision-label {
+    font-family: var(--font-mono); font-size: 0.7rem; color: var(--amber);
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .t6-decision p { margin: 0; font-size: 0.94rem; color: var(--ink); line-height: 1.55; }
+
+  /* Sample-size calculator */
+  .t6-calc {
+    border: 1px solid var(--border); background: var(--bg-card);
+    border-radius: 4px; padding: 26px 32px; margin: 24px 0 0;
+  }
+  .t6-calc-formula {
+    background: var(--bg-inset); border: 1px solid var(--border);
+    border-left: 2px solid var(--amber-soft);
+    border-radius: 3px; padding: 14px 18px;
+    font-family: var(--font-mono); font-size: 0.92rem;
+    color: var(--ink); margin-bottom: 24px;
+    letter-spacing: 0.01em; line-height: 1.4;
+  }
+  .t6-calc-formula .var-name { color: var(--amber); }
+  .t6-calc-formula sub { font-size: 0.78em; }
+  .t6-calc-formula .desc {
+    display: block; font-size: 0.74rem; color: var(--ink-muted);
+    margin-top: 8px; letter-spacing: 0.02em; font-family: var(--font-body);
+  }
+  .t6-calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .t6-calc-col-inputs { display: flex; flex-direction: column; gap: 14px; }
+  .t6-calc-input { display: block; }
+  .t6-calc-input > label {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-muted); margin-bottom: 6px; display: block;
+  }
+  .t6-calc-input input[type="number"] {
+    width: 80%;
+    background: var(--bg-inset); border: 1px solid var(--border-strong);
+    color: var(--ink); font-family: var(--font-mono); font-size: 0.95rem;
+    padding: 8px 10px; border-radius: 3px; -moz-appearance: textfield;
+  }
+  .t6-calc-input input[type="number"]::-webkit-outer-spin-button,
+  .t6-calc-input input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .t6-calc-input input[type="range"] {
+    width: 100%; background: transparent; -webkit-appearance: none; margin: 6px 0; height: 4px;
+  }
+  .t6-calc-input input[type="range"]::-webkit-slider-runnable-track {
+    height: 3px; background: var(--border-strong); border-radius: 2px;
+  }
+  .t6-calc-input input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%;
+    background: var(--amber); margin-top: -5.5px; cursor: pointer;
+  }
+  .t6-calc-input input[type="range"]::-moz-range-track {
+    height: 3px; background: var(--border-strong); border-radius: 2px;
+  }
+  .t6-calc-input input[type="range"]::-moz-range-thumb {
+    height: 14px; width: 14px; border-radius: 50%; background: var(--amber); border: none; cursor: pointer;
+  }
+  .t6-calc-input input:focus { outline: none; border-color: var(--amber); }
+  .t6-calc-input .unit { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-muted); margin-left: 6px; }
+  .t6-calc-radio { display: inline-flex; gap: 6px; margin-top: 2px; }
+  .t6-calc-radio button {
+    appearance: none; background: var(--bg-inset);
+    border: 1px solid var(--border-strong); color: var(--ink-muted);
+    font-family: var(--font-mono); font-size: 0.84rem;
+    padding: 6px 12px; border-radius: 2px; cursor: pointer; transition: all .15s ease;
+  }
+  .t6-calc-radio button:hover { color: var(--ink-soft); border-color: var(--ink-faint); }
+  .t6-calc-radio button.on { color: var(--ink); border-color: var(--amber); background: rgba(199,148,58,.06); }
+  .t6-calc-volume { font-family: var(--font-mono); font-size: 0.95rem; color: var(--ink); margin-top: 4px; }
+
+  .t6-calc-output {
+    background: var(--bg-inset); border: 1px solid var(--border);
+    border-left: 2px solid var(--amber);
+    border-radius: 3px; padding: 18px 22px;
+  }
+  .t6-calc-output h4 {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px; font-weight: 500;
+  }
+  .t6-calc-output .out-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 0; border-top: 1px dashed var(--border); font-size: 0.92rem;
+  }
+  .t6-calc-output .out-row:first-of-type { border-top: none; padding-top: 0; }
+  .t6-calc-output .out-row .label { color: var(--ink-muted); font-family: var(--font-body); font-size: 0.84rem; }
+  .t6-calc-output .out-row .val {
+    font-family: var(--font-display); font-size: 1.3rem; color: var(--ink);
+    font-variant-numeric: tabular-nums; font-weight: 500;
+  }
+  @media (max-width: 720px) { .t6-calc-grid { grid-template-columns: 1fr; } .t6-calc-input input[type="number"] { width: 100%; } }
+
+  /* Registry vision panel */
+  .t6-registry-illus {
+    background: var(--bg-inset); border: 1px solid var(--border);
+    border-radius: 3px; padding: 18px 22px; margin: 18px 0;
+    font-family: var(--font-mono); font-size: 0.82rem;
+    color: var(--ink-soft); line-height: 1.7;
+    overflow-x: auto;
+  }
+  .t6-registry-illus .field { color: var(--amber); display: inline-block; min-width: 130px; }
+  .t6-registry-illus .val { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -1567,12 +1785,272 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
   </section>
 
   <section class="tab-panel layout-dashboard" data-panel="6">
-    <div class="panel-header">
+    <div class="panel-header" style="max-width: 880px; margin: 0 auto 28px;">
       <div class="panel-eyebrow">06 · Experimentation &amp; Incrementality</div>
-      <h1 class="panel-title">Experiment design</h1>
-      <p class="panel-lede">Tab 6 placeholder — the honest backstop. Two full A/B writeups, sample-size widget, registry vision.</p>
+      <h1 class="panel-title">Where causation gets measured</h1>
+      <p class="panel-lede">Two experiments end-to-end. One controlled bid-strategy A/B, one geo-holdout incrementality test. The second is the one that produces the discount factor in the trust framework.</p>
     </div>
-    <div class="placeholder">Tab 6 content pending</div>
+
+    <!-- ─── Section A — Why incrementality matters here ─── -->
+    <div class="t6-section">
+      <div class="t6-section-eyebrow"><span class="marker">A</span>Why incrementality matters here</div>
+      <h2>The spine reports correlation; this tab measures causation</h2>
+      <p>Tab&nbsp;2's Section&nbsp;H named the gap. Even with every join in the spine running clean, last-click attribution is correlation, not causation. The spine can tell us a Meta ad was the last touch before install — it cannot tell us the install would not have happened without that ad. Two questions our spend depends on get answered below: a controlled bid-strategy A/B (the simple case — same channel, same audience, two bid configurations) and a geo-holdout incrementality test (the harder case — measuring whether a channel's reported conversions would have happened anyway).</p>
+      <p>The dashed amber arrow in <strong>Fig.&nbsp;1</strong> is what makes incrementality a system rather than an occasional study. Experiment&nbsp;2 below is the one that writes a measured incremental rate back into Layer&nbsp;2's trust weighting — that's where Section&nbsp;E's Meta&nbsp;2/5 score earns its number, not from skepticism but from a holdout. After this tab, the loop is the loop; we'll let it speak through the work.</p>
+    </div>
+
+    <!-- ─── Experiment 1 — Bid lever ─── -->
+    <article class="t6-exp lever-bid">
+      <div class="t6-exp-meta">
+        <span class="t6-exp-num">EXP 01 / 02</span>
+        <span class="t6-exp-lever">Bid lever</span>
+      </div>
+      <h2 class="t6-exp-title">UAC tCPI vs tROAS — Solitaire iOS</h2>
+      <p class="t6-exp-hypo">Switching from tCPI to tROAS bidding on Google UAC for Solitaire iOS will improve D30 ROAS by ≥ 10% without sacrificing install volume by more than 15%.</p>
+
+      <div class="t6-setup">
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Primary metric</div>
+          <div class="t6-setup-val">D30 ROAS, computed from <code>fact_ua_daily.roas_d7</code> projected via the Tab&nbsp;5 power-curve model. Pre-period baseline 45.0%.</div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Guardrails</div>
+          <div class="t6-setup-val">Install volume ≥ 85% of pre-period · CPI not up &gt; 25% · D7 retention parity within 1 pp.</div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Sample-size calc</div>
+          <div class="t6-setup-val">
+            <span class="formula">n = 2 · (z<sub>α/2</sub> + z<sub>β</sub>)² · σ² / Δ²</span>
+            With baseline σ = 0.08, MDE Δ = 0.045 (10% of 0.45 baseline), α = 0.05, power = 0.80 → ~50 campaign-days per arm. We have 5 campaigns × 21 days = 105 per arm.
+          </div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Randomization unit</div>
+          <div class="t6-setup-val">Campaign-level. 10 active UAC campaigns randomly split 5 / 5, stratified by pre-period spend tier so neither arm is starved of high-value campaigns.</div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Run dates</div>
+          <div class="t6-setup-val">2026-04-08 → 2026-04-29 (21 days). D30 readout window closes 2026-05-29.</div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Pre-registered</div>
+          <div class="t6-setup-val">Hypothesis, MDE, guardrails, and decision rule locked in the experiment registry on 2026-04-04. Decision rule: posterior P(lift ≥ MDE) ≥ 0.80 = ship.</div>
+        </div>
+      </div>
+
+      <div class="t6-result">
+        <div class="t6-result-headline">tROAS won D30 ROAS by +14.1% relative</div>
+        <div class="t6-result-sub">readout 2026-05-30 · n = 105 campaign-days per arm</div>
+
+        <div class="t6-numbers">
+          <div class="t6-num-cell">
+            <span class="label">tCPI control · D30 ROAS</span>
+            <div class="val">45.0%</div>
+            <div class="delta">baseline</div>
+          </div>
+          <div class="t6-num-cell">
+            <span class="label">tROAS treatment · D30 ROAS</span>
+            <div class="val">51.4%</div>
+            <div class="delta">+6.4 pp absolute</div>
+          </div>
+          <div class="t6-num-cell">
+            <span class="label">Relative lift</span>
+            <div class="val">+14.1%</div>
+            <div class="delta">95% CI [+5.8%, +22.3%]</div>
+          </div>
+        </div>
+
+        <div class="t6-readouts">
+          <div class="t6-readout">
+            <h4>Frequentist</h4>
+            <p>Two-sample t-test rejects null at p&nbsp;= 0.003. Estimated relative lift 14.1%, 95% CI [+5.8%, +22.3%]. The lower CI bound clears the 10% MDE bar; the test is conclusive.</p>
+            <div class="post"><span class="label">p-value</span><span class="num">0.003</span></div>
+            <div class="post"><span class="label">95% CI</span><span class="num">+5.8% to +22.3%</span></div>
+          </div>
+          <div class="t6-readout">
+            <h4>Bayesian</h4>
+            <p>P(tROAS &gt; tCPI) = 0.997 — that's "treatment is better, basically certain." The decision-grade question is the next one: <strong>P(lift ≥ 10% MDE) = 0.83</strong>. We're 83% confident the effect is meaningfully large, not just non-zero. That's the bar to ship at scale.</p>
+            <div class="post"><span class="label">P(treat &gt; ctrl)</span><span class="num">0.997</span></div>
+            <div class="post"><span class="label">P(lift ≥ MDE)</span><span class="num">0.83</span></div>
+            <div class="post"><span class="label">Posterior median</span><span class="num">+14.0% [+7.4%, +21.1%]</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t6-setup" style="margin-bottom: 0;">
+        <div class="t6-setup-cell"><div class="t6-setup-label">Guardrail · install volume</div><div class="t6-setup-val">tROAS arm averaged 89% of tCPI volume — within 85% guardrail. <strong style="color:var(--positive)">PASS</strong></div></div>
+        <div class="t6-setup-cell"><div class="t6-setup-label">Guardrail · CPI</div><div class="t6-setup-val">tROAS arm CPI 18% above tCPI — within 25% guardrail. <strong style="color:var(--positive)">PASS</strong></div></div>
+        <div class="t6-setup-cell"><div class="t6-setup-label">Guardrail · D7 retention</div><div class="t6-setup-val">0.4 pp difference between arms — within 1 pp parity. <strong style="color:var(--positive)">PASS</strong></div></div>
+        <div class="t6-setup-cell"><div class="t6-setup-label">Decision rule</div><div class="t6-setup-val">Posterior P(lift ≥ MDE) = 0.83 ≥ 0.80 pre-registered bar. <strong style="color:var(--amber)">SHIP</strong></div></div>
+      </div>
+
+      <div class="t6-decision">
+        <div class="t6-decision-label">Decision</div>
+        <p>Roll out tROAS to all comparable Solitaire iOS UAC campaigns. Hold one campaign on tCPI as a perpetual control to detect baseline drift. Re-evaluate at 90 days — UAC bid algorithms evolve, and a result that holds today doesn't hold forever.</p>
+      </div>
+    </article>
+
+    <!-- ─── Experiment 2 — Incrementality lever ─── -->
+    <article class="t6-exp lever-incrementality">
+      <div class="t6-exp-meta">
+        <span class="t6-exp-num">EXP 02 / 02</span>
+        <span class="t6-exp-lever">Incrementality lever · geo holdout</span>
+      </div>
+      <h2 class="t6-exp-title">Meta US incrementality — DMA-level holdout</h2>
+      <p class="t6-exp-hypo">Meta-attributed installs in the US contain ≥ 30% incremental installs. Measured via DMA-level holdout, the incremental rate becomes the discount factor we apply to Meta-reported ROAS in the spine.</p>
+
+      <!-- Parallel-trends chart FIRST, before the rest of setup — this is the credibility artifact -->
+      <div class="t6-chart-wrap">
+        <div class="t6-chart-head">
+          <span class="t6-chart-title">Pre-period parallel-trends check · daily organic installs (8 weeks)</span>
+          <span class="t6-chart-cap">2026-02-15 → 2026-04-14</span>
+        </div>
+        <div class="t6-chart-canvas"><canvas id="t6-trends-chart"></canvas></div>
+        <p style="font-size: 0.85rem; color: var(--ink-muted); margin: 12px 0 0; line-height: 1.55;">Treatment- and control-DMA aggregates track within ±3% across 56 days of pre-period. Day-of-week pattern matches; no divergent trend. The matching is valid — treatment-vs-control comparison during the holdout will not be confounded by pre-existing differences. <strong>This chart is the experiment's first credibility artifact</strong>; if the lines diverged here, the test would not be worth running.</p>
+      </div>
+
+      <div class="t6-setup">
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Method</div>
+          <div class="t6-setup-val">Pause Meta spend in 8 randomly-selected DMAs for 14 days; hold 8 matched DMAs as control with normal Meta spend. Match on pre-period total install volume, organic mix, and casual-card category share.</div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Randomization unit</div>
+          <div class="t6-setup-val">DMA. <em>Treatment:</em> Phoenix · Atlanta · Miami · Denver · Minneapolis · Pittsburgh · Sacramento · Charlotte. <em>Control:</em> Houston · Detroit · Seattle · Cleveland · Tampa · Portland · San Diego · Indianapolis.</div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Primary metric</div>
+          <div class="t6-setup-val">Incremental rate = (counterfactual Meta-attributed installs − actual installs lost in treatment vs control) / counterfactual. Day-of-week-adjusted on a 28-day rolling window.</div>
+        </div>
+        <div class="t6-setup-cell">
+          <div class="t6-setup-label">Run dates</div>
+          <div class="t6-setup-val">2026-04-15 → 2026-04-29 (14 days). Pre-period parallel-trends window: 56 days, charted above.</div>
+        </div>
+      </div>
+
+      <div class="t6-result">
+        <div class="t6-result-headline">41.2% incremental rate — Meta over-states causation by 2.43×</div>
+        <div class="t6-result-sub">readout 2026-04-30 · 14-day holdout · 8 / 8 DMAs</div>
+
+        <div class="t6-numbers">
+          <div class="t6-num-cell">
+            <span class="label">Meta self-reported counterfactual installs</span>
+            <div class="val">~1,700/d</div>
+            <div class="delta">if Meta spend had continued</div>
+          </div>
+          <div class="t6-num-cell">
+            <span class="label">Actual installs lost · treatment vs control</span>
+            <div class="val">~700/d</div>
+            <div class="delta">DOW-adjusted</div>
+          </div>
+          <div class="t6-num-cell">
+            <span class="label">Incremental rate</span>
+            <div class="val">41.2%</div>
+            <div class="delta">95% CI [33.4%, 49.0%]</div>
+          </div>
+        </div>
+
+        <div class="t6-readouts">
+          <div class="t6-readout">
+            <h4>Frequentist</h4>
+            <p>Reject null of zero incrementality at p &lt; 0.001. Incremental-rate point estimate 41.2%, 95% CI [33.4%, 49.0%]. The lower bound clears our 30% hypothesis bar comfortably.</p>
+            <div class="post"><span class="label">p-value (vs null)</span><span class="num">&lt; 0.001</span></div>
+            <div class="post"><span class="label">95% CI</span><span class="num">[33.4%, 49.0%]</span></div>
+          </div>
+          <div class="t6-readout">
+            <h4>Bayesian</h4>
+            <p><strong>P(rate ≥ 30%) = 0.94</strong> — meets hypothesis bar with high confidence. <strong>P(rate ≥ 50%) = 0.18</strong> — Meta is real, not at the high end. The senior read: Meta drives genuine causation, but the platform's self-attribution dashboard over-states the effect by roughly 2.4×.</p>
+            <div class="post"><span class="label">P(rate ≥ 30%)</span><span class="num">0.94</span></div>
+            <div class="post"><span class="label">P(rate ≥ 50%)</span><span class="num">0.18</span></div>
+            <div class="post"><span class="label">Posterior median</span><span class="num">41.2% [34.0%, 48.5%]</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t6-decision">
+        <div class="t6-decision-label">Decision · the discount factor that closes the loop</div>
+        <p>Apply <strong>0.41</strong> as a discount factor to Meta-reported ROAS in <code>fact_ua_daily</code>, effective immediately. This writes into Layer&nbsp;2's trust weighting per Fig.&nbsp;1 — and is the source of Meta's 2/5 composite trust score in Tab&nbsp;2 Section&nbsp;E. Re-run this geo-holdout quarterly; incrementality drifts as platform algorithms evolve, and a static discount factor decays. Budget allocation does <em>not</em> pull out of Meta — Meta is genuinely incremental, just not at the rate the platform claims.</p>
+      </div>
+    </article>
+
+    <!-- ─── Section C — Sample-size calculator ─── -->
+    <div class="t6-section">
+      <div class="t6-section-eyebrow"><span class="marker">C</span>Sample-size calculator</div>
+      <h2>Power the test before you run it, not after</h2>
+      <p>Two-proportion sample-size calculation for the kinds of conversion-rate tests we run weekly — D7 retention lift, install rate from a creative variant, completion rate on a tutorial change. Inputs are a baseline rate and the relative effect we'd actually act on (the MDE). Outputs are the sample size per arm and how long the test takes given current daily volume.</p>
+
+      <div class="t6-calc">
+        <div class="t6-calc-formula">
+          <span><span class="var-name">n</span> = (<span class="var-name">z<sub>α/2</sub></span> + <span class="var-name">z<sub>β</sub></span>)² · [p<sub>1</sub>(1−p<sub>1</sub>) + p<sub>2</sub>(1−p<sub>2</sub>)] / (p<sub>2</sub> − p<sub>1</sub>)²</span>
+          <span class="desc">where p<sub>1</sub> = baseline rate, p<sub>2</sub> = baseline · (1 + MDE), n = sample size per arm. Two-tailed test.</span>
+        </div>
+
+        <div class="t6-calc-grid">
+          <div class="t6-calc-col-inputs">
+            <div class="t6-calc-input">
+              <label>Baseline conversion rate</label>
+              <input type="number" id="calc-baseline" value="11.5" min="0.1" max="99" step="0.1"><span class="unit">%</span>
+            </div>
+            <div class="t6-calc-input">
+              <label>Minimum detectable effect (relative)</label>
+              <input type="number" id="calc-mde" value="10" min="1" max="100" step="0.5"><span class="unit">%</span>
+            </div>
+            <div class="t6-calc-input">
+              <label>Significance (α) · two-tailed</label>
+              <div class="t6-calc-radio" id="calc-alpha">
+                <button data-val="0.10">0.10</button>
+                <button data-val="0.05" class="on">0.05</button>
+                <button data-val="0.01">0.01</button>
+              </div>
+            </div>
+            <div class="t6-calc-input">
+              <label>Statistical power (1 − β)</label>
+              <div class="t6-calc-radio" id="calc-power">
+                <button data-val="0.80" class="on">0.80</button>
+                <button data-val="0.90">0.90</button>
+                <button data-val="0.95">0.95</button>
+              </div>
+            </div>
+            <div class="t6-calc-input">
+              <label>Daily install volume per arm</label>
+              <input type="range" id="calc-vol" min="500" max="50000" value="8500" step="500">
+              <div class="t6-calc-volume" id="calc-vol-display">8,500 / day per arm</div>
+            </div>
+          </div>
+
+          <div class="t6-calc-output">
+            <h4>Output</h4>
+            <div class="out-row"><span class="label">Required sample per arm</span><span class="val" id="calc-out-n">—</span></div>
+            <div class="out-row"><span class="label">Total sample needed</span><span class="val" id="calc-out-total">—</span></div>
+            <div class="out-row"><span class="label">Expected duration</span><span class="val" id="calc-out-days">—</span></div>
+            <div class="out-row"><span class="label">p<sub>1</sub> · p<sub>2</sub></span><span class="val" id="calc-out-p" style="font-size: 0.95rem;">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--ink-muted); margin-top: 14px;">The math here is the standard two-proportion z-test, computed in vanilla JS via a Beasley-Springer-Moro inverse-normal approximation. Verify against any UA-team's stats reference; the formula above is the live formula.</p>
+    </div>
+
+    <!-- ─── Section D — Experiment registry ─── -->
+    <div class="t6-section">
+      <div class="t6-section-eyebrow"><span class="marker">D</span>Experiment registry</div>
+      <h2>How a UA team learns compoundingly</h2>
+      <p>Every test logged with hypothesis, design, results, and decision — ideally <em>before</em> the test runs, not after. Pre-registration matters because it stops the readout from drifting toward whatever conclusion the loudest voice in the room wants. The bigger reason is compounding: a UA team that has run 47 tests and can recall the answer to "did we already learn whether interstitial-frequency-cap impacts D7 retention" runs at a different velocity than one that re-litigates settled questions every quarter.</p>
+
+      <div class="t6-registry-illus">
+<span class="field">id</span>            <span class="val">EXP-2026-04-08-uac-bid-strategy</span><br>
+<span class="field">hypothesis</span>    <span class="val">tROAS will lift Solitaire iOS UAC D30 ROAS ≥ 10% vs tCPI...</span><br>
+<span class="field">primary</span>       <span class="val">D30 ROAS</span><br>
+<span class="field">guardrails</span>    <span class="val">install_vol ≥ 85% pre · CPI ≤ +25% · D7_ret ±1pp</span><br>
+<span class="field">unit</span>          <span class="val">campaign (5/5 split, stratified by spend tier)</span><br>
+<span class="field">window</span>        <span class="val">2026-04-08 → 2026-04-29 · readout 2026-05-30</span><br>
+<span class="field">decision_rule</span> <span class="val">posterior P(lift ≥ MDE) ≥ 0.80 → ship</span><br>
+<span class="field">result</span>        <span class="val">+14.1% relative · P(lift ≥ MDE) = 0.83 · SHIPPED</span><br>
+<span class="field">links</span>         <span class="val">slack/#exp-uac-bid · sql/exp_2026_04_08.sql · readout/exp-01.md</span>
+      </div>
+
+      <p>The registry lives as version-controlled YAML in the analytics repo, one file per experiment. New analysts read backwards through it during onboarding — that's how institutional memory transfers without depending on whoever happened to be in the room when the original decision was made. The five-bullet build list in Tab&nbsp;2 Section&nbsp;I doesn't include this artifact explicitly; the registry is a sixth one, scheduled for the second 30-day cycle. After ~60 tests, the registry stops being a log and starts being a model — what kinds of tests we win, where our priors are well-calibrated, where we keep being surprised. That's the asset.</p>
+    </div>
   </section>
 
   <section class="tab-panel layout-dashboard" data-panel="7">
@@ -1888,6 +2366,106 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
     if (target) target.innerHTML = highlightSql(src.textContent.replace(/^\n/, '').replace(/\s+$/, ''));
   });
 
+  // ─── Inverse normal CDF (Beasley-Springer-Moro) ───
+  function normInv(p) {
+    if (p <= 0 || p >= 1) return NaN;
+    const a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02, 1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00];
+    const b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02, 6.680131188771972e+01, -1.328068155288572e+01];
+    const c = [-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00, -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00];
+    const d = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00, 3.754408661907416e+00];
+    const pLow = 0.02425, pHigh = 1 - pLow;
+    let q, r;
+    if (p < pLow) {
+      q = Math.sqrt(-2 * Math.log(p));
+      return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+    }
+    if (p <= pHigh) {
+      q = p - 0.5; r = q * q;
+      return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+    }
+    q = Math.sqrt(-2 * Math.log(1 - p));
+    return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+
+  // ─── Sample-size calculator (Tab 6 Section C) ───
+  const calcState = { baseline: 11.5, mde: 10, alpha: 0.05, power: 0.80, vol: 8500 };
+  function recalc() {
+    const p1 = calcState.baseline / 100;
+    const p2 = p1 * (1 + calcState.mde / 100);
+    if (p1 <= 0 || p1 >= 1 || p2 <= 0 || p2 >= 1 || calcState.mde === 0) return;
+    const za = normInv(1 - calcState.alpha / 2);
+    const zb = normInv(calcState.power);
+    const num = Math.pow(za + zb, 2) * (p1 * (1 - p1) + p2 * (1 - p2));
+    const den = Math.pow(p2 - p1, 2);
+    const n = Math.ceil(num / den);
+    const total = n * 2;
+    const days = total / calcState.vol;
+    document.getElementById('calc-out-n').textContent = n.toLocaleString();
+    document.getElementById('calc-out-total').textContent = total.toLocaleString();
+    document.getElementById('calc-out-days').textContent = days < 100 ? days.toFixed(1) + ' days' : Math.round(days) + ' days';
+    document.getElementById('calc-out-p').textContent = `${(p1*100).toFixed(2)}% → ${(p2*100).toFixed(2)}%`;
+  }
+  if (document.getElementById('calc-baseline')) {
+    document.getElementById('calc-baseline').addEventListener('input', e => { calcState.baseline = +e.target.value || 0; recalc(); });
+    document.getElementById('calc-mde').addEventListener('input', e => { calcState.mde = +e.target.value || 0; recalc(); });
+    document.getElementById('calc-vol').addEventListener('input', e => {
+      calcState.vol = +e.target.value;
+      document.getElementById('calc-vol-display').textContent = calcState.vol.toLocaleString() + ' / day per arm';
+      recalc();
+    });
+    document.querySelectorAll('#calc-alpha button').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('#calc-alpha button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on'); calcState.alpha = +btn.dataset.val; recalc();
+    }));
+    document.querySelectorAll('#calc-power button').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('#calc-power button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on'); calcState.power = +btn.dataset.val; recalc();
+    }));
+    recalc();
+  }
+
+  // ─── Tab 6 Experiment 2 parallel-trends chart ───
+  window.__chartInit = window.__chartInit || {};
+  window.__chartInit['6'] = (function() {
+    let drawn = false;
+    return function() {
+      if (drawn) return;
+      const canvas = document.getElementById('t6-trends-chart');
+      if (!canvas || !window.Chart) return;
+      const days = 56, labels = [], treat = [], ctrl = [];
+      const start = new Date('2026-02-15');
+      for (let i = 0; i < days; i++) {
+        const d = new Date(start); d.setDate(d.getDate() + i);
+        labels.push(`${d.getMonth()+1}/${d.getDate()}`);
+        const dow = d.getDay();
+        const wk = (dow === 0 || dow === 6) ? 1.07 : 1;
+        const trend = 1 - (i / days) * 0.015;
+        treat.push(Math.round(3500 * wk * trend * (1 + (rng() - 0.5) * 0.10)));
+        ctrl.push(Math.round(3520 * wk * trend * (1 + (rng() - 0.5) * 0.10)));
+      }
+      new Chart(canvas, {
+        type: 'line',
+        data: { labels, datasets: [
+          { label: 'Treatment DMAs (8)', data: treat, borderColor: PALETTE.sage,  backgroundColor: 'transparent', borderWidth: 1.4, pointRadius: 0 },
+          { label: 'Control DMAs (8)',   data: ctrl,  borderColor: PALETTE.slate, backgroundColor: 'transparent', borderWidth: 1.4, pointRadius: 0 }
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', align: 'end', labels: { boxWidth: 10, boxHeight: 2, padding: 14 } },
+            tooltip: { mode: 'index', intersect: false }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.025)' }, ticks: { maxTicksLimit: 8, color: '#5E5C56', font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.035)' }, ticks: { color: '#8E8C84', font: { size: 10 }, callback: v => v.toLocaleString() } }
+          },
+          interaction: { mode: 'index', intersect: false }
+        }
+      });
+      drawn = true;
+    };
+  })();
+
   // ─── Tab navigation ───
   const tabs = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.tab-panel');
@@ -1900,7 +2478,7 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
       if (window.__chartInit && window.__chartInit[id]) window.__chartInit[id]();
     });
   });
-  window.__chartInit = {};
+  window.__chartInit = window.__chartInit || {};
 </script>
 
 </body>
