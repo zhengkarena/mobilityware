@@ -120,10 +120,10 @@
     padding-left: 14px;
   }
   .brand-byline {
-    margin-left: auto;
-    font-size: 0.78rem;
-    color: var(--ink-muted);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
     font-variant-numeric: tabular-nums;
+    padding-left: 4px;
   }
   .brand-byline em { color: var(--ink-soft); font-style: normal; }
 
@@ -320,6 +320,112 @@
     font-size: 0.85rem;
     border-radius: 4px;
   }
+
+  /* ─── Trust score dots (used in Tab 2 sources table + Section E grid) ─── */
+  .trust { display: inline-flex; gap: 3px; align-items: center; line-height: 1; }
+  .trust .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+  }
+  .trust .dot.on { background: var(--amber); border-color: var(--amber); }
+  .trust.score-1 .dot.on, .trust.score-2 .dot.on { background: var(--crimson-soft); border-color: var(--crimson-soft); }
+  .trust.score-5 .dot.on { background: var(--sage); border-color: var(--sage); }
+  .trust .num {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-muted);
+    margin-left: 6px;
+  }
+
+  /* ─── Tab 2 specifics ─── */
+  .t2-section { margin: 56px 0; }
+  .t2-section:first-of-type { margin-top: 32px; }
+  .t2-section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .t2-section-eyebrow .marker { color: var(--amber); margin-right: 8px; }
+  .t2-section h2 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .t2-pull {
+    border-left: 2px solid var(--amber);
+    padding: 4px 0 4px 18px;
+    margin: 28px 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+
+  /* Sources table — denser than the standard data table; has its own breathing room */
+  .sources-wrap {
+    margin: 24px -8px 0;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  table.sources {
+    width: 100%;
+    min-width: 1080px;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  table.sources th, table.sources td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.sources th {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    background: var(--bg-inset);
+    border-bottom: 1px solid var(--border-strong);
+    position: sticky;
+    top: 0;
+  }
+  table.sources tbody tr:last-child td { border-bottom: none; }
+  table.sources tbody tr:hover { background: rgba(255,255,255,0.012); }
+  table.sources td.src-name {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  table.sources td.src-name .src-kind {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    margin-top: 3px;
+  }
+  table.sources td.src-tells { color: var(--ink-soft); width: 22%; }
+  table.sources td.src-misses { color: var(--ink-muted); width: 22%; font-style: italic; }
+  table.sources td.src-grain, table.sources td.src-latency { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-soft); white-space: nowrap; }
+  table.sources td.src-trust { white-space: nowrap; }
+  table.sources td.src-known { color: var(--ink-muted); font-size: 0.82rem; width: 22%; }
 </style>
 </head>
 <body>
@@ -328,8 +434,7 @@
   <div class="topbar-inner">
     <div class="brand">
       <span class="brand-mark">UA Workbench</span>
-      <span class="brand-sub">MobilityWare Portfolio</span>
-      <span class="brand-byline"><em>[Your Name]</em> · Director-round leave-behind</span>
+      <span class="brand-byline">/ <em>[Your Name]</em></span>
     </div>
     <nav class="tabnav" id="tabnav">
       <button class="tab-btn is-active" data-tab="1"><span class="tab-num">01</span>Dashboard</button>
@@ -360,9 +465,142 @@
     <div class="panel-header">
       <div class="panel-eyebrow">02 · The Data Spine</div>
       <h1 class="panel-title">Unified attribution architecture</h1>
-      <p class="panel-lede">Tab 2 placeholder — the centerpiece. Built next, in two passes (A–E, then F–I).</p>
+      <p class="panel-lede">Building the trustworthy backbone before building any chart on top of it.</p>
     </div>
-    <div class="placeholder">Tab 2 content pending</div>
+
+    <!-- ─── Section A — The Problem, Stated Plainly ─── -->
+    <div class="t2-section">
+      <div class="t2-section-eyebrow"><span class="marker">A</span>The problem, stated plainly</div>
+      <h2>Eight silos, four install counts, one decision to make</h2>
+      <p>UA data at any modern studio lives in eight-plus silos. Ten ad networks each report their own installs, spend, and self-attributed conversions. An MMP — AppsFlyer, in our case — tries to unify them, but carries its own attribution windows and fingerprinting limits. SKAN postbacks arrive twenty-four to seventy-two hours late, aggregated and privacy-preserved by design. The Play Install Referrer is deterministic on Android but limited in fields. Store consoles own ground-truth revenue but not user-level acquisition data. The internal warehouse holds in-app events, retention, and IAP — but joining it to UA data depends on a single install ID matching cleanly across systems. Ad-mediation platforms (AppLovin MAX, ironSource LevelPlay) report the ad-revenue events that actually drive ROAS in an ad-monetized portfolio like ours, and they arrive on a different cadence still.</p>
+      <p>Each source has its own definition of an install. They disagree, often by double digits. The result is a UA Manager who can open four dashboards on the same channel and see four different "true" install counts — and a chain from <em>ad impression → click → install → in-app behavior → LTV</em> that is broken at multiple seams. Attribution becomes guesswork. Budget allocation becomes politics. Incrementality becomes the only honest answer to <em>"did this campaign actually cause anything?"</em></p>
+      <p class="t2-pull">You can't optimize what you can't trust. The first deliverable any UA analyst should ship is the spine that makes the rest of the work honest.</p>
+    </div>
+
+    <!-- ─── Section B — The Data Sources ─── -->
+    <div class="t2-section">
+      <div class="t2-section-eyebrow"><span class="marker">B</span>The sources we're stitching together</div>
+      <h2>Ten inputs, scored on what they tell us and what they hide</h2>
+      <p>Below is the inventory. Trust scores are a weighted composite (reconciliation rate · SKAN-to-probabilistic ratio · postback completeness · creative-ID propagation · cohort joinability) — the framework is fully spelled out in <strong>Section&nbsp;E</strong>. The dot-rating here is the same instrument used there, so a row's score in this table is the same number that appears in the network grid.</p>
+
+      <div class="sources-wrap">
+        <table class="sources">
+          <thead>
+            <tr>
+              <th style="width:14%">Source</th>
+              <th>What it tells us</th>
+              <th>What it misses</th>
+              <th>Granularity</th>
+              <th>Latency</th>
+              <th>Trust</th>
+              <th>Known issues</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="src-name">AppsFlyer SSOT<span class="src-kind">MMP</span></td>
+              <td class="src-tells">Unified install attribution across SKAN, probabilistic, and deterministic. The closest thing we have to a single source of truth for paid installs.</td>
+              <td class="src-misses">Re-engagement events from non-AF-instrumented partners; full creative-level data on some networks; SKAN conversion-value mapping requires its own setup.</td>
+              <td class="src-grain">user · cohort (SKAN)</td>
+              <td class="src-latency">real-time / T+24–72h SKAN</td>
+              <td class="src-trust"><span class="trust score-4"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="num">4 / 5</span></span></td>
+              <td class="src-known">Probabilistic windowing differs from network defaults — install counts will not match exactly, and that's expected.</td>
+            </tr>
+            <tr>
+              <td class="src-name">Google UAC<span class="src-kind">network self-report</span></td>
+              <td class="src-tells">Spend, impressions, clicks, network-attributed installs by campaign and ad group. Bidding telemetry only Google has.</td>
+              <td class="src-misses">Creative-level granularity is limited; SKAN view-throughs blend silently; install counts drift up vs MMP.</td>
+              <td class="src-grain">campaign · ad-group · geo · device</td>
+              <td class="src-latency">real-time spend / T+24h installs</td>
+              <td class="src-trust"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="num">3 / 5</span></span></td>
+              <td class="src-known">Self-attributed installs typically over-report 3–8% vs MMP. Anchor on MMP, document the gap.</td>
+            </tr>
+            <tr>
+              <td class="src-name">Apple Search Ads<span class="src-kind">network self-report</span></td>
+              <td class="src-tells">Deterministic, Apple-owned attribution for paid App Store searches. Clean spend and install data; no SKAN dependency.</td>
+              <td class="src-misses">Post-install behavior unless joined via MMP; LAT-on devices excluded from some downstream joins.</td>
+              <td class="src-grain">keyword · match-type · storefront · device</td>
+              <td class="src-latency">real-time</td>
+              <td class="src-trust"><span class="trust score-4"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="num">4 / 5</span></span></td>
+              <td class="src-known">Custom Product Page allocation requires careful tagging or attribution will pool to the default page.</td>
+            </tr>
+            <tr>
+              <td class="src-name">Meta Ads Manager<span class="src-kind">network self-report</span></td>
+              <td class="src-tells">Spend, impressions, clicks, Meta-attributed installs, and downstream events when CAPI is wired in.</td>
+              <td class="src-misses">Heavy reliance on Aggregated Event Measurement post-ATT; creative-level performance for non-opted-in iOS is aggregated and delayed.</td>
+              <td class="src-grain">campaign · ad-set · creative · geo</td>
+              <td class="src-latency">real-time spend / T+24–48h installs</td>
+              <td class="src-trust"><span class="trust score-2"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="num">2 / 5</span></span></td>
+              <td class="src-known">Meta self-attributed installs typically inflate true incremental contribution by 2–3× — validated via geo-holdout in Tab&nbsp;6.</td>
+            </tr>
+            <tr>
+              <td class="src-name">SKAN postbacks<span class="src-kind">SKAdNetwork v4</span></td>
+              <td class="src-tells">iOS install + conversion-value events for non-opted-in users. The privacy-preserving ground floor on iOS.</td>
+              <td class="src-misses">User-level identity; clean creative attribution; events outside the conversion-value mapping.</td>
+              <td class="src-grain">campaign · network · CV · coarse geo</td>
+              <td class="src-latency">T+24h, +T+72h windows</td>
+              <td class="src-trust"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="num">3 / 5</span></span></td>
+              <td class="src-known">Postback completeness ranges 65–90% by network. Null-CV postbacks discarded by default loses ~10% of signal — keep them.</td>
+            </tr>
+            <tr>
+              <td class="src-name">Play Install Referrer<span class="src-kind">Android deterministic</span></td>
+              <td class="src-tells">Deterministic referrer URL with click ID, install timestamp, Play Store referrer.</td>
+              <td class="src-misses">Cross-network unification (still need the MMP for that); ad-creative ID for many networks.</td>
+              <td class="src-grain">user-level</td>
+              <td class="src-latency">real-time</td>
+              <td class="src-trust"><span class="trust score-5"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="num">5 / 5</span></span></td>
+              <td class="src-known">Some networks pass partial referrer payloads; click-ID format must be reconciled per-network.</td>
+            </tr>
+            <tr>
+              <td class="src-name">iTunes&nbsp;Connect / Play&nbsp;Console<span class="src-kind">store revenue</span></td>
+              <td class="src-tells">Ground-truth revenue, refunds, store impressions → page views → installs (the store funnel).</td>
+              <td class="src-misses">No ad attribution. No way to tie store revenue back to acquisition channel without joining via MMP.</td>
+              <td class="src-grain">app · storefront · date</td>
+              <td class="src-latency">T+1 to T+3 for revenue</td>
+              <td class="src-trust"><span class="trust score-4"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="num">4 / 5</span></span></td>
+              <td class="src-known">Refund recognition lag means D7/D30 revenue revises for ~30 days. Lock cohort revenue at D+33 minimum.</td>
+            </tr>
+            <tr>
+              <td class="src-name">Internal warehouse<span class="src-kind">in-app events</span></td>
+              <td class="src-tells">Every in-app event, IAP transaction, session, level progression, retention. The truth about user behavior.</td>
+              <td class="src-misses">Acquisition-channel attribution unless joined to MMP at install.</td>
+              <td class="src-grain">user · event · timestamp</td>
+              <td class="src-latency">T+1 batch (or near-real-time if streamed)</td>
+              <td class="src-trust"><span class="trust score-5"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="num">5 / 5</span></span></td>
+              <td class="src-known">install_id join-key fragility — mismatched IDs between MMP and warehouse lose 1–3% of cohort daily. Audit weekly.</td>
+            </tr>
+            <tr>
+              <td class="src-name">AppLovin MAX<span class="src-kind">ad mediation</span></td>
+              <td class="src-tells">Ad impressions, eCPM, ad-revenue events at user-level for in-app advertising — the revenue side of an ad-monetized portfolio.</td>
+              <td class="src-misses">Cross-mediation reconciliation; waterfall vs bidding revenue split is opaque.</td>
+              <td class="src-grain">user · impression · placement</td>
+              <td class="src-latency">T+24–48h settled</td>
+              <td class="src-trust"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="num">3 / 5</span></span></td>
+              <td class="src-known">Impression-time eCPM differs from settled revenue by 5–15%. Use settled value for ROAS, not impression value.</td>
+            </tr>
+            <tr>
+              <td class="src-name">ironSource LevelPlay<span class="src-kind">ad mediation</span></td>
+              <td class="src-tells">Same surface as MAX — ad revenue at impression-level for the LevelPlay-mediated portion of the waterfall.</td>
+              <td class="src-misses">Same — cross-mediation gaps; revenue-split assumptions.</td>
+              <td class="src-grain">user · impression · placement</td>
+              <td class="src-latency">T+24–48h settled</td>
+              <td class="src-trust"><span class="trust score-3"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="num">3 / 5</span></span></td>
+              <td class="src-known">Bidding vs waterfall revenue split has known reconciliation gap. Settle on a single mediation source per app to avoid double-count.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 18px; font-size: 0.92rem; color: var(--ink-muted);">Two reads from this table set up everything that follows. <strong>One:</strong> there is no single source that is both complete and trustworthy — every input has a known seam. <strong>Two:</strong> the seams are predictable, which means they can be reconciled by rule rather than re-litigated weekly. That rule-set is Section&nbsp;D. The architecture that holds the rule-set is Section&nbsp;C.</p>
+    </div>
+
+    <!-- ─── Section C — Architecture diagram (PENDING SIGN-OFF) ─── -->
+    <div class="t2-section">
+      <div class="t2-section-eyebrow"><span class="marker">C</span>Architecture</div>
+      <h2>The flow from ten silos to one decision-grade fact table</h2>
+      <p style="color: var(--ink-faint); font-style: italic;">[Architecture diagram pending — text-sketch awaiting sign-off]</p>
+    </div>
+
+    <!-- Sections D, E pending -->
   </section>
 
   <section class="tab-panel layout-dashboard" data-panel="3">
