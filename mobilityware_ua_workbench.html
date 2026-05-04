@@ -2159,6 +2159,215 @@
   @media (max-width: 720px) {
     .t7-verdict { grid-template-columns: 1fr; gap: 12px; }
   }
+
+  /* ─── Tab 9 — 90-Day Plan ─── */
+  .t9-opening {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 0 0 36px;
+  }
+  .t9-opening strong { color: var(--ink); }
+
+  .t9-timeline {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 0 28px;
+    margin: 0 0 36px;
+  }
+  .t9-day {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-align: right;
+    padding-top: 18px;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .t9-day::after {
+    content: "";
+    position: absolute;
+    right: -16px;
+    top: 24px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--phase-color, var(--ink-muted));
+    border: 2px solid var(--bg);
+    z-index: 1;
+  }
+  .t9-phase {
+    border-left: 1px solid var(--border-strong);
+    padding: 14px 0 32px 28px;
+    position: relative;
+  }
+  .t9-phase-name {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--phase-color, var(--ink-muted));
+    margin-bottom: 6px;
+  }
+  .t9-phase-name::before { content: "● "; color: var(--phase-color); }
+  .t9-phase-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin: 0 0 18px;
+  }
+  .t9-deliverables {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .t9-deliverable {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--phase-color);
+    border-radius: 0 3px 3px 0;
+    padding: 14px 18px;
+  }
+  .t9-deliverable-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+  .t9-deliverable-spec {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--phase-color);
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+  .t9-deliverable-desc {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .t9-deliverable-desc strong { color: var(--ink); }
+  .t9-deliverable-desc code { font-size: 0.86em; }
+
+  .t9-phase.phase-listen, .t9-day.phase-listen { --phase-color: var(--slate); }
+  .t9-phase.phase-ship,   .t9-day.phase-ship   { --phase-color: var(--amber); }
+  .t9-phase.phase-move,   .t9-day.phase-move   { --phase-color: var(--sage);  }
+  .t9-day.day-90 { --phase-color: var(--amber); }
+
+  .t9-final {
+    border-left: 1px solid transparent;
+    padding-left: 28px;
+    padding-top: 14px;
+  }
+  .t9-final .t9-phase-name { color: var(--amber); }
+  .t9-final .t9-phase-name::before { color: var(--amber); }
+  .t9-final-summary {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 12px 0 0;
+  }
+  .t9-final-summary strong { color: var(--ink); }
+
+  /* Tooling vision */
+  .t9-tooling {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 26px 32px;
+    margin: 36px 0 0;
+  }
+  .t9-tooling h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .t9-tooling .sub {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .t9-tooling-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 28px;
+  }
+  .t9-tooling-item {
+    border-top: 1px dashed var(--border);
+    padding: 14px 0;
+  }
+  .t9-tooling-item:nth-child(-n+2) { border-top: none; padding-top: 0; }
+  .t9-tooling-item-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .t9-tooling-item-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .t9-tooling-item-desc code { font-size: 0.86em; }
+  .t9-tooling-item-desc strong { color: var(--ink); }
+  .t9-tooling-northstar {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border-strong);
+    padding-top: 18px;
+    margin-top: 8px;
+  }
+  .t9-tooling-northstar .label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--amber);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  @media (max-width: 720px) {
+    .t9-timeline { grid-template-columns: 64px 1fr; gap: 0 16px; }
+    .t9-day { padding-top: 14px; font-size: 0.7rem; }
+    .t9-day::after { right: -10px; top: 18px; width: 8px; height: 8px; }
+    .t9-phase { padding-left: 16px; padding-bottom: 22px; }
+    .t9-tooling-grid { grid-template-columns: 1fr; }
+    .t9-tooling-item:nth-child(2) { border-top: 1px dashed var(--border); padding-top: 14px; }
+  }
+
+  .t9-closing {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .t9-closing p { margin: 0; }
+  .t9-closing .signoff {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-style: normal;
+    letter-spacing: -0.005em;
+  }
 </style>
 </head>
 <body>
@@ -4975,9 +5184,159 @@ print(f"D365 95% bootstrap CI: [${ci_lo:.2f}, ${ci_hi:.2f}]")
     <div class="panel-header">
       <div class="panel-eyebrow">09 · 90-Day Plan</div>
       <h1 class="panel-title">First ninety days</h1>
-      <p class="panel-lede">Tab 9 placeholder — three-phase timeline, tooling vision, closing line.</p>
+      <p class="panel-lede">Three phases. Day 1 to Day 90. Listening is implied; deliverables are explicit.</p>
     </div>
-    <div class="placeholder">Tab 9 content pending</div>
+
+    <p class="t9-opening">Days 1–30 build the data spine and a shared diagnostic. Days 31–60 turn the spine into a small set of reusable artifacts the team uses without thinking. Days 61–90 land the first incrementality readout, the first creative cycle, and the first ad-spend decision the analyst owns end-to-end. <strong>The work compounds the moment the spine exists</strong> — every artifact below is something later analysts inherit, not re-derive.</p>
+
+    <div class="t9-timeline">
+
+      <!-- ─── Day 1 / Phase 1 ─── -->
+      <div class="t9-day phase-listen">Day 1</div>
+      <div class="t9-phase phase-listen">
+        <div class="t9-phase-name">Phase 1 · Listen &amp; Instrument</div>
+        <h2 class="t9-phase-title">Build the spine. Earn the team's confidence in it.</h2>
+        <div class="t9-deliverables">
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">UA Manager ride-alongs</h3>
+            <div class="t9-deliverable-spec">4 titles · 1 week embedded with each · Days 1–28</div>
+            <p class="t9-deliverable-desc">Operational reading of how the team works today — what reports they trust, what they re-derive, what they ignore. Not a shadow rotation; the goal is to identify the three workflows that, if automated by Day 60, give each UA Manager back ~5 hours per week.</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Dashboard inventory &amp; trust audit</h3>
+            <div class="t9-deliverable-spec">written report · delivered Day 21</div>
+            <p class="t9-deliverable-desc">Each existing dashboard catalogued — owner, what it answers, source data, where it disagrees with another dashboard. Output is a single sheet plus a trust score on each existing artifact, so the team knows which dashboards to keep, which to consolidate, and which to retire.</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Daily reconciliation report · v1</h3>
+            <div class="t9-deliverable-spec">SQL + scheduled query · #ua-data Slack · 8:00 a.m. PT weekdays</div>
+            <p class="t9-deliverable-desc">Tab 2 Section&nbsp;I bullet 1 in production. Channel × OS × game rows with anchored install counts, network gaps, SKAN gaps, composition-shift flags from the prior day. <strong>The Moloco-style flag from Section&nbsp;D becomes one row in this report</strong>; nothing about its detection is bespoke.</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Diagnostic memo to Chris &amp; Corvin</h3>
+            <div class="t9-deliverable-spec">1 page · end of week 4 · pre-circulated 24h before review</div>
+            <p class="t9-deliverable-desc">Where the data is trustworthy, where it isn't, what's getting fixed first, what gets fixed later. Names the seams in the spine, names the priorities, references specific channels by trust score (Tab 2 Section&nbsp;E grid as the supporting artifact).</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ─── Day 30 / Phase 2 ─── -->
+      <div class="t9-day phase-ship">Day 30</div>
+      <div class="t9-phase phase-ship">
+        <div class="t9-phase-name">Phase 2 · Ship Reusable Infrastructure</div>
+        <h2 class="t9-phase-title">Make the spine earn its keep.</h2>
+        <div class="t9-deliverables">
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Per-network trust-score scorecard</h3>
+            <div class="t9-deliverable-spec">refreshed Sunday 9:00 p.m. PT · <code>mw-ua.ref.network_trust_scores</code></div>
+            <p class="t9-deliverable-desc">Tab 2 Section&nbsp;E in production. Every Monday morning, the channel-owner Slack DM names any of D1–D5 dimensions that dropped a dot week-over-week, with the contributing rows pre-attached. The conversation is half-written before the responder opens the ticket.</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Channel-performance daily scorecard</h3>
+            <div class="t9-deliverable-spec">scheduled BigQuery view · automated dashboard · 8:00 a.m. PT weekdays</div>
+            <p class="t9-deliverable-desc">Tab 3 Section&nbsp;A in production. The 10-channel breakdown table lands as a Looker tile that links through to the per-channel SQL view (<code>per_channel_roas_rollup.sql</code>, Tab&nbsp;3 Section&nbsp;D). Sortable. Same SKAN-aware ROAS handling for trailing-3-day windows.</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Creative-fatigue early-warning report</h3>
+            <div class="t9-deliverable-spec">weekly Friday 4:00 p.m. PT · #creative-ops Slack</div>
+            <p class="t9-deliverable-desc">Tab 4 Section&nbsp;E <code>creative_fatigue.py</code> in production. Power-curve decay fit per active creative; any creative crossing the 70%-of-d0 CTR threshold (Tab 4 Section&nbsp;B fatigue curve) appears as a row in the refresh queue handed to Creative producers on Friday for Sunday brief.</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">First incrementality test · designed and scoped</h3>
+            <div class="t9-deliverable-spec">pre-registered in experiment registry · launched Day 60</div>
+            <p class="t9-deliverable-desc">Geo holdout on the largest channel (Google UAC, $1.18M monthly spend). Pre-period parallel-trends check, treatment + control DMA selection, sample-size derivation via the Tab 6 calculator, decision rule documented before launch. The Tab 6 Experiment 2 pattern made repeatable.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ─── Day 60 / Phase 3 ─── -->
+      <div class="t9-day phase-move">Day 60</div>
+      <div class="t9-phase phase-move">
+        <div class="t9-phase-name">Phase 3 · Move a Metric</div>
+        <h2 class="t9-phase-title">Land the first compounding outcome.</h2>
+        <div class="t9-deliverables">
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">First incrementality test · readout</h3>
+            <div class="t9-deliverable-spec">Day 90 · 14-day holdout · readout doc + #ua-data</div>
+            <p class="t9-deliverable-desc">Tab 6 Experiment 2 pattern in production: pre-period parallel-trends visualization, frequentist + Bayesian readout, decision callout. Whatever incremental rate the holdout produces gets written back into the trust-weighting layer per <strong>Tab 2's feedback arrow</strong> — the spine starts learning from honest tests in week 13.</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Creative testing cadence · Sunday cycle</h3>
+            <div class="t9-deliverable-spec">co-authored with Creative · launches Day 75</div>
+            <p class="t9-deliverable-desc">Tab 4 Section&nbsp;C brief in production. Weekly Sunday handoff from data → Creative; 4-variant tests per (title × network × OS) cell with one-dimension change; 14-day rotation cap; permanent control creative for cross-test calibration. First cycle ships against Solitaire iOS Meta and TriPeaks Android AppLovin (where V12–V14 are still inside their rotation window).</p>
+          </article>
+
+          <article class="t9-deliverable">
+            <h3 class="t9-deliverable-title">Tab 8 Brief 4 · Brazil iOS pilot</h3>
+            <div class="t9-deliverable-spec">$50K test budget · 6 weeks · 4-DMA geo holdout</div>
+            <p class="t9-deliverable-desc">The Tab 1 Action 03 BR sub-segment is already producing data on TikTok BR (CPI 22% below portfolio average, retention parity); the spine pilot becomes Tab 8 Brief 4's first deliverable: <strong>Brazil iOS Bubble Shooter Pop, 4-DMA treatment / 4-DMA control, 6-week cycle.</strong> Why this initiative first: <em>(1)</em> incrementality is built in by design — geo holdout = causation by construction; <em>(2)</em> the canonical BR thread already produces signal we trust; <em>(3)</em> the holdout is small enough to run inside the 90-day window with room for readout; <em>(4)</em> Corvin's market-expansion theme gets a concrete first deliverable, not a deck.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ─── Day 90 closing milestone ─── -->
+      <div class="t9-day day-90">Day 90</div>
+      <div class="t9-final">
+        <div class="t9-phase-name">Closing milestone</div>
+        <h2 class="t9-phase-title">First incrementality readout · first cycle shipped · first metric moved.</h2>
+        <p class="t9-final-summary">Three artifacts now run on schedules. One incrementality test has just produced a measured discount factor. One creative cycle is alive on its second iteration. One emerging-markets pilot is mid-readout. The next 90 days don't need a new plan — they need to keep doing this.</p>
+      </div>
+
+    </div>
+
+    <!-- ─── Tooling vision ─── -->
+    <div class="t9-tooling">
+      <h3>Tooling vision</h3>
+      <div class="sub">What gets built once, used forever</div>
+
+      <div class="t9-tooling-grid">
+
+        <div class="t9-tooling-item">
+          <h4 class="t9-tooling-item-name">SQL query library</h4>
+          <p class="t9-tooling-item-desc">Versioned, documented, git-tracked. Every analyst on the team can run a query without re-discovering it. Two seed examples already exist: <code>fact_ua_daily.sql</code> (Tab 2 F) and <code>per_channel_roas_rollup.sql</code> (Tab 3 D). The library compounds — one query per shipped analysis, every quarter.</p>
+        </div>
+
+        <div class="t9-tooling-item">
+          <h4 class="t9-tooling-item-name">Dashboard automation</h4>
+          <p class="t9-tooling-item-desc">Scheduled BigQuery views feed Looker tiles refreshed at 8:00 a.m. PT every weekday. Removes the analyst-as-button-pusher loop; analyst time goes into reading the data, not refreshing it. Three dashboards retired in the Phase 1 audit get consolidated into one.</p>
+        </div>
+
+        <div class="t9-tooling-item">
+          <h4 class="t9-tooling-item-name">Documentation system</h4>
+          <p class="t9-tooling-item-desc">Three artifacts, one git repo: <strong>data dictionary</strong> covering every column in <code>fact_ua_daily</code> with owner + freshness SLA (Tab 2 I bullet 5); <strong>KPI definitions</strong> doc with how each metric is computed and what gets excluded; <strong>experiment registry</strong> (Tab 6 D) — every test logged with hypothesis, design, results, decision.</p>
+        </div>
+
+        <div class="t9-tooling-item">
+          <h4 class="t9-tooling-item-name">Creative analytics layer</h4>
+          <p class="t9-tooling-item-desc">Tab 4 Section&nbsp;E Python in production, joined to the experiment registry so creative tests inherit the same readout machinery as bid tests. Creative work stops being a separate analytical universe; it shares the spine.</p>
+        </div>
+
+        <div class="t9-tooling-northstar">
+          <span class="label">12-month north star</span>
+          <p class="t9-tooling-item-desc">Shift the UA team from a <strong>reporting cadence</strong> — where the analyst spends most of the week refreshing dashboards and answering ad-hoc questions — to an <strong>autonomous experimentation cadence</strong>, where the analyst spends most of the week designing tests, reading results, and writing decision memos. The infrastructure built in Phases 1–2 is what enables the shift; the experiment registry compounding (Tab 6 Section&nbsp;D) is what makes it durable.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Closing line ─── -->
+    <div class="t9-closing">
+      <p>The work here is the kind I find genuinely interesting: messy data, real money on the line, decisions that compound over months. I'd be glad to walk through any of this in depth.</p>
+      <span class="signoff">— [Your Name]</span>
+    </div>
   </section>
 
 </main>
