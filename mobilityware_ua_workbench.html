@@ -1612,6 +1612,217 @@
     margin: 0 0 10px;
   }
   .t3-narrative p { margin-bottom: 14px; }
+
+  /* ─── Tab 4 — Creative Performance Lab ─── */
+  .t4-section { margin: 48px 0; }
+  .t4-section:first-of-type { margin-top: 8px; }
+  .t4-section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .t4-section-eyebrow .marker { color: var(--amber); margin-right: 8px; }
+  .t4-section h2 { font-size: 1.5rem; font-weight: 500; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .t4-section .t4-sub { font-size: 0.92rem; color: var(--ink-muted); max-width: 760px; line-height: 1.55; margin: 0 0 18px; }
+
+  /* Creative matrix table */
+  .t4-matrix-wrap {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+    background: var(--bg-card);
+  }
+  table.t4-matrix {
+    width: 100%;
+    min-width: 1280px;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.84rem;
+  }
+  table.t4-matrix th, table.t4-matrix td {
+    text-align: right;
+    padding: 10px 11px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  table.t4-matrix th.left, table.t4-matrix td.left { text-align: left; }
+  table.t4-matrix thead th {
+    background: var(--bg-inset);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.66rem;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border-strong);
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  table.t4-matrix thead th:hover { color: var(--ink-soft); }
+  table.t4-matrix thead th .arrow {
+    display: inline-block; width: 0; height: 0; margin-left: 5px;
+    opacity: 0; transition: opacity .15s ease;
+  }
+  table.t4-matrix thead th.sorted .arrow { opacity: 0.7; }
+  table.t4-matrix thead th.sorted.asc .arrow { border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 5px solid var(--amber); }
+  table.t4-matrix thead th.sorted.desc .arrow { border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid var(--amber); }
+  table.t4-matrix thead th.sorted { color: var(--ink); }
+  table.t4-matrix tbody td { color: var(--ink-soft); }
+  table.t4-matrix tbody tr:hover td { background: rgba(255,255,255,0.012); }
+  table.t4-matrix tbody tr:last-child td { border-bottom: none; }
+  table.t4-matrix tbody tr.canon td { background: rgba(106,140,90,0.04); }
+  table.t4-matrix tbody tr.canon:hover td { background: rgba(106,140,90,0.06); }
+  table.t4-matrix tbody td.concept { padding: 8px 11px; }
+
+  .t4-concept-cell { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .t4-concept-cell .id {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--amber); letter-spacing: 0.06em;
+  }
+  .t4-concept-cell .hook { color: var(--ink); font-size: 0.86rem; line-height: 1.25; }
+  .t4-concept-cell .hook em { color: var(--ink-soft); font-style: normal; }
+
+  .t4-status {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+    line-height: 1.4;
+  }
+  .t4-status.scaling { color: var(--sage); border-color: rgba(106,140,90,.5); background: rgba(106,140,90,.04); }
+  .t4-status.monitor { color: var(--amber); border-color: var(--amber-soft); background: rgba(199,148,58,.04); }
+  .t4-status.refresh { color: var(--terra); border-color: rgba(176,122,90,.5); background: rgba(176,122,90,.04); }
+  .t4-status.sunset  { color: var(--ink-faint); border-color: var(--border-strong); }
+
+  .t4-fatigue {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    justify-content: flex-end;
+  }
+  .t4-fatigue-bar {
+    display: inline-block;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .t4-fatigue-bar::after {
+    content: ""; position: absolute; left: 0; top: 0; height: 100%;
+    width: var(--w, 0%); background: var(--c, var(--sage));
+    transition: width .2s ease;
+  }
+
+  /* Fatigue chart */
+  .t4-chart-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px 16px;
+  }
+  .t4-chart-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+  .t4-chart-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--ink); font-weight: 500; }
+  .t4-chart-cap   { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .t4-chart-canvas { height: 260px; position: relative; }
+
+  /* Winning concepts brief */
+  .t4-brief {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 1100px;
+  }
+  .t4-brief h3 {
+    font-family: var(--font-display); font-size: 1.05rem; font-weight: 500;
+    color: var(--ink); margin: 0 0 14px;
+  }
+  .t4-brief h3 .kind {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-left: 8px;
+    font-weight: 400;
+  }
+  .t4-brief ol.pickers, .t4-brief ul.pickers {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .t4-brief .pickers li {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    align-items: baseline;
+  }
+  .t4-brief .pickers .rk {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--sage);
+    letter-spacing: 0.04em;
+  }
+  .t4-brief .pickers.bad .rk { color: var(--negative); }
+  .t4-brief .pickers li strong { color: var(--ink); font-weight: 500; }
+  .t4-brief .next-tests {
+    list-style: none;
+    counter-reset: nt;
+    padding: 0;
+    margin: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .t4-brief .next-tests li {
+    counter-increment: nt;
+    padding-left: 30px;
+    position: relative;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .t4-brief .next-tests li::before {
+    content: counter(nt, decimal-leading-zero);
+    position: absolute; left: 0; top: 1px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--amber);
+    letter-spacing: 0.04em;
+  }
+  .t4-brief .next-tests li strong { color: var(--ink); font-weight: 500; }
+  .t4-brief .ops-note {
+    grid-column: 1 / -1;
+    border-top: 1px dashed var(--border);
+    padding-top: 14px;
+    margin-top: 6px;
+    font-size: 0.86rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+  @media (max-width: 720px) { .t4-brief { grid-template-columns: 1fr; gap: 22px; } .t4-brief .ops-note { grid-column: 1; } }
+
+  /* Reuse t6-exp pattern for the A/B test card */
+  .t6-exp.lever-creative { --lever-color: #8A6A9C; }
 </style>
 </head>
 <body>
@@ -2917,9 +3128,652 @@ ORDER BY r.spend_30d DESC
     <div class="panel-header">
       <div class="panel-eyebrow">04 · Creative Performance Lab</div>
       <h1 class="panel-title">Creative as its own track</h1>
-      <p class="panel-lede">Tab 4 placeholder — creative matrix, fatigue curve, winning concepts brief, A/B card, Python snippet.</p>
+      <p class="panel-lede">A separate practice from channel work, with its own metrics, fatigue dynamics, and refresh cadence. The matrix below shows the top 25 active creatives by spend; the rest of the portfolio (~180 more) live in the same fact table off-frame.</p>
     </div>
-    <div class="placeholder">Tab 4 content pending</div>
+
+    <!-- ─── Section A — Creative matrix ─── -->
+    <div class="t4-section">
+      <div class="t4-section-eyebrow"><span class="marker">A</span>The matrix</div>
+      <h2>Top 25 active creatives by spend · last 30 days</h2>
+      <p class="t4-sub">Click any column to sort. The TriPeaks V12–V14 cluster on AppLovin Android is highlighted (sage tint) — they're the current portfolio leaders on IPM and fatigue; story-driven hook on a 30s/15s mix.</p>
+
+      <div class="t4-matrix-wrap">
+        <table class="t4-matrix">
+          <thead>
+            <tr>
+              <th class="left" data-sort="concept">Concept <span class="arrow"></span></th>
+              <th class="left" data-sort="format">Format <span class="arrow"></span></th>
+              <th class="left" data-sort="game">Game <span class="arrow"></span></th>
+              <th class="left" data-sort="net">Network <span class="arrow"></span></th>
+              <th data-sort="spend">Spend <span class="arrow"></span></th>
+              <th data-sort="imp">Impressions <span class="arrow"></span></th>
+              <th data-sort="ipm">IPM <span class="arrow"></span></th>
+              <th data-sort="ctr">CTR <span class="arrow"></span></th>
+              <th data-sort="cvr">CVR <span class="arrow"></span></th>
+              <th data-sort="cpi">CPI <span class="arrow"></span></th>
+              <th data-sort="days">Days live <span class="arrow"></span></th>
+              <th data-sort="fat">Fatigue <span class="arrow"></span></th>
+              <th class="left" data-sort="status">Status <span class="arrow"></span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V11"><div class="t4-concept-cell"><span class="id">SOL-V11</span><span class="hook">Story-driven · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="Meta · iOS">Meta · iOS</td>
+              <td data-col="spend" data-val="62000">$62K</td>
+              <td data-col="imp" data-val="2433830">2.43M</td>
+              <td data-col="ipm" data-val="9.4">9.4</td>
+              <td data-col="ctr" data-val="2.1">2.1%</td>
+              <td data-col="cvr" data-val="36">36%</td>
+              <td data-col="cpi" data-val="2.71">$2.71</td>
+              <td data-col="days" data-val="12">12d</td>
+              <td data-col="fat" data-val="22"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:22%;--c:var(--sage)"></span><span>22</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V09"><div class="t4-concept-cell"><span class="id">SOL-V09</span><span class="hook">Daily-challenge urgency · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="UAC · Android">UAC · Android</td>
+              <td data-col="spend" data-val="55000">$55K</td>
+              <td data-col="imp" data-val="2513000">2.51M</td>
+              <td data-col="ipm" data-val="11.4">11.4</td>
+              <td data-col="ctr" data-val="2.4">2.4%</td>
+              <td data-col="cvr" data-val="38">38%</td>
+              <td data-col="cpi" data-val="1.92">$1.92</td>
+              <td data-col="days" data-val="14">14d</td>
+              <td data-col="fat" data-val="26"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:26%;--c:var(--sage)"></span><span>26</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V08"><div class="t4-concept-cell"><span class="id">SOL-V08</span><span class="hook">Win-streak hook · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="Meta · iOS">Meta · iOS</td>
+              <td data-col="spend" data-val="48000">$48K</td>
+              <td data-col="imp" data-val="1991000">1.99M</td>
+              <td data-col="ipm" data-val="8.2">8.2</td>
+              <td data-col="ctr" data-val="1.8">1.8%</td>
+              <td data-col="cvr" data-val="32">32%</td>
+              <td data-col="cpi" data-val="2.94">$2.94</td>
+              <td data-col="days" data-val="18">18d</td>
+              <td data-col="fat" data-val="36"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:36%;--c:var(--amber)"></span><span>36</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="BUB-V09"><div class="t4-concept-cell"><span class="id">BUB-V09</span><span class="hook">Combo reveal · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="Bubble Shooter Pop">Bubble Shooter Pop</td>
+              <td class="left" data-col="net" data-val="UAC · Android">UAC · Android</td>
+              <td data-col="spend" data-val="42000">$42K</td>
+              <td data-col="imp" data-val="2479000">2.48M</td>
+              <td data-col="ipm" data-val="9.2">9.2</td>
+              <td data-col="ctr" data-val="2.0">2.0%</td>
+              <td data-col="cvr" data-val="33">33%</td>
+              <td data-col="cpi" data-val="1.84">$1.84</td>
+              <td data-col="days" data-val="15">15d</td>
+              <td data-col="fat" data-val="28"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:28%;--c:var(--sage)"></span><span>28</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V03"><div class="t4-concept-cell"><span class="id">SOL-V03</span><span class="hook">Gameplay-only · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="Meta · iOS">Meta · iOS</td>
+              <td data-col="spend" data-val="40000">$40K</td>
+              <td data-col="imp" data-val="2000000">2.00M</td>
+              <td data-col="ipm" data-val="6.1">6.1</td>
+              <td data-col="ctr" data-val="1.4">1.4%</td>
+              <td data-col="cvr" data-val="29">29%</td>
+              <td data-col="cpi" data-val="3.28">$3.28</td>
+              <td data-col="days" data-val="21">21d</td>
+              <td data-col="fat" data-val="50"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:50%;--c:var(--amber)"></span><span>50</span></div></td>
+              <td class="left" data-col="status" data-val="2"><span class="t4-status monitor">monitor</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V12"><div class="t4-concept-cell"><span class="id">SOL-V12</span><span class="hook">Tournament tease · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="UAC · iOS">UAC · iOS</td>
+              <td data-col="spend" data-val="38000">$38K</td>
+              <td data-col="imp" data-val="1542000">1.54M</td>
+              <td data-col="ipm" data-val="7.8">7.8</td>
+              <td data-col="ctr" data-val="1.9">1.9%</td>
+              <td data-col="cvr" data-val="31">31%</td>
+              <td data-col="cpi" data-val="3.16">$3.16</td>
+              <td data-col="days" data-val="11">11d</td>
+              <td data-col="fat" data-val="21"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:21%;--c:var(--sage)"></span><span>21</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SPI-V06"><div class="t4-concept-cell"><span class="id">SPI-V06</span><span class="hook">Win-streak hook · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="Spider Solitaire">Spider Solitaire</td>
+              <td class="left" data-col="net" data-val="UAC · Android">UAC · Android</td>
+              <td data-col="spend" data-val="36000">$36K</td>
+              <td data-col="imp" data-val="2384000">2.38M</td>
+              <td data-col="ipm" data-val="7.4">7.4</td>
+              <td data-col="ctr" data-val="1.7">1.7%</td>
+              <td data-col="cvr" data-val="31">31%</td>
+              <td data-col="cpi" data-val="2.04">$2.04</td>
+              <td data-col="days" data-val="17">17d</td>
+              <td data-col="fat" data-val="45"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:45%;--c:var(--amber)"></span><span>45</span></div></td>
+              <td class="left" data-col="status" data-val="2"><span class="t4-status monitor">monitor</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V07"><div class="t4-concept-cell"><span class="id">SOL-V07</span><span class="hook">Cards-falling ASMR · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="TikTok · iOS">TikTok · iOS</td>
+              <td data-col="spend" data-val="32000">$32K</td>
+              <td data-col="imp" data-val="1147000">1.15M</td>
+              <td data-col="ipm" data-val="12.8">12.8</td>
+              <td data-col="ctr" data-val="3.1">3.1%</td>
+              <td data-col="cvr" data-val="34">34%</td>
+              <td data-col="cpi" data-val="2.18">$2.18</td>
+              <td data-col="days" data-val="9">9d</td>
+              <td data-col="fat" data-val="16"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:16%;--c:var(--sage)"></span><span>16</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr class="canon">
+              <td class="left concept" data-col="concept" data-val="TRI-V12"><div class="t4-concept-cell"><span class="id">TRI-V12</span><span class="hook">Story-driven hook · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="TriPeaks">TriPeaks</td>
+              <td class="left" data-col="net" data-val="AppLovin · Android">AppLovin · Android</td>
+              <td data-col="spend" data-val="32000">$32K</td>
+              <td data-col="imp" data-val="1550000">1.55M</td>
+              <td data-col="ipm" data-val="11.6">11.6</td>
+              <td data-col="ctr" data-val="2.6">2.6%</td>
+              <td data-col="cvr" data-val="39">39%</td>
+              <td data-col="cpi" data-val="1.78">$1.78</td>
+              <td data-col="days" data-val="9">9d</td>
+              <td data-col="fat" data-val="13"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:13%;--c:var(--sage)"></span><span>13</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr class="canon">
+              <td class="left concept" data-col="concept" data-val="TRI-V13"><div class="t4-concept-cell"><span class="id">TRI-V13</span><span class="hook">Story-driven hook · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="TriPeaks">TriPeaks</td>
+              <td class="left" data-col="net" data-val="AppLovin · Android">AppLovin · Android</td>
+              <td data-col="spend" data-val="30000">$30K</td>
+              <td data-col="imp" data-val="1467000">1.47M</td>
+              <td data-col="ipm" data-val="12.1">12.1</td>
+              <td data-col="ctr" data-val="2.7">2.7%</td>
+              <td data-col="cvr" data-val="40">40%</td>
+              <td data-col="cpi" data-val="1.69">$1.69</td>
+              <td data-col="days" data-val="8">8d</td>
+              <td data-col="fat" data-val="12"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:12%;--c:var(--sage)"></span><span>12</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V05"><div class="t4-concept-cell"><span class="id">SOL-V05</span><span class="hook">Free coins · static</span></div></td>
+              <td class="left" data-col="format" data-val="static">static</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="AppLovin · Android">AppLovin · Android</td>
+              <td data-col="spend" data-val="28000">$28K</td>
+              <td data-col="imp" data-val="2197000">2.20M</td>
+              <td data-col="ipm" data-val="5.4">5.4</td>
+              <td data-col="ctr" data-val="1.1">1.1%</td>
+              <td data-col="cvr" data-val="22">22%</td>
+              <td data-col="cpi" data-val="2.36">$2.36</td>
+              <td data-col="days" data-val="26">26d</td>
+              <td data-col="fat" data-val="70"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:70%;--c:var(--terra)"></span><span>70</span></div></td>
+              <td class="left" data-col="status" data-val="3"><span class="t4-status refresh">refresh</span></td>
+            </tr>
+            <tr class="canon">
+              <td class="left concept" data-col="concept" data-val="TRI-V14"><div class="t4-concept-cell"><span class="id">TRI-V14</span><span class="hook">Story-driven hook · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="TriPeaks">TriPeaks</td>
+              <td class="left" data-col="net" data-val="AppLovin · Android">AppLovin · Android</td>
+              <td data-col="spend" data-val="28000">$28K</td>
+              <td data-col="imp" data-val="1364000">1.36M</td>
+              <td data-col="ipm" data-val="11.8">11.8</td>
+              <td data-col="ctr" data-val="2.5">2.5%</td>
+              <td data-col="cvr" data-val="38">38%</td>
+              <td data-col="cpi" data-val="1.74">$1.74</td>
+              <td data-col="days" data-val="7">7d</td>
+              <td data-col="fat" data-val="11"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:11%;--c:var(--sage)"></span><span>11</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="BUB-V07"><div class="t4-concept-cell"><span class="id">BUB-V07</span><span class="hook">Daily-challenge urgency · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="Bubble Shooter Pop">Bubble Shooter Pop</td>
+              <td class="left" data-col="net" data-val="Meta · iOS">Meta · iOS</td>
+              <td data-col="spend" data-val="28000">$28K</td>
+              <td data-col="imp" data-val="1213000">1.21M</td>
+              <td data-col="ipm" data-val="7.6">7.6</td>
+              <td data-col="ctr" data-val="1.7">1.7%</td>
+              <td data-col="cvr" data-val="29">29%</td>
+              <td data-col="cpi" data-val="3.04">$3.04</td>
+              <td data-col="days" data-val="21">21d</td>
+              <td data-col="fat" data-val="51"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:51%;--c:var(--amber)"></span><span>51</span></div></td>
+              <td class="left" data-col="status" data-val="2"><span class="t4-status monitor">monitor</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="BUB-V11"><div class="t4-concept-cell"><span class="id">BUB-V11</span><span class="hook">Cards-falling ASMR · 15s · BR</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="Bubble Shooter Pop">Bubble Shooter Pop</td>
+              <td class="left" data-col="net" data-val="TikTok · iOS BR">TikTok · iOS BR</td>
+              <td data-col="spend" data-val="26000">$26K</td>
+              <td data-col="imp" data-val="1074000">1.07M</td>
+              <td data-col="ipm" data-val="13.6">13.6</td>
+              <td data-col="ctr" data-val="3.3">3.3%</td>
+              <td data-col="cvr" data-val="35">35%</td>
+              <td data-col="cpi" data-val="1.78">$1.78</td>
+              <td data-col="days" data-val="8">8d</td>
+              <td data-col="fat" data-val="14"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:14%;--c:var(--sage)"></span><span>14</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V02"><div class="t4-concept-cell"><span class="id">SOL-V02</span><span class="hook">Win-animation loop · playable</span></div></td>
+              <td class="left" data-col="format" data-val="playable">playable</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="Unity · Android">Unity · Android</td>
+              <td data-col="spend" data-val="24000">$24K</td>
+              <td data-col="imp" data-val="1434000">1.43M</td>
+              <td data-col="ipm" data-val="9.1">9.1</td>
+              <td data-col="ctr" data-val="1.6">1.6%</td>
+              <td data-col="cvr" data-val="41">41%</td>
+              <td data-col="cpi" data-val="1.84">$1.84</td>
+              <td data-col="days" data-val="22">22d</td>
+              <td data-col="fat" data-val="52"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:52%;--c:var(--amber)"></span><span>52</span></div></td>
+              <td class="left" data-col="status" data-val="2"><span class="t4-status monitor">monitor</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SPI-V02"><div class="t4-concept-cell"><span class="id">SPI-V02</span><span class="hook">Daily-challenge urgency · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="Spider Solitaire">Spider Solitaire</td>
+              <td class="left" data-col="net" data-val="Meta · iOS">Meta · iOS</td>
+              <td data-col="spend" data-val="24000">$24K</td>
+              <td data-col="imp" data-val="1033000">1.03M</td>
+              <td data-col="ipm" data-val="7.9">7.9</td>
+              <td data-col="ctr" data-val="1.8">1.8%</td>
+              <td data-col="cvr" data-val="30">30%</td>
+              <td data-col="cpi" data-val="2.94">$2.94</td>
+              <td data-col="days" data-val="19">19d</td>
+              <td data-col="fat" data-val="48"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:48%;--c:var(--amber)"></span><span>48</span></div></td>
+              <td class="left" data-col="status" data-val="2"><span class="t4-status monitor">monitor</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="TRI-V08"><div class="t4-concept-cell"><span class="id">TRI-V08</span><span class="hook">Win-streak hook · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="TriPeaks">TriPeaks</td>
+              <td class="left" data-col="net" data-val="Meta · iOS">Meta · iOS</td>
+              <td data-col="spend" data-val="22000">$22K</td>
+              <td data-col="imp" data-val="888000">888K</td>
+              <td data-col="ipm" data-val="8.6">8.6</td>
+              <td data-col="ctr" data-val="1.9">1.9%</td>
+              <td data-col="cvr" data-val="30">30%</td>
+              <td data-col="cpi" data-val="2.88">$2.88</td>
+              <td data-col="days" data-val="16">16d</td>
+              <td data-col="fat" data-val="30"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:30%;--c:var(--sage)"></span><span>30</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="TRI-V09"><div class="t4-concept-cell"><span class="id">TRI-V09</span><span class="hook">Achievement-bridge · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="TriPeaks">TriPeaks</td>
+              <td class="left" data-col="net" data-val="Moloco · iOS">Moloco · iOS</td>
+              <td data-col="spend" data-val="20000">$20K</td>
+              <td data-col="imp" data-val="852000">852K</td>
+              <td data-col="ipm" data-val="9.7">9.7</td>
+              <td data-col="ctr" data-val="2.2">2.2%</td>
+              <td data-col="cvr" data-val="35">35%</td>
+              <td data-col="cpi" data-val="2.42">$2.42</td>
+              <td data-col="days" data-val="11">11d</td>
+              <td data-col="fat" data-val="20"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:20%;--c:var(--sage)"></span><span>20</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="TRI-V05"><div class="t4-concept-cell"><span class="id">TRI-V05</span><span class="hook">Pyramid reveal · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="TriPeaks">TriPeaks</td>
+              <td class="left" data-col="net" data-val="TikTok · iOS">TikTok · iOS</td>
+              <td data-col="spend" data-val="18000">$18K</td>
+              <td data-col="imp" data-val="740000">740K</td>
+              <td data-col="ipm" data-val="10.4">10.4</td>
+              <td data-col="ctr" data-val="2.4">2.4%</td>
+              <td data-col="cvr" data-val="33">33%</td>
+              <td data-col="cpi" data-val="2.34">$2.34</td>
+              <td data-col="days" data-val="13">13d</td>
+              <td data-col="fat" data-val="24"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:24%;--c:var(--sage)"></span><span>24</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SPI-V07"><div class="t4-concept-cell"><span class="id">SPI-V07</span><span class="hook">Difficulty-tease · playable</span></div></td>
+              <td class="left" data-col="format" data-val="playable">playable</td>
+              <td class="left" data-col="game" data-val="Spider Solitaire">Spider Solitaire</td>
+              <td class="left" data-col="net" data-val="AppLovin · Android">AppLovin · Android</td>
+              <td data-col="spend" data-val="18000">$18K</td>
+              <td data-col="imp" data-val="1080000">1.08M</td>
+              <td data-col="ipm" data-val="8.6">8.6</td>
+              <td data-col="ctr" data-val="1.5">1.5%</td>
+              <td data-col="cvr" data-val="36">36%</td>
+              <td data-col="cpi" data-val="1.94">$1.94</td>
+              <td data-col="days" data-val="14">14d</td>
+              <td data-col="fat" data-val="25"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:25%;--c:var(--sage)"></span><span>25</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SOL-V04"><div class="t4-concept-cell"><span class="id">SOL-V04</span><span class="hook">Generic tutorial · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="Solitaire">Solitaire</td>
+              <td class="left" data-col="net" data-val="ironSource · Android">ironSource · Android</td>
+              <td data-col="spend" data-val="18000">$18K</td>
+              <td data-col="imp" data-val="1750000">1.75M</td>
+              <td data-col="ipm" data-val="4.2">4.2</td>
+              <td data-col="ctr" data-val="0.9">0.9%</td>
+              <td data-col="cvr" data-val="18">18%</td>
+              <td data-col="cpi" data-val="2.45">$2.45</td>
+              <td data-col="days" data-val="30">30d</td>
+              <td data-col="fat" data-val="84"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:84%;--c:var(--terra)"></span><span>84</span></div></td>
+              <td class="left" data-col="status" data-val="4"><span class="t4-status sunset">sunset</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="BUB-V03"><div class="t4-concept-cell"><span class="id">BUB-V03</span><span class="hook">Free coins · static</span></div></td>
+              <td class="left" data-col="format" data-val="static">static</td>
+              <td class="left" data-col="game" data-val="Bubble Shooter Pop">Bubble Shooter Pop</td>
+              <td class="left" data-col="net" data-val="ironSource · Android">ironSource · Android</td>
+              <td data-col="spend" data-val="16000">$16K</td>
+              <td data-col="imp" data-val="1853000">1.85M</td>
+              <td data-col="ipm" data-val="4.4">4.4</td>
+              <td data-col="ctr" data-val="0.9">0.9%</td>
+              <td data-col="cvr" data-val="21">21%</td>
+              <td data-col="cpi" data-val="1.96">$1.96</td>
+              <td data-col="days" data-val="27">27d</td>
+              <td data-col="fat" data-val="76"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:76%;--c:var(--terra)"></span><span>76</span></div></td>
+              <td class="left" data-col="status" data-val="4"><span class="t4-status sunset">sunset</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SPI-V04"><div class="t4-concept-cell"><span class="id">SPI-V04</span><span class="hook">Cards-falling ASMR · 15s</span></div></td>
+              <td class="left" data-col="format" data-val="video 15s">video 15s</td>
+              <td class="left" data-col="game" data-val="Spider Solitaire">Spider Solitaire</td>
+              <td class="left" data-col="net" data-val="TikTok · iOS">TikTok · iOS</td>
+              <td data-col="spend" data-val="14000">$14K</td>
+              <td data-col="imp" data-val="516000">516K</td>
+              <td data-col="ipm" data-val="11.2">11.2</td>
+              <td data-col="ctr" data-val="2.8">2.8%</td>
+              <td data-col="cvr" data-val="32">32%</td>
+              <td data-col="cpi" data-val="2.42">$2.42</td>
+              <td data-col="days" data-val="10">10d</td>
+              <td data-col="fat" data-val="18"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:18%;--c:var(--sage)"></span><span>18</span></div></td>
+              <td class="left" data-col="status" data-val="1"><span class="t4-status scaling">scaling</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="TRI-V03"><div class="t4-concept-cell"><span class="id">TRI-V03</span><span class="hook">Free coins · static</span></div></td>
+              <td class="left" data-col="format" data-val="static">static</td>
+              <td class="left" data-col="game" data-val="TriPeaks">TriPeaks</td>
+              <td class="left" data-col="net" data-val="Liftoff · Android">Liftoff · Android</td>
+              <td data-col="spend" data-val="14000">$14K</td>
+              <td data-col="imp" data-val="1339000">1.34M</td>
+              <td data-col="ipm" data-val="4.8">4.8</td>
+              <td data-col="ctr" data-val="1.0">1.0%</td>
+              <td data-col="cvr" data-val="24">24%</td>
+              <td data-col="cpi" data-val="2.18">$2.18</td>
+              <td data-col="days" data-val="24">24d</td>
+              <td data-col="fat" data-val="65"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:65%;--c:var(--terra)"></span><span>65</span></div></td>
+              <td class="left" data-col="status" data-val="3"><span class="t4-status refresh">refresh</span></td>
+            </tr>
+            <tr>
+              <td class="left concept" data-col="concept" data-val="SPI-V01"><div class="t4-concept-cell"><span class="id">SPI-V01</span><span class="hook">Generic tutorial · 30s</span></div></td>
+              <td class="left" data-col="format" data-val="video 30s">video 30s</td>
+              <td class="left" data-col="game" data-val="Spider Solitaire">Spider Solitaire</td>
+              <td class="left" data-col="net" data-val="Unity · Android">Unity · Android</td>
+              <td data-col="spend" data-val="12000">$12K</td>
+              <td data-col="imp" data-val="1196000">1.20M</td>
+              <td data-col="ipm" data-val="4.6">4.6</td>
+              <td data-col="ctr" data-val="1.0">1.0%</td>
+              <td data-col="cvr" data-val="22">22%</td>
+              <td data-col="cpi" data-val="2.18">$2.18</td>
+              <td data-col="days" data-val="28">28d</td>
+              <td data-col="fat" data-val="78"><div class="t4-fatigue"><span class="t4-fatigue-bar" style="--w:78%;--c:var(--terra)"></span><span>78</span></div></td>
+              <td class="left" data-col="status" data-val="4"><span class="t4-status sunset">sunset</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 0.84rem; color: var(--ink-muted); margin-top: 12px;">+ 183 more creatives across the portfolio · this view shows top 25 by 30-day spend. Sage-tinted rows mark the TriPeaks V12–V14 cluster — the current portfolio creative win, surfaced on Tab 1's TriPeaks card and Action 02.</p>
+    </div>
+
+    <!-- ─── Section B — Fatigue curve chart ─── -->
+    <div class="t4-section">
+      <div class="t4-section-eyebrow"><span class="marker">B</span>Creative fatigue curve</div>
+      <h2>CTR decay by days live</h2>
+      <p class="t4-sub">Portfolio average CTR follows a power-curve decay; on average, a creative loses ~30% of its day-0 CTR by day 14. The amber line is the refresh-recommended threshold (70% of d0). The TriPeaks V12–V14 cluster (sage) is currently running a flatter decay than the portfolio average — they're earning the longer rotation.</p>
+
+      <div class="t4-chart-wrap">
+        <div class="t4-chart-head">
+          <div class="t4-chart-title">CTR decay vs days live · portfolio + TRI V12–V14</div>
+          <div class="t4-chart-cap">power-curve fit · refresh threshold = 70% of d0</div>
+        </div>
+        <div class="t4-chart-canvas"><canvas id="t4-fatigue-chart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ─── Section C — Winning concepts brief ─── -->
+    <div class="t4-section">
+      <div class="t4-section-eyebrow"><span class="marker">C</span>Winning concepts brief</div>
+      <h2>What the matrix is telling Creative this week</h2>
+      <p class="t4-sub">Two-week brief, auto-generated from the matrix above. Hand it to Creative on Sunday; the next test cycle ships within five business days.</p>
+
+      <div class="t4-brief">
+        <div>
+          <h3>Top 3 winning hooks <span class="kind">scale these</span></h3>
+          <ul class="pickers">
+            <li>
+              <span class="rk">01</span>
+              <span><strong>Story-driven progression.</strong> TriPeaks V12–V14 (AppLovin · Android) leading the portfolio with IPM 11.6–12.1 and D7 retention +3.1 pp vs portfolio. Solitaire V11 (Meta · iOS) won the recent A/B vs gameplay-only by +12.4% D7 ROAS.</span>
+            </li>
+            <li>
+              <span class="rk">02</span>
+              <span><strong>Cards-falling ASMR.</strong> TikTok winner across the portfolio. Solitaire V07 (TikTok iOS) IPM 12.8; Bubble Shooter Pop V11 (TikTok BR iOS) IPM 13.6 — the BR variant is also Tab 1's Action 03 lift candidate.</span>
+            </li>
+            <li>
+              <span class="rk">03</span>
+              <span><strong>Daily-challenge urgency.</strong> Solitaire V09 (UAC Android) IPM 11.4. Time-bounded urgency converts especially well on broad UAC audiences; the hook is durable inside the 14-day rotation cap.</span>
+            </li>
+          </ul>
+
+          <h3>Top 3 underperforming hooks <span class="kind">stop scaling</span></h3>
+          <ul class="pickers bad">
+            <li>
+              <span class="rk">01</span>
+              <span><strong>Free coins.</strong> SOL-V05 IPM 5.4, TRI-V03 IPM 4.8, BUB-V03 IPM 4.4. Cheap to scale, low-LTV cohort — Tab 8 Brief 1's risk #2 names this hook explicitly as the over-indexer for reward-seekers.</span>
+            </li>
+            <li>
+              <span class="rk">02</span>
+              <span><strong>Generic tutorial walkthrough.</strong> SPI-V01 IPM 4.6, SOL-V04 IPM 4.2. Sunset status. Tutorial-style creative converts only on Day 0 of a player's category awareness; we've outgrown it.</span>
+            </li>
+            <li>
+              <span class="rk">03</span>
+              <span><strong>"We miss you" reactivation copy.</strong> Tested but didn't qualify for the matrix. Underperforms across the casual-card category — Tab 8 Brief 3's note. Bring live-ops event-tied copy instead.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Five concepts to test next <span class="kind">brief on Sunday</span></h3>
+          <ol class="next-tests">
+            <li><strong>TRI / Story-driven 60s long-form.</strong> Extend V13's 30s success to a 60s narrative; test on AppLovin Android first. Hypothesis: longer commitment = lower IPM but materially higher D7 ROAS, replicating the Solitaire Meta A/B finding.</li>
+            <li><strong>SOL / Live-tournament FOMO.</strong> Countdown timer to the Solitaire weekly tournament launch — ties to Tab 8 Brief 3 wave 1's re-engagement creative.</li>
+            <li><strong>BUB / "Jogo offline" portrait variant.</strong> Current BR ASMR creative is landscape; ship a portrait version for TikTok BR iOS with the offline-play hook prioritized in the first 3 seconds.</li>
+            <li><strong>TRI / Cross-promo achievement-bridge.</strong> Take a Solitaire user's win-streak history and surface it as a TriPeaks first-day reward — Tab 8 Brief 5's track #3, productized as creative.</li>
+            <li><strong>SOL / Win-Animation Collection reveal.</strong> Lean into the new feature; gameplay-flavored 15s on Meta and UAC. Mastery hook, not free-coin hook — pull on the same lever that's working on TriPeaks V12–V14.</li>
+          </ol>
+        </div>
+
+        <p class="ops-note"><strong>Operations:</strong> 14-day rotation cap per Tab 8 Brief 2's SKAN-optimized engine. Refresh cadence locked to that window; producer briefs land Sundays 5 p.m. PT. Each concept above ships as a 4-variant test (one-dimension change only — hook, pacing, CTA, or audio). Permanent control creative held against every cycle for cross-test calibration.</p>
+      </div>
+    </div>
+
+    <!-- ─── Section D — A/B test result card ─── -->
+    <div class="t4-section">
+      <div class="t4-section-eyebrow"><span class="marker">D</span>A/B test · creative format</div>
+      <h2>Story-driven 30s vs Gameplay-only 15s — Solitaire iOS Meta</h2>
+      <p class="t4-sub">Same component as the Tab 6 experiments. Creative tests are real experiments, not intuition calls — the difference is the statistical bar (frequentist + effect size + guardrail; no Bayesian readout for a creative test of this stake).</p>
+
+      <article class="t6-exp lever-creative">
+        <div class="t6-exp-meta">
+          <span class="t6-exp-num">A/B 01 / 01</span>
+          <span class="t6-exp-lever">Creative · format test</span>
+        </div>
+        <h2 class="t6-exp-title">Story-driven 30s vs Gameplay-only 15s</h2>
+        <p class="t6-exp-hypo">Story-driven 30s creative will lift D7 ROAS by ≥ 10% on Solitaire iOS Meta vs the gameplay-only 15s control, without breaking D1 retention parity.</p>
+
+        <div class="t6-setup">
+          <div class="t6-setup-cell">
+            <div class="t6-setup-label">Primary metric</div>
+            <div class="t6-setup-val">D7 ROAS at the ad-set level. Pre-period control baseline 17.2%.</div>
+          </div>
+          <div class="t6-setup-cell">
+            <div class="t6-setup-label">Guardrail</div>
+            <div class="t6-setup-val">D1 retention parity within 1 pp. Story-driven 30s carries a higher install commitment; if D1 drops sharply, the lift isn't worth it.</div>
+          </div>
+          <div class="t6-setup-cell">
+            <div class="t6-setup-label">Sample size</div>
+            <div class="t6-setup-val">~85K impressions per arm at planned spend. Baseline CVR 31%, MDE 10% relative — clears 80% power on a two-proportion test (Section&nbsp;C calculator on Tab&nbsp;6 verifies).</div>
+          </div>
+          <div class="t6-setup-cell">
+            <div class="t6-setup-label">Randomization unit</div>
+            <div class="t6-setup-val">Ad-set within Meta campaign, even split. Same audience, same bid strategy — only creative varies.</div>
+          </div>
+          <div class="t6-setup-cell">
+            <div class="t6-setup-label">Run dates</div>
+            <div class="t6-setup-val">2026-04-15 → 2026-04-30 (16 days). D7 readout closes 2026-05-07.</div>
+          </div>
+          <div class="t6-setup-cell">
+            <div class="t6-setup-label">Pre-registered</div>
+            <div class="t6-setup-val">Hypothesis, MDE 10% relative, decision rule (lift ≥ MDE at p ≤ 0.05 = ship). Logged in registry on 2026-04-13.</div>
+          </div>
+        </div>
+
+        <div class="t6-result">
+          <div class="t6-result-headline">Story-driven 30s won by +12.4% relative D7 ROAS</div>
+          <div class="t6-result-sub">readout 2026-05-07 · n ≈ 85K impressions per arm · ad-set level</div>
+
+          <div class="t6-numbers">
+            <div class="t6-num-cell">
+              <span class="label">Gameplay-only 15s · D7 ROAS</span>
+              <div class="val">17.2%</div>
+              <div class="delta">control baseline</div>
+            </div>
+            <div class="t6-num-cell">
+              <span class="label">Story-driven 30s · D7 ROAS</span>
+              <div class="val">19.3%</div>
+              <div class="delta">+2.1 pp absolute</div>
+            </div>
+            <div class="t6-num-cell">
+              <span class="label">Relative lift</span>
+              <div class="val">+12.4%</div>
+              <div class="delta">95% CI [+4.2%, +20.7%]</div>
+            </div>
+          </div>
+
+          <div class="t6-readouts" style="grid-template-columns: 1fr;">
+            <div class="t6-readout">
+              <h4>Frequentist readout</h4>
+              <p>Two-sample test rejects null at p&nbsp;= 0.008. Estimated relative lift 12.4%, 95% CI [+4.2%, +20.7%]. Lower bound clears the 10% MDE bar; the test is conclusive on direction and meaningful on magnitude.</p>
+              <div class="post"><span class="label">p-value</span><span class="num">0.008</span></div>
+              <div class="post"><span class="label">95% CI on relative lift</span><span class="num">[+4.2%, +20.7%]</span></div>
+              <div class="post"><span class="label">Effect size (Cohen's h)</span><span class="num">0.18</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t6-setup" style="margin-bottom: 0;">
+          <div class="t6-setup-cell"><div class="t6-setup-label">Guardrail · D1 retention</div><div class="t6-setup-val">Story-driven 38.4% / Gameplay 39.0% — 0.6 pp difference, within 1 pp parity. <strong style="color:var(--positive)">PASS</strong></div></div>
+          <div class="t6-setup-cell"><div class="t6-setup-label">Decision threshold</div><div class="t6-setup-val">Lift ≥ 10% MDE achieved at p &lt; 0.01. <strong style="color:var(--amber)">SHIP</strong></div></div>
+        </div>
+
+        <div class="t6-decision">
+          <div class="t6-decision-label">Decision · 80 / 20 ship</div>
+          <p>Roll story-driven 30s to <strong>80% of Solitaire iOS Meta spend</strong>; hold gameplay-only 15s at <strong>20%</strong> as control. The 20% control isn't budget waste — it's optionality for the next round. Story-driven creative will fatigue inside three weeks per the curve in Section&nbsp;B; when it crosses the 70%-of-d0-CTR threshold, run story-driven V2 vs gameplay-only V2 in the same 80/20 structure.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- ─── Section E — Python snippet ─── -->
+    <div class="t4-section">
+      <div class="t4-section-eyebrow"><span class="marker">E</span>Computing fatigue scores</div>
+      <h2>From raw impressions to a ranked refresh queue</h2>
+      <p class="t4-sub">Reads from <code>fact_creative_daily</code> (the per-creative parallel of <code>fact_ua_daily</code>). Power-curve decay fit per creative + recency CTR drop + tenure → composite fatigue score. The output is what the matrix above is sorted on.</p>
+
+      <div class="t2-sql-frame">
+        <div class="t2-sql-head">
+          <span>creative_fatigue.py</span>
+          <span class="lang">pandas + scipy</span>
+        </div>
+        <pre class="code"><code id="py-creative-fatigue"></code></pre>
+      </div>
+
+      <script type="text/x-python" data-target="py-creative-fatigue">
+import pandas as pd
+import numpy as np
+from scipy.optimize import curve_fit
+
+# Loaded from fact_creative_daily — per-creative roll-up parallel to fact_ua_daily.
+df = pd.read_gbq("""
+  SELECT * FROM `mw-ua.fact.fact_creative_daily`
+  WHERE day BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 35 DAY) AND CURRENT_DATE()
+""")
+df['days_live'] = df.groupby('creative_id')['day'].rank(method='dense').astype(int) - 1
+df['ctr'] = df['clicks'] / df['impressions'].replace(0, np.nan)
+
+def power_decay(t, a, b):
+    return a * (1 + t) ** (-b)
+
+def fit_decay(g):
+    x, y = g['days_live'].values, g['ctr'].values
+    if len(x) < 5 or np.isnan(y).any():
+        return np.nan
+    try:
+        popt, _ = curve_fit(power_decay, x, y, p0=[0.02, 0.1], maxfev=2000)
+        return popt[1]  # decay exponent — higher = faster fatigue
+    except RuntimeError:
+        return np.nan
+
+decay_b = df.groupby('creative_id').apply(fit_decay).rename('decay_b')
+
+# Recency CTR drop: first-3-days mean vs last-7-days mean.
+ordered  = df.sort_values(['creative_id', 'day'])
+early    = ordered.groupby('creative_id').head(3).groupby('creative_id')['ctr'].mean()
+recent   = ordered.groupby('creative_id').tail(7).groupby('creative_id')['ctr'].mean()
+ctr_drop = ((early - recent) / early).clip(lower=0).rename('ctr_drop')
+days_max = df.groupby('creative_id')['days_live'].max().rename('days_live')
+
+# Composite fatigue: 0 (fresh) → 100 (sunset). Three weighted components.
+fatigue = (
+      35 * (days_max / 30).clip(upper=1)
+    + 35 * (decay_b * 5).fillna(0).clip(upper=1)
+    + 30 * ctr_drop.fillna(0).clip(upper=1)
+).round(0).astype(int).rename('fatigue_score')
+
+metrics = df.groupby('creative_id').agg(
+    spend=('spend', 'sum'),
+    installs=('installs', 'sum'),
+    impressions=('impressions', 'sum')
+)
+metrics['ipm'] = (metrics['installs'] / metrics['impressions'] * 1000).round(2)
+
+ranked = (metrics.join(fatigue)
+                 .sort_values(['fatigue_score', 'ipm'], ascending=[True, False]))
+print(ranked.head(8))
+# fatigue_score   ipm     spend  installs
+# TRI-V14    11   11.80   28000   16,092
+# TRI-V13    12   12.10   30000   17,751
+# TRI-V12    13   11.60   32000   17,978
+# BUB-V11    14   13.60   26000   14,607
+# SOL-V07    16   12.80   32000   14,679
+# SPI-V04    18   11.20   14000    5,785
+# TRI-V09    20    9.70   20000    8,264
+# SOL-V12    21    7.80   38000   12,025
+      </script>
+
+      <p style="margin-top: 14px; font-size: 0.88rem; color: var(--ink-muted); max-width: 760px; line-height: 1.55;">The output is the same ranking the matrix uses for default ordering. The TriPeaks V12–V14 cluster takes the top three — they're the freshest among the high-IPM cohort, and they're winning on both the tenure component (low days-live) and the decay component (flatter slope than the portfolio average). That's the cluster Tab 1's Action 02 says to scale, this query is what surfaces it, and the matrix above is what the analyst hands to Creative on Sunday.</p>
+    </div>
   </section>
 
   <section class="tab-panel layout-dashboard" data-panel="5">
@@ -3513,6 +4367,29 @@ ORDER BY r.spend_30d DESC
     if (target) target.innerHTML = highlightSql(src.textContent.replace(/^\n/, '').replace(/\s+$/, ''));
   });
 
+  // ─── Python syntax highlighter ───
+  const PY_KW = new Set('import from as def return if elif else for while in is not and or True False None lambda with yield class try except raise pass break continue global nonlocal'.split(' '));
+  const PY_FN = new Set('range len print sum min max abs round int float str list dict tuple set zip enumerate sorted reversed map filter any all'.split(' '));
+  function highlightPy(raw) {
+    const esc = raw.replace(/[<>&]/g, c => ({ '<':'&lt;', '>':'&gt;', '&':'&amp;' }[c]));
+    return esc.replace(/(#[^\n]*)|('(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")|(\b\d+(?:\.\d+)?\b)|(\b[A-Za-z_][A-Za-z0-9_]*\b)/g,
+      (m, c, s, n, w) => {
+        if (c) return `<span class="cm">${c}</span>`;
+        if (s) return `<span class="str">${s}</span>`;
+        if (n) return `<span class="num">${n}</span>`;
+        if (w) {
+          if (PY_KW.has(w)) return `<span class="kw">${w}</span>`;
+          if (PY_FN.has(w)) return `<span class="fn">${w}</span>`;
+        }
+        return m;
+      });
+  }
+  document.querySelectorAll('script[type="text/x-python"]').forEach(src => {
+    const targetId = src.dataset.target;
+    const target = document.getElementById(targetId);
+    if (target) target.innerHTML = highlightPy(src.textContent.replace(/^\n/, '').replace(/\s+$/, ''));
+  });
+
   // ─── Inverse normal CDF (Beasley-Springer-Moro) ───
   function normInv(p) {
     if (p <= 0 || p >= 1) return NaN;
@@ -3743,6 +4620,53 @@ ORDER BY r.spend_30d DESC
     });
   }
   document.querySelectorAll('table.t3-channel').forEach(makeSortable);
+  document.querySelectorAll('table.t4-matrix').forEach(makeSortable);
+
+  // ─── Tab 4 — Fatigue curve chart ───
+  window.__chartInit['4'] = (function() {
+    let drawn = false;
+    return function() {
+      if (drawn) return;
+      const canvas = document.getElementById('t4-fatigue-chart');
+      if (!canvas || !window.Chart) return;
+      // Average creative CTR decay: power curve fit. Day 0 ~2.2%, b ~0.15.
+      const days = 30, labels = [], avg = [], thresh = [];
+      for (let i = 0; i <= days; i++) {
+        labels.push(`d${i}`);
+        avg.push(+(2.20 * Math.pow(1 + i, -0.15)).toFixed(3));
+        thresh.push(1.55);
+      }
+      // V12-V14 cluster — leans flatter; show as a brighter overlay through day ~9
+      const winning = [];
+      for (let i = 0; i <= days; i++) {
+        if (i <= 10) winning.push(+(2.65 * Math.pow(1 + i, -0.06)).toFixed(3));
+        else winning.push(null);
+      }
+      new Chart(canvas, {
+        type: 'line',
+        data: { labels, datasets: [
+          { label: 'Portfolio average', data: avg, borderColor: PALETTE.slate, backgroundColor: 'transparent', borderWidth: 1.6, pointRadius: 0, tension: 0.2 },
+          { label: 'Refresh threshold (70% of d0)', data: thresh, borderColor: PALETTE.amber, borderDash: [5, 4], borderWidth: 1, pointRadius: 0, tension: 0 },
+          { label: 'TRI V12–V14 (live)', data: winning, borderColor: PALETTE.sage, backgroundColor: 'transparent', borderWidth: 1.8, pointRadius: 0, tension: 0.2, spanGaps: false }
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', align: 'start', labels: { boxWidth: 10, boxHeight: 2, padding: 12, font: { size: 10 } } },
+            tooltip: { mode: 'index', intersect: false, callbacks: {
+              label: ctx => ctx.parsed.y == null ? null : `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`
+            } }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.025)' }, ticks: { maxTicksLimit: 11, color: '#5E5C56', font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.035)' }, ticks: { color: '#8E8C84', font: { size: 10 }, callback: v => v.toFixed(2) + '%' } }
+          },
+          interaction: { mode: 'index', intersect: false }
+        }
+      });
+      drawn = true;
+    };
+  })();
 
   // ─── Tab 3 — 90-day CPI trend chart ───
   window.__chartInit['3'] = (function() {
