@@ -1969,6 +1969,196 @@
     display: block;
     margin-bottom: 4px;
   }
+
+  /* ─── Tab 7 — Competitive Intelligence ─── */
+  .t7-section { margin: 48px 0; }
+  .t7-section:first-of-type { margin-top: 8px; }
+  .t7-section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .t7-section-eyebrow .marker { color: var(--amber); margin-right: 8px; }
+  .t7-section h2 { font-size: 1.5rem; font-weight: 500; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .t7-section .t7-sub { font-size: 0.92rem; color: var(--ink-muted); max-width: 760px; line-height: 1.55; margin: 0 0 14px; }
+
+  .t7-disclaimer {
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--ink-faint);
+    border-radius: 0 3px 3px 0;
+    padding: 10px 16px;
+    margin: 0 0 22px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    max-width: 880px;
+  }
+  .t7-disclaimer .label {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.7rem;
+    margin-right: 8px;
+  }
+
+  /* Competitor table */
+  .t7-table-wrap {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+    background: var(--bg-card);
+  }
+  table.t7-comp {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+  table.t7-comp th, table.t7-comp td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.t7-comp thead th {
+    background: var(--bg-inset);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.68rem;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border-strong);
+    white-space: nowrap;
+  }
+  table.t7-comp tbody tr:last-child td { border-bottom: none; }
+  table.t7-comp tbody tr:hover td { background: rgba(255,255,255,0.012); }
+  table.t7-comp tbody td.competitor {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  table.t7-comp tbody td.competitor .title-sub {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 3px;
+    font-weight: 400;
+  }
+  table.t7-comp tbody td.spend, table.t7-comp tbody td.installs {
+    font-family: var(--font-mono);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  table.t7-comp tbody td.channels { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-soft); }
+  table.t7-comp tbody td.monetization {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  table.t7-comp tbody td.advantage { color: var(--ink-soft); font-style: italic; }
+
+  /* Creative trend scan */
+  .t7-trends {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .t7-trend-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 22px;
+  }
+  .t7-trend-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+  }
+  .t7-trend-theme {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .t7-trend-where {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .t7-trend-implies {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    border-top: 1px dashed var(--border);
+    padding-top: 10px;
+  }
+  .t7-trend-implies strong { color: var(--ink); }
+
+  /* Per-competitor verdict cards */
+  .t7-verdicts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1100px;
+  }
+  .t7-verdict {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 28px;
+    padding: 22px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .t7-verdict.structural { border-left: 3px solid var(--amber); }
+  .t7-verdict-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .t7-verdict-tag {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .t7-verdict.structural .t7-verdict-tag { color: var(--amber); }
+  .t7-verdict-body p {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .t7-verdict-body p:last-child { margin-bottom: 0; }
+  .t7-verdict-body strong { color: var(--ink); }
+  @media (max-width: 720px) {
+    .t7-verdict { grid-template-columns: 1fr; gap: 12px; }
+  }
 </style>
 </head>
 <body>
@@ -4385,9 +4575,198 @@ print(f"D365 95% bootstrap CI: [${ci_lo:.2f}, ${ci_hi:.2f}]")
     <div class="panel-header">
       <div class="panel-eyebrow">07 · Competitive Intelligence</div>
       <h1 class="panel-title">The category, observed</h1>
-      <p class="panel-lede">Tab 7 placeholder — competitor spend table, creative trend cards, per-competitor verdicts.</p>
+      <p class="panel-lede">Six competitors that share our category; only one shares our economics. The work below is observational — what they're doing, what it implies, and where the comparison breaks down.</p>
     </div>
-    <div class="placeholder">Tab 7 content pending</div>
+
+    <!-- ─── Section A — Competitor table ─── -->
+    <div class="t7-section">
+      <div class="t7-section-eyebrow"><span class="marker">A</span>Spend &amp; install estimates</div>
+      <h2>Six competitors, three structurally different games</h2>
+      <p class="t7-sub">Casual card portfolio (Grand Harvest, Microsoft, Brainium), real-money skill (Solitaire Cash, Solitaire Smash), and the closest UA-capability analogue (Tripledot). Different economic envelopes; the table reads cleanly only after you stop pretending they're comparable.</p>
+
+      <div class="t7-disclaimer">
+        <span class="label">Source</span>Estimates from public-data approximations — creative library scrape proxies (data.ai, Sensor Tower) cross-referenced with benchmark CPM/CPI ranges. Directional, not exact. Numbers shown as ranges; do not cite point figures from this table.
+      </div>
+
+      <div class="t7-table-wrap">
+        <table class="t7-comp">
+          <thead>
+            <tr>
+              <th>Competitor</th>
+              <th>30d Spend</th>
+              <th>30d Installs</th>
+              <th>Top channels</th>
+              <th>Dominant hook</th>
+              <th>Monetization</th>
+              <th>Structural advantage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="competitor">Solitaire Grand Harvest<span class="title-sub">Playtika · TriPeaks variant</span></td>
+              <td class="spend">$8–12M</td>
+              <td class="installs">3.0–4.0M</td>
+              <td class="channels">Meta · AppLovin · Unity</td>
+              <td>Free coins + farm progression</td>
+              <td class="monetization">IAP-heavy (~85%)</td>
+              <td class="advantage">Meta-game flywheel</td>
+            </tr>
+            <tr>
+              <td class="competitor">Solitaire Cash<span class="title-sub">Papaya Gaming · RMG skill</span></td>
+              <td class="spend">$15–20M</td>
+              <td class="installs">2.5–3.0M</td>
+              <td class="channels">Meta · TikTok · Google</td>
+              <td>Real cash competition</td>
+              <td class="monetization">RMG (skill-based)</td>
+              <td class="advantage">RMG economics · 5–7× rev/AU</td>
+            </tr>
+            <tr>
+              <td class="competitor">Solitaire Smash<span class="title-sub">Playtika · RMG skill + tournaments</span></td>
+              <td class="spend">$10–14M</td>
+              <td class="installs">1.8–2.2M</td>
+              <td class="channels">Meta · Google · TikTok</td>
+              <td>Real cash + leaderboard FOMO</td>
+              <td class="monetization">RMG</td>
+              <td class="advantage">RMG + tournament loop</td>
+            </tr>
+            <tr>
+              <td class="competitor">Microsoft Solitaire Collection<span class="title-sub">Microsoft · 5 modes bundled</span></td>
+              <td class="spend">&lt; $1M</td>
+              <td class="installs">~5M (mostly organic)</td>
+              <td class="channels">ASA · Microsoft Ads</td>
+              <td>Daily challenge · brand authority</td>
+              <td class="monetization">Subscription + ads</td>
+              <td class="advantage">Brand trust + Xbox ecosystem</td>
+            </tr>
+            <tr>
+              <td class="competitor">Brainium<span class="title-sub">Solitaire / Spider · classic execution</span></td>
+              <td class="spend">$2–3M</td>
+              <td class="installs">1.0–1.4M</td>
+              <td class="channels">Meta · Google · AppLovin</td>
+              <td>Clean classic gameplay</td>
+              <td class="monetization">Ads + light IAP</td>
+              <td class="advantage">UX polish + organic share</td>
+            </tr>
+            <tr>
+              <td class="competitor">Tripledot Studios<span class="title-sub">portfolio · Sudoku, Solitaire, Block</span></td>
+              <td class="spend">$30–40M (portfolio)</td>
+              <td class="installs">8–11M (portfolio)</td>
+              <td class="channels">Meta · Google · AppLovin · Unity · Moloco · ASA</td>
+              <td>Variety · classic + light meta</td>
+              <td class="monetization">Ads + IAP</td>
+              <td class="advantage">UA capability + portfolio scale</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ─── Section B — Creative trend scan ─── -->
+    <div class="t7-section">
+      <div class="t7-section-eyebrow"><span class="marker">B</span>Creative trend scan</div>
+      <h2>Five hooks the category is running</h2>
+      <p class="t7-sub">What's currently active across the competitive set, and the operational implication for our creative roadmap. Three of these we already run; two we don't.</p>
+
+      <div class="t7-trends">
+        <div class="t7-trend-card">
+          <div class="t7-trend-num">01</div>
+          <div class="t7-trend-theme">"Free coins"</div>
+          <div class="t7-trend-where">Grand Harvest · Solitaire Cash</div>
+          <p class="t7-trend-implies">High-velocity acquisition of low-LTV users; over-indexes for reward-seekers (<strong>Tab 4</strong> Section&nbsp;C names this hook explicitly as the underperformer in our matrix). Useful for low-stakes volume tests, not a primary scaling lever for an ad-monetized portfolio.</p>
+        </div>
+        <div class="t7-trend-card">
+          <div class="t7-trend-num">02</div>
+          <div class="t7-trend-theme">"Real cash competition"</div>
+          <div class="t7-trend-where">Solitaire Cash · Solitaire Smash</div>
+          <p class="t7-trend-implies">Not directly applicable — different regulatory and economic envelope. <strong>We can borrow the urgency mechanic</strong> (countdown to next round, leaderboard tease) without the cash payout — which is what <strong>Tab 4 next-test #2</strong> ("SOL live-tournament FOMO") proposes.</p>
+        </div>
+        <div class="t7-trend-card">
+          <div class="t7-trend-num">03</div>
+          <div class="t7-trend-theme">"Daily-challenge urgency"</div>
+          <div class="t7-trend-where">Microsoft · Brainium</div>
+          <p class="t7-trend-implies">Already a winning hook for us — <strong>SOL-V09 IPM 11.4 on UAC Android</strong> (Tab 4 matrix). Validates continued investment; the category is converging on this as a baseline classic-card creative format.</p>
+        </div>
+        <div class="t7-trend-card">
+          <div class="t7-trend-num">04</div>
+          <div class="t7-trend-theme">"Story progression / room renovation"</div>
+          <div class="t7-trend-where">Grand Harvest · adjacent meta-game titles</div>
+          <p class="t7-trend-implies">A meta-layer creates a creative ad surface that classic Solitaire doesn't have — Grand Harvest can show farm growth, we can only show card hands. Worth watching as a long-term creative direction tied to the product roadmap (Jigsaw events, Arcade Goal are our early steps).</p>
+        </div>
+        <div class="t7-trend-card">
+          <div class="t7-trend-num">05</div>
+          <div class="t7-trend-theme">"ASMR / oddly-satisfying gameplay"</div>
+          <div class="t7-trend-where">Rising trend across casual puzzle</div>
+          <p class="t7-trend-implies">Aligns with our <strong>SOL-V07 (IPM 12.8)</strong> and <strong>BUB-V11 (IPM 13.6, BR)</strong> wins on TikTok (Tab 4). Continue scaling on TikTok where the audience auto-plays at sound-on; investigate portrait-format variants per Tab 4 next-test #3.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Section C — Per-competitor verdicts ─── -->
+    <div class="t7-section">
+      <div class="t7-section-eyebrow"><span class="marker">C</span>Per-competitor verdicts</div>
+      <h2>What we can learn · what we can ignore</h2>
+      <p class="t7-sub">One paragraph each. The Grand Harvest entry is the structural one — meta-game gap diagnosis tied to dollars; the Tripledot entry is the operational one — closest analogue, different leverage.</p>
+
+      <div class="t7-verdicts">
+
+        <article class="t7-verdict structural">
+          <div>
+            <div class="t7-verdict-name">Solitaire Grand Harvest</div>
+            <div class="t7-verdict-tag">Structural · meta-game gap</div>
+          </div>
+          <div class="t7-verdict-body">
+            <p>Grand Harvest is the case study in a structural advantage we don't have. The TriPeaks variant is wrapped in a farm-meta flywheel — players don't just complete card hands, they accumulate coins to renovate a virtual farm, which feeds back into reasons to come back tomorrow. The mechanism in plain terms: <strong>meta-game → higher D30/D60 retention → higher pLTV → higher CPI ceiling → ability to outbid in privacy-constrained auctions.</strong></p>
+            <p>Their pLTV/CPI ratio probably lands at 1.4–1.6× (IAP-heavy economics on a meta-driven retention curve). Ours blended lands at <strong>0.82×</strong> (Tab 5 Section D). That gap is the meta-game gap, expressed in dollars.</p>
+            <p>Closing it doesn't require us to copy farm-renovation. The recent Jigsaw events, Arcade Goal, Winning Animation Collection, and weekly tournaments are the same architectural lever applied to our codebase. The UA implication is patient — meta-features lift LTV first, which lifts the CPI ceiling next, which lets UA outbid third. <strong>This isn't a UA fix; it's a product roadmap input the UA team should advocate for.</strong></p>
+          </div>
+        </article>
+
+        <article class="t7-verdict">
+          <div>
+            <div class="t7-verdict-name">Tripledot Studios</div>
+            <div class="t7-verdict-tag">Operational · closest analogue</div>
+          </div>
+          <div class="t7-verdict-body">
+            <p>Tripledot is the structurally closest competitor to us — classic mechanics, strong UA capability, ad-plus-IAP monetization, multi-title portfolio. <strong>What they do better today:</strong> faster creative iteration cadence (closer to weekly than our biweekly), broader channel diversification (active across Moloco's bidding tier where our spend is still ramping), and a UA-first organizational culture where channel managers drive product feature requests, not the other way around.</p>
+            <p><strong>What we have that they don't:</strong> 35 years of brand authority, the original mobile Solitaire (100M+ player history), and portfolio cross-promotion inventory we're under-using (Tab 8 Brief 5 quantifies the gap at 12–18% category benchmark vs our 3.4%).</p>
+            <p>The right framing: we're not behind a different company; we're a parallel company with different leverage. The Tab 8 SKAN-optimized creative engine and the 90-day plan close the iteration-cadence gap. The cross-title synergy initiative monetizes the inventory advantage Tripledot can't replicate.</p>
+          </div>
+        </article>
+
+        <article class="t7-verdict">
+          <div>
+            <div class="t7-verdict-name">Solitaire Cash &amp; Solitaire Smash</div>
+            <div class="t7-verdict-tag">RMG · different beast</div>
+          </div>
+          <div class="t7-verdict-body">
+            <p>RMG titles run under a different regulatory and UA economy — age-gated, geo-restricted (currently 30-some US states plus a handful of international markets), with their own MMP handling for chargebacks and refunds, and a fraud surface that drives up tracking complexity and CPI. Their reported $15–20M monthly UA spend isn't directly comparable to ours: a real-money skill competition produces 5–7× the revenue per active user that an ad-monetized casual game does, which raises the CPI ceiling without raising the LTV multiple in any way we can copy.</p>
+            <p><strong>We can learn their hooks</strong> — countdown urgency, leaderboard FOMO, real-stakes language adapted to non-cash equivalents like daily tournaments and cosmetic prizes. <strong>We cannot learn their unit economics.</strong> The right read on RMG is one paragraph long; entire competitive decks have been written treating these games as comparable, and they aren't.</p>
+          </div>
+        </article>
+
+        <article class="t7-verdict">
+          <div>
+            <div class="t7-verdict-name">Microsoft Solitaire Collection</div>
+            <div class="t7-verdict-tag">Organic competitor</div>
+          </div>
+          <div class="t7-verdict-body">
+            <p>Microsoft's strategy is brand authority plus ecosystem distribution. They spend almost nothing on UA (under $1M/month) and capture roughly 5M monthly installs largely organic — App Store and Play Store search visibility plus Windows preinstall plus Xbox cross-promotion. D7 retention is reportedly high; Microsoft account login increases stickiness in a way third-party titles can't replicate.</p>
+            <p>Read: they're an organic competitor, not a UA competitor. The lesson is in their daily-challenge cadence and the simplicity of their always-available offline mode — both already informing our product roadmap. Where we compete with them isn't on the App Store search page; it's on the difference between "Solitaire" the brand category and "MobilityWare Solitaire" the product. <strong>ASO and store conversion-rate optimization matter here more than channel mix.</strong></p>
+          </div>
+        </article>
+
+        <article class="t7-verdict">
+          <div>
+            <div class="t7-verdict-name">Brainium</div>
+            <div class="t7-verdict-tag">Quality benchmark</div>
+          </div>
+          <div class="t7-verdict-body">
+            <p>Brainium is the clean-execution competitor. Limited UA spend ($2–3M/month), strong organic share via App Store reviews (their review count and rating consistently lead the casual-card category), and creative that prioritizes gameplay clarity over hook intensity. <strong>The lesson: review velocity matters as a long-term UA input we under-invest in.</strong> Their unit economics on the ad-monetized side are likely close to ours, slightly favoring them on the App Store conversion funnel. Worth watching as the benchmark for what a high-quality classic experience without a meta-layer looks like at scale.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
   </section>
 
   <section class="tab-panel layout-narrative" data-panel="8">
