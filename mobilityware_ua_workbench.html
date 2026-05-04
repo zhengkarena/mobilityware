@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UA Workbench — MobilityWare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg:            #0F0F11;
+    --bg-raised:     #17171B;
+    --bg-card:       #1B1B21;
+    --bg-inset:      #131318;
+    --border:        #2A2A32;
+    --border-strong: #3A3A44;
+    --ink:           #ECEAE3;
+    --ink-soft:      #C8C5BC;
+    --ink-muted:     #8E8C84;
+    --ink-faint:     #5E5C56;
+    --crimson:       #B83A3A;
+    --crimson-soft:  #8C4040;
+    --amber:         #C7943A;
+    --amber-soft:    #8C7340;
+    --sage:          #6A8C5A;
+    --slate:         #5A7A95;
+    --plum:          #8A6A9C;
+    --terra:         #B07A5A;
+    --positive:      #6A8C5A;
+    --negative:      #8C4040;
+    --shadow-soft:   0 1px 0 rgba(0,0,0,.4);
+
+    --font-display:  'Fraunces', Georgia, serif;
+    --font-body:     'Geist', -apple-system, system-ui, sans-serif;
+    --font-mono:     'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+    --maxw-narrative: 880px;
+    --maxw-dashboard: 1320px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: rgba(199,148,58,.35); color: var(--ink); }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  h1 { font-size: 2.4rem; line-height: 1.1; letter-spacing: -0.02em; }
+  h2 { font-size: 1.65rem; line-height: 1.2; }
+  h3 { font-size: 1.2rem; line-height: 1.3; }
+  h4 { font-size: 1rem; font-family: var(--font-body); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+
+  p { margin: 0 0 1em; color: var(--ink-soft); }
+  a { color: var(--amber); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  code, pre { font-family: var(--font-mono); }
+  code { font-size: 0.88em; color: var(--amber); background: var(--bg-inset); padding: 1px 5px; border-radius: 3px; border: 1px solid var(--border); }
+
+  /* ─── TOPBAR ─── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(15,15,17,.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner {
+    max-width: var(--maxw-dashboard);
+    margin: 0 auto;
+    padding: 14px 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .brand-mark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .brand-mark::before {
+    content: "♠";
+    color: var(--crimson);
+    margin-right: 8px;
+    font-size: 0.95em;
+  }
+  .brand-sub {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border-left: 1px solid var(--border-strong);
+    padding-left: 14px;
+  }
+  .brand-byline {
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .brand-byline em { color: var(--ink-soft); font-style: normal; }
+
+  .tabnav {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabnav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    font-family: var(--font-body);
+    font-size: 0.83rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 12px 16px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .tab-btn .tab-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    font-weight: 400;
+  }
+  .tab-btn:hover { color: var(--ink-soft); }
+  .tab-btn:hover .tab-num { color: var(--ink-muted); }
+  .tab-btn.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--crimson);
+  }
+  .tab-btn.is-active .tab-num { color: var(--crimson); }
+
+  /* ─── MAIN / PANELS ─── */
+  main {
+    padding: 36px 28px 96px;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.is-active { display: block; }
+  .tab-panel.layout-dashboard { max-width: var(--maxw-dashboard); margin: 0 auto; }
+  .tab-panel.layout-narrative { max-width: var(--maxw-narrative); margin: 0 auto; line-height: 1.65; }
+  .tab-panel.layout-narrative p { font-size: 1rem; color: var(--ink-soft); }
+  .tab-panel.layout-narrative h2 { font-size: 1.85rem; margin-top: 2.2em; }
+  .tab-panel.layout-narrative h2:first-of-type { margin-top: 0; }
+  .tab-panel.layout-narrative h3 { margin-top: 1.6em; color: var(--ink); }
+
+  .panel-header {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .panel-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--crimson);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .panel-lede {
+    font-size: 1.02rem;
+    color: var(--ink-muted);
+    max-width: 720px;
+  }
+
+  /* ─── REUSABLE COMPONENTS ─── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .card-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  .kpi { display: flex; flex-direction: column; gap: 4px; }
+  .kpi-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); }
+  .kpi-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .kpi-delta { font-family: var(--font-mono); font-size: 0.78rem; }
+  .kpi-delta.up { color: var(--positive); }
+  .kpi-delta.down { color: var(--negative); }
+  .kpi-delta::before { content: ""; display: inline-block; width: 0; height: 0; margin-right: 5px; border-left: 4px solid transparent; border-right: 4px solid transparent; }
+  .kpi-delta.up::before { border-bottom: 5px solid var(--positive); }
+  .kpi-delta.down::before { border-top: 5px solid var(--negative); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--border-strong);
+    color: var(--ink-soft);
+    background: var(--bg-inset);
+  }
+  .pill.crimson { color: var(--crimson); border-color: var(--crimson-soft); }
+  .pill.amber { color: var(--amber); border-color: var(--amber-soft); }
+  .pill.sage { color: var(--sage); border-color: var(--sage); border-color: rgba(106,140,90,.5); }
+
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.88rem;
+  }
+  table.data th, table.data td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.data th {
+    font-weight: 600;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--border-strong);
+    background: var(--bg-inset);
+  }
+  table.data td { color: var(--ink-soft); }
+  table.data td.num { text-align: right; }
+  table.data tbody tr:hover { background: rgba(255,255,255,0.015); }
+
+  pre.code {
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--amber-soft);
+    border-radius: 3px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  pre.code .kw { color: var(--crimson); }
+  pre.code .fn { color: var(--amber); }
+  pre.code .str { color: var(--sage); }
+  pre.code .num { color: var(--terra); }
+  pre.code .cm { color: var(--ink-faint); font-style: italic; }
+
+  .footnote {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    margin-top: 32px;
+    font-style: italic;
+  }
+
+  .section-spacer { height: 36px; }
+  .section-rule { border: 0; border-top: 1px solid var(--border); margin: 36px 0; }
+
+  .placeholder {
+    border: 1px dashed var(--border-strong);
+    color: var(--ink-faint);
+    padding: 32px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">UA Workbench</span>
+      <span class="brand-sub">MobilityWare Portfolio</span>
+      <span class="brand-byline"><em>[Your Name]</em> · Director-round leave-behind</span>
+    </div>
+    <nav class="tabnav" id="tabnav">
+      <button class="tab-btn is-active" data-tab="1"><span class="tab-num">01</span>Dashboard</button>
+      <button class="tab-btn" data-tab="2"><span class="tab-num">02</span>Attribution Architecture</button>
+      <button class="tab-btn" data-tab="3"><span class="tab-num">03</span>Channel Performance</button>
+      <button class="tab-btn" data-tab="4"><span class="tab-num">04</span>Creative Lab</button>
+      <button class="tab-btn" data-tab="5"><span class="tab-num">05</span>Cohort &amp; LTV</button>
+      <button class="tab-btn" data-tab="6"><span class="tab-num">06</span>Experimentation</button>
+      <button class="tab-btn" data-tab="7"><span class="tab-num">07</span>Competitive</button>
+      <button class="tab-btn" data-tab="8"><span class="tab-num">08</span>Initiatives</button>
+      <button class="tab-btn" data-tab="9"><span class="tab-num">09</span>90-Day Plan</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="tab-panel layout-dashboard is-active" data-panel="1">
+    <div class="panel-header">
+      <div class="panel-eyebrow">01 · Executive Dashboard</div>
+      <h1 class="panel-title">Portfolio at a glance</h1>
+      <p class="panel-lede">Tab 1 placeholder — KPI strip, four game cards, channel-stack chart, and Today's 3 Actions land here.</p>
+    </div>
+    <div class="placeholder">Tab 1 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-narrative" data-panel="2">
+    <div class="panel-header">
+      <div class="panel-eyebrow">02 · The Data Spine</div>
+      <h1 class="panel-title">Unified attribution architecture</h1>
+      <p class="panel-lede">Tab 2 placeholder — the centerpiece. Built next, in two passes (A–E, then F–I).</p>
+    </div>
+    <div class="placeholder">Tab 2 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-dashboard" data-panel="3">
+    <div class="panel-header">
+      <div class="panel-eyebrow">03 · Channel Deep-Dive</div>
+      <h1 class="panel-title">Channel performance</h1>
+      <p class="panel-lede">Tab 3 placeholder — channel table, iOS vs Android split, 90-day CPI trend, SQL block, reallocation simulator.</p>
+    </div>
+    <div class="placeholder">Tab 3 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-dashboard" data-panel="4">
+    <div class="panel-header">
+      <div class="panel-eyebrow">04 · Creative Performance Lab</div>
+      <h1 class="panel-title">Creative as its own track</h1>
+      <p class="panel-lede">Tab 4 placeholder — creative matrix, fatigue curve, winning concepts brief, A/B card, Python snippet.</p>
+    </div>
+    <div class="placeholder">Tab 4 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-dashboard" data-panel="5">
+    <div class="panel-header">
+      <div class="panel-eyebrow">05 · Cohort &amp; LTV</div>
+      <h1 class="panel-title">Cohort &amp; LTV analysis</h1>
+      <p class="panel-lede">Tab 5 placeholder — retention curves, pLTV chart, high-value-user panel, channel LTV bars, Python snippet.</p>
+    </div>
+    <div class="placeholder">Tab 5 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-dashboard" data-panel="6">
+    <div class="panel-header">
+      <div class="panel-eyebrow">06 · Experimentation &amp; Incrementality</div>
+      <h1 class="panel-title">Experiment design</h1>
+      <p class="panel-lede">Tab 6 placeholder — the honest backstop. Two full A/B writeups, sample-size widget, registry vision.</p>
+    </div>
+    <div class="placeholder">Tab 6 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-dashboard" data-panel="7">
+    <div class="panel-header">
+      <div class="panel-eyebrow">07 · Competitive Intelligence</div>
+      <h1 class="panel-title">The category, observed</h1>
+      <p class="panel-lede">Tab 7 placeholder — competitor spend table, creative trend cards, per-competitor verdicts.</p>
+    </div>
+    <div class="placeholder">Tab 7 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-narrative" data-panel="8">
+    <div class="panel-header">
+      <div class="panel-eyebrow">08 · Marketing Initiatives</div>
+      <h1 class="panel-title">Five campaign briefs</h1>
+      <p class="panel-lede">Tab 8 placeholder — the marketing-strategy showcase. Five expandable initiative cards with full brief structure.</p>
+    </div>
+    <div class="placeholder">Tab 8 content pending</div>
+  </section>
+
+  <section class="tab-panel layout-narrative" data-panel="9">
+    <div class="panel-header">
+      <div class="panel-eyebrow">09 · 90-Day Plan</div>
+      <h1 class="panel-title">First ninety days</h1>
+      <p class="panel-lede">Tab 9 placeholder — three-phase timeline, tooling vision, closing line.</p>
+    </div>
+    <div class="placeholder">Tab 9 content pending</div>
+  </section>
+
+</main>
+
+<script>
+  // ─── Chart.js global theming ───
+  if (window.Chart) {
+    Chart.defaults.font.family = "'Geist', -apple-system, system-ui, sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = '#8E8C84';
+    Chart.defaults.borderColor = '#2A2A32';
+    Chart.defaults.plugins.legend.labels.color = '#C8C5BC';
+    Chart.defaults.plugins.legend.labels.boxWidth = 10;
+    Chart.defaults.plugins.legend.labels.boxHeight = 10;
+    Chart.defaults.plugins.legend.labels.font = { family: "'Geist', sans-serif", size: 11 };
+    Chart.defaults.plugins.tooltip.backgroundColor = '#17171B';
+    Chart.defaults.plugins.tooltip.titleColor = '#ECEAE3';
+    Chart.defaults.plugins.tooltip.bodyColor = '#C8C5BC';
+    Chart.defaults.plugins.tooltip.borderColor = '#3A3A44';
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
+    Chart.defaults.plugins.tooltip.cornerRadius = 2;
+    Chart.defaults.plugins.tooltip.padding = 10;
+    Chart.defaults.plugins.tooltip.titleFont = { family: "'Geist', sans-serif", size: 11, weight: '600' };
+    Chart.defaults.plugins.tooltip.bodyFont = { family: "'JetBrains Mono', monospace", size: 11 };
+    Chart.defaults.plugins.tooltip.displayColors = true;
+    Chart.defaults.plugins.tooltip.boxWidth = 8;
+    Chart.defaults.plugins.tooltip.boxHeight = 8;
+    Chart.defaults.elements.point.radius = 0;
+    Chart.defaults.elements.point.hoverRadius = 4;
+    Chart.defaults.elements.line.borderWidth = 1.5;
+    Chart.defaults.elements.line.tension = 0.25;
+  }
+
+  // Shared chart palette — desaturated, intentional.
+  const PALETTE = {
+    crimson: '#B83A3A',
+    amber:   '#C7943A',
+    sage:    '#6A8C5A',
+    slate:   '#5A7A95',
+    plum:    '#8A6A9C',
+    terra:   '#B07A5A',
+    muted:   '#5E5C56'
+  };
+  const PALETTE_ARR = [PALETTE.crimson, PALETTE.amber, PALETTE.sage, PALETTE.slate, PALETTE.plum, PALETTE.terra];
+
+  // Seeded RNG so "simulated" data is stable across reloads.
+  function mulberry32(seed) {
+    return function() {
+      let t = seed += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const rng = mulberry32(20260504);
+
+  // ─── Canonical "story" facts — referenced consistently across tabs ───
+  const STORY = {
+    solitaireMolocoSkanGap: {
+      game: 'Solitaire', os: 'iOS', channel: 'Moloco',
+      note: 'SKAN ROAS holding at 28% but probabilistic install share dropped 40% w/w — likely SDK/postback issue.'
+    },
+    triPeaksAppLovinCreativeWin: {
+      game: 'TriPeaks', os: 'Android', channel: 'AppLovin',
+      note: 'D7 retention up 3pp on creatives V12–V14 (story-driven hook).'
+    },
+    bubbleTikTokBR: {
+      game: 'Bubble Shooter Pop', os: 'iOS', channel: 'TikTok', geo: 'BR',
+      note: 'CPI 22% below portfolio avg with D7 retention parity.'
+    }
+  };
+
+  // ─── Tab navigation ───
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.tab;
+      tabs.forEach(b => b.classList.toggle('is-active', b === btn));
+      panels.forEach(p => p.classList.toggle('is-active', p.dataset.panel === id));
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      if (window.__chartInit && window.__chartInit[id]) window.__chartInit[id]();
+    });
+  });
+  window.__chartInit = {};
+</script>
+
+</body>
+</html>
