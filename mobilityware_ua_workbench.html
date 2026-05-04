@@ -669,6 +669,76 @@
   table.t2-grid td.composite { background: var(--bg-inset); border-left: 1px solid var(--border-strong); }
   table.t2-grid tbody tr:hover td { background: rgba(255,255,255,0.012); }
   table.t2-grid tbody tr:hover td.ch { background: var(--bg-inset); }
+
+  /* ─── Tab 2 — Section F SQL block frame ─── */
+  .t2-sql-frame {
+    margin: 18px 0 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .t2-sql-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: var(--bg-inset);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+  }
+  .t2-sql-head .lang { color: var(--amber); text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.7rem; }
+  .t2-sql-frame pre.code {
+    margin: 0;
+    border: none;
+    border-left: none;
+    border-radius: 0;
+    background: var(--bg);
+    font-size: 0.78rem;
+    line-height: 1.55;
+    padding: 18px 22px;
+  }
+
+  /* ─── Tab 2 — Section I build list ─── */
+  .t2-build-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+    counter-reset: build;
+  }
+  .t2-build-list li {
+    counter-increment: build;
+    padding: 18px 0 18px 56px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .t2-build-list li:last-child { border-bottom: none; }
+  .t2-build-list li::before {
+    content: counter(build, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--amber);
+    letter-spacing: 0.06em;
+  }
+  .t2-build-list .b-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .t2-build-list .b-desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .t2-build-list code { font-size: 0.82em; }
 </style>
 </head>
 <body>
@@ -1191,7 +1261,188 @@
       <p style="margin-top: 14px;">D2 — the SKAN-to-probabilistic ratio — is the one to watch hardest. A partner that delivers a lot of probabilistic installs but thin SKAN signal is, mechanically, a partner whose attribution we cannot independently verify. That is the dimension that should set the ceiling on incremental budget allocation.</p>
     </div>
 
-    <!-- Sections F, G, H, I pending sign-off -->
+    <!-- ─── Section F — The SQL view ─── -->
+    <div class="t2-section">
+      <div class="t2-section-eyebrow"><span class="marker">F</span>The SQL view</div>
+      <h2>One query, one fact row, ninety days of history</h2>
+      <p>Below is the canonical query that builds <code>fact_ua_daily</code> — the table that everything downstream reads from. It pulls from the five sources we've been talking about (network spend, MMP, SKAN postbacks, ad-revenue events, IAP events), reconciles them on the join keys we trust, and applies the trust-weighted blend from Section&nbsp;E. This is the query I'd want to land on first because every other SQL artifact in the spine is a rollup of this row shape.</p>
+
+      <div class="t2-sql-frame">
+        <div class="t2-sql-head">
+          <span>fact_ua_daily.sql</span>
+          <span class="lang">BigQuery</span>
+        </div>
+        <pre class="code"><code id="sql-fact-ua"></code></pre>
+      </div>
+
+      <script type="text/x-sql" data-target="sql-fact-ua">
+-- fact_ua_daily — one row per app × channel × campaign × creative × geo × os × date.
+-- Rebuilds nightly; downstream scorecards, alerts, and experiment readouts read from this.
+
+WITH network_spend AS (
+  SELECT
+    spend_date                                                AS report_date,
+    app_id, channel, campaign_id,
+    COALESCE(creative_id, '_none')                            AS creative_id,
+    geo, os,
+    SUM(spend_usd)                                            AS spend_usd,
+    SUM(impressions)                                          AS impressions,
+    SUM(clicks)                                               AS clicks,
+    SUM(network_reported_installs)                            AS net_installs
+  FROM `mw-ua.raw.network_spend_daily`
+  WHERE spend_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 35 DAY) AND CURRENT_DATE()
+  GROUP BY 1, 2, 3, 4, 5, 6, 7
+),
+
+mmp_installs AS (
+  -- attributed_touch_time, not install_time — keeps day boundaries
+  -- aligned with the network spend reports we're joining to.
+  SELECT
+    DATE(attributed_touch_time)                               AS report_date,
+    app_id, channel, campaign_id, creative_id, geo, os,
+    install_id,
+    attribution_type
+  FROM `mw-ua.mmp.appsflyer_installs`
+  WHERE DATE(attributed_touch_time) >= DATE_SUB(CURRENT_DATE(), INTERVAL 35 DAY)
+    AND is_organic = FALSE
+),
+
+skan_postbacks AS (
+  SELECT
+    postback_date                                             AS report_date,
+    app_id, channel, campaign_id,
+    coarse_geo                                                AS geo,
+    'ios'                                                     AS os,
+    COUNT(DISTINCT skan_redownload_id)                        AS skan_installs,
+    COUNTIF(postback_sequence_index = 0 AND conversion_value IS NOT NULL) AS skan_cv_received,
+    COUNT(*)                                                  AS skan_postbacks_total
+  FROM `mw-ua.skan.postbacks`
+  WHERE postback_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 35 DAY)
+  GROUP BY 1, 2, 3, 4, 5
+),
+
+ad_revenue_events AS (
+  -- Settled revenue, not impression-time eCPM — the gap on MAX/LevelPlay runs 5–15%.
+  SELECT
+    install_id,
+    SUM(IF(event_age_hours <= 168, settled_revenue_usd, 0))   AS ad_revenue_d7
+  FROM `mw-ua.warehouse.ad_revenue_events`
+  WHERE event_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 42 DAY)
+  GROUP BY install_id
+),
+
+iap_events AS (
+  SELECT
+    install_id,
+    SUM(IF(event_age_hours <= 168, net_revenue_usd, 0))       AS iap_revenue_d7
+  FROM `mw-ua.warehouse.iap_events`
+  WHERE event_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 42 DAY)
+  GROUP BY install_id
+),
+
+trust AS (
+  SELECT channel, composite_trust_score
+  FROM `mw-ua.ref.network_trust_scores`
+  WHERE as_of_date = (SELECT MAX(as_of_date) FROM `mw-ua.ref.network_trust_scores`)
+),
+
+mmp_rolled AS (
+  SELECT
+    m.report_date, m.app_id, m.channel, m.campaign_id, m.creative_id, m.geo, m.os,
+    COUNT(DISTINCT m.install_id)                              AS mmp_installs,
+    COUNTIF(m.attribution_type = 'deterministic')             AS mmp_det,
+    COUNTIF(m.attribution_type = 'probabilistic')             AS mmp_prob,
+    COUNTIF(m.attribution_type = 'skan')                      AS mmp_skan,
+    SUM(COALESCE(ad.ad_revenue_d7, 0))                        AS ad_revenue_d7,
+    SUM(COALESCE(iap.iap_revenue_d7, 0))                      AS iap_revenue_d7
+  FROM mmp_installs m
+  LEFT JOIN ad_revenue_events ad  USING (install_id)
+  LEFT JOIN iap_events        iap USING (install_id)
+  GROUP BY 1, 2, 3, 4, 5, 6, 7
+)
+
+SELECT
+  s.report_date, s.app_id, s.channel, s.campaign_id, s.creative_id, s.geo, s.os,
+  s.spend_usd, s.impressions, s.clicks, s.net_installs,
+  m.mmp_installs, sk.skan_installs,
+  -- Trust-weighted blend: anchor on MMP; top up with SKAN only on iOS rows where
+  -- MMP runs materially thinner than SKAN, weighted by the channel's current
+  -- composite trust score (Section E). Falls back to neutral 3/5 when unscored.
+  CAST(
+    COALESCE(m.mmp_installs, 0) +
+    CASE
+      WHEN s.os = 'ios'
+       AND COALESCE(m.mmp_installs, 0) < COALESCE(sk.skan_installs, 0) * 0.70
+      THEN (COALESCE(sk.skan_installs, 0) - COALESCE(m.mmp_installs, 0))
+           * (COALESCE(t.composite_trust_score, 3) / 5.0)
+      ELSE 0
+    END
+  AS INT64)                                                                    AS blended_installs,
+  SAFE_DIVIDE(s.spend_usd, m.mmp_installs)                                     AS cpi_mmp,
+  SAFE_DIVIDE(m.ad_revenue_d7 + m.iap_revenue_d7, s.spend_usd)                 AS roas_d7,
+  SAFE_DIVIDE(sk.skan_cv_received, NULLIF(sk.skan_postbacks_total, 0))         AS skan_postback_completeness,
+  SAFE_DIVIDE(m.mmp_prob, NULLIF(m.mmp_skan, 0))                               AS prob_to_skan_ratio,
+  t.composite_trust_score
+FROM network_spend s
+LEFT JOIN mmp_rolled    m  USING (report_date, app_id, channel, campaign_id, creative_id, geo, os)
+LEFT JOIN skan_postbacks sk USING (report_date, app_id, channel, campaign_id, geo, os)
+LEFT JOIN trust          t  USING (channel)
+WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+                        AND DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
+;
+      </script>
+
+      <p>The design tradeoff worth naming: the blend joins on <code>install_id</code> where MMP gives us one and falls back to SKAN-postback aggregates only when MMP runs materially below SKAN on iOS rows. That's deliberate — joining SKAN aggregates to user-level rows is impossible without inventing identity, and inventing identity is how double-counting starts. We accept aggregation loss on the SKAN-only top-up in exchange for never inflating an install that already exists at user-level. The trust-score weight on the top-up is what keeps a low-confidence partner from puffing up the blended count beyond what their measurement actually supports.</p>
+    </div>
+
+    <!-- ─── Section G — Identity stitching ─── -->
+    <div class="t2-section">
+      <div class="t2-section-eyebrow"><span class="marker">G</span>Identity stitching, honestly</div>
+      <h2>The chain works in three regimes — and one of them isn't really a chain</h2>
+      <p><strong>Android.</strong> The Play Install Referrer carries a deterministic click ID and timestamp from the click that earned the install; the GAID on the device gives us a stable user identifier (until reset). The MMP consumes the referrer and writes a single <code>install_id</code> that ties through to in-app events, ad-revenue events, and IAP. <em>Ad impression → click → install → in-app behavior → LTV</em> is one row, joined cleanly. Roughly 55% of our portfolio installs sit in this regime, and they're the cohort our retention and pLTV models can be most confident about.</p>
+      <p><strong>iOS, opted-in.</strong> When a user grants ATT consent, IDFA is available and the chain looks the same as Android — deterministic, user-level, joinable end-to-end. The catch is the consent rate: in casual card games we see roughly 25–35% opt-in, with material variance by geo and creative. So this is the highest-quality iOS data we get, but only on a quarter of the iOS cohort. We treat this slice as gold for modeling but never pretend it represents the whole iOS population — opted-in users self-select, often toward higher engagement, and projecting their behavior onto the opted-out cohort overstates LTV in predictable directions.</p>
+      <p><strong>iOS, opted-out.</strong> SKAN. Conversion-value mapped, aggregated at the campaign × CV bucket level, delayed 24–72 hours, with no individual user identity by design. There is no clean stitch from a single ad impression to a single user's in-app behavior in this regime, and probabilistic fingerprinting — what's left of it — is shrinking under Apple's policy enforcement. The honest framing: we have <em>aggregate signal</em>, not a chain. Section&nbsp;F's blend handles this by topping up MMP with SKAN aggregates where MMP runs thin, but the top-up is a population estimate with a trust weight, not a row-level join. Anyone who tells you they have a clean per-user attribution chain on opted-out iOS is selling something.</p>
+    </div>
+
+    <!-- ─── Section H — Incrementality bridge ─── -->
+    <div class="t2-section">
+      <div class="t2-section-eyebrow"><span class="marker">H</span>Why incrementality is the honest backstop</div>
+      <h2>The cleanest stitched spine still tells you correlation, not causation</h2>
+      <p>Even with every join in Section&nbsp;F running clean, there is a question the spine cannot answer on its own: <em>did this campaign cause this install, or would the install have happened anyway?</em> Last-click attribution credits the platform that closed the conversion. That credit is correct accounting and incorrect causation. A user who would have organically searched Solitaire today gets credited to the Meta retargeting ad they happened to see this morning. Multiply that across every channel and the reported ROAS the spine emits is systematically too generous, in ways that vary by partner.</p>
+      <p>The dashed amber arrow in <strong>Fig.&nbsp;1</strong> is where this gets fixed. Holdout-based incrementality tests — geo holdouts, ghost-bidding, PSA tests — measure causation directly by comparing a treated population to an untreated control. The number that comes out of an honest holdout is an <em>incremental rate</em>: the share of attributed conversions that wouldn't have happened without the campaign. That number writes back into the trust-score weighting in Layer&nbsp;2, which is what makes the loop a loop. Tab&nbsp;6 walks through two of these end-to-end — a bid-strategy test on Google UAC and a geo-holdout on Meta — and the Meta result is the one that produces the discount factor the spine then applies to every Meta-attributed row going forward.</p>
+    </div>
+
+    <!-- ─── Section I — 30-day build list ─── -->
+    <div class="t2-section">
+      <div class="t2-section-eyebrow"><span class="marker">I</span>What I'd ship in my first 30 days</div>
+      <h2>Five concrete artifacts that turn the spine from a slide into a system</h2>
+      <p>Each of the five below is a thing that exists, runs on a schedule, has an owner, and a Slack channel that gets pinged when it breaks. None of them are aspirational.</p>
+
+      <ol class="t2-build-list">
+        <li>
+          <div class="b-title">Daily reconciliation report</div>
+          <div class="b-desc">The Section&nbsp;F view runs nightly via Cloud Composer; output lands in <code>#ua-data</code> on Slack at 8:00&nbsp;a.m. PT every weekday. Channel × OS × game rows with anchored install counts, network gaps, SKAN gaps, and any composition-shift flags from the prior day. The Moloco-style flag in Section&nbsp;D is one row in this report.</div>
+        </li>
+        <li>
+          <div class="b-title">Per-network trust-score scorecard</div>
+          <div class="b-desc">Refreshed every Sunday at 9:00&nbsp;p.m. PT against the prior 7 days. Reads from <code>mw-ua.ref.network_trust_scores</code>; the Section&nbsp;E grid is the human-readable face of this table. Alerts the channel owner if any of D1–D5 drops by one dot week-over-week, with the contributing rows pre-attached.</div>
+        </li>
+        <li>
+          <div class="b-title">SKAN postback completeness alert</div>
+          <div class="b-desc">Real-time monitor on the <code>skan_cv_received / skan_postbacks_total</code> ratio per (channel × app × os). Fires a Slack ping when the ratio drops below 70% completeness for two consecutive days. Alert payload includes the partner AM email pre-filled and the trailing-14-day completeness trend, so the responder has the conversation half-written before they open the ticket.</div>
+        </li>
+        <li>
+          <div class="b-title">Creative-ID propagation audit</div>
+          <div class="b-desc">One-time deep dive across all ten networks documenting which carry <code>creative_id</code> cleanly, which only on certain ad formats, and which not at all. Output is a maintained sheet plus a weekly automated check that flags new creative IDs appearing in spend without matching installs — that's how the Tab&nbsp;4 creative analysis stops going dark on specific channels without anyone noticing.</div>
+        </li>
+        <li>
+          <div class="b-title">Data dictionary for fact_ua</div>
+          <div class="b-desc">Every column documented: source CTE, source table, transformation logic, owner, freshness SLA. Lives as git-versioned markdown in the analytics repo, not a Notion page that decays. Anyone on UA, Creative, or Finance can answer <em>"what does this column mean and when was it last refreshed"</em> without pinging the data team. This is the artifact that compounds — every new analyst onboarded to the team starts here instead of in a 1:1 with someone senior.</div>
+        </li>
+      </ol>
+
+      <p style="margin-top: 28px; color: var(--ink-muted); font-style: italic;">That's the spine. The next seven tabs are what you do with it.</p>
+    </div>
   </section>
 
   <section class="tab-panel layout-dashboard" data-panel="3">
@@ -1326,6 +1577,29 @@
       note: 'CPI 22% below portfolio avg with D7 retention parity.'
     }
   };
+
+  // ─── SQL syntax highlighter ───
+  const SQL_KW = new Set('WITH SELECT FROM WHERE AS AND OR ON USING GROUP BY ORDER LEFT RIGHT INNER OUTER FULL JOIN UNION ALL CASE WHEN THEN ELSE END IS NOT NULL IN BETWEEN INTERVAL TRUE FALSE DESC ASC DAY HOUR MONTH YEAR DISTINCT'.split(' '));
+  const SQL_FN = new Set('DATE DATE_SUB DATE_TRUNC DATE_ADD TIMESTAMP_SUB CURRENT_DATE CURRENT_TIMESTAMP SAFE_DIVIDE COUNT SUM COUNTIF COALESCE NULLIF CAST MAX MIN AVG IF INT64 STRING'.split(' '));
+  function highlightSql(raw) {
+    const esc = raw.replace(/[<>&]/g, c => ({ '<':'&lt;', '>':'&gt;', '&':'&amp;' }[c]));
+    return esc.replace(/(--[^\n]*)|('[^']*')|(\b\d+(?:\.\d+)?\b)|(\b[A-Za-z_][A-Za-z0-9_]*\b)/g, (m, c, s, n, w) => {
+      if (c) return `<span class="cm">${c}</span>`;
+      if (s) return `<span class="str">${s}</span>`;
+      if (n) return `<span class="num">${n}</span>`;
+      if (w) {
+        const u = w.toUpperCase();
+        if (SQL_KW.has(u)) return `<span class="kw">${w}</span>`;
+        if (SQL_FN.has(u)) return `<span class="fn">${w}</span>`;
+      }
+      return m;
+    });
+  }
+  document.querySelectorAll('script[type="text/x-sql"]').forEach(src => {
+    const targetId = src.dataset.target;
+    const target = document.getElementById(targetId);
+    if (target) target.innerHTML = highlightSql(src.textContent.replace(/^\n/, '').replace(/\s+$/, ''));
+  });
 
   // ─── Tab navigation ───
   const tabs = document.querySelectorAll('.tab-btn');
