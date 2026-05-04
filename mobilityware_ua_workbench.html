@@ -234,12 +234,12 @@
   .kpi { display: flex; flex-direction: column; gap: 4px; }
   .kpi-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); }
   .kpi-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .kpi-delta { font-family: var(--font-mono); font-size: 0.78rem; }
-  .kpi-delta.up { color: var(--positive); }
-  .kpi-delta.down { color: var(--negative); }
+  .kpi-delta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-muted); display: inline-flex; align-items: center; }
+  .kpi-delta.good { color: var(--positive); }
+  .kpi-delta.bad { color: var(--negative); }
   .kpi-delta::before { content: ""; display: inline-block; width: 0; height: 0; margin-right: 5px; border-left: 4px solid transparent; border-right: 4px solid transparent; }
-  .kpi-delta.up::before { border-bottom: 5px solid var(--positive); }
-  .kpi-delta.down::before { border-top: 5px solid var(--negative); }
+  .kpi-delta.up::before { border-bottom: 5px solid currentColor; }
+  .kpi-delta.down::before { border-top: 5px solid currentColor; }
 
   .pill {
     display: inline-flex;
@@ -1051,6 +1051,242 @@
   }
   .t6-registry-illus .field { color: var(--amber); display: inline-block; min-width: 130px; }
   .t6-registry-illus .val { color: var(--ink); }
+
+  /* ─── Tab 1 — Executive Dashboard ─── */
+  .t1-lede {
+    max-width: 760px;
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 0 0 32px;
+  }
+
+  .t1-section-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+
+  /* KPI strip */
+  .t1-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-card);
+    margin-bottom: 36px;
+  }
+  .t1-kpi-strip .kpi {
+    padding: 18px 20px 18px;
+    border-right: 1px solid var(--border);
+  }
+  .t1-kpi-strip .kpi:last-child { border-right: none; }
+  @media (max-width: 1024px) {
+    .t1-kpi-strip { grid-template-columns: repeat(3, 1fr); }
+    .t1-kpi-strip .kpi:nth-child(3n) { border-right: none; }
+    .t1-kpi-strip .kpi:nth-child(-n+3) { border-bottom: 1px solid var(--border); }
+  }
+  @media (max-width: 600px) {
+    .t1-kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .t1-kpi-strip .kpi { border-right: 1px solid var(--border) !important; border-bottom: 1px solid var(--border); }
+    .t1-kpi-strip .kpi:nth-child(2n) { border-right: none !important; }
+  }
+
+  /* Game cards */
+  .t1-games {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .t1-game {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .t1-game-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .t1-game-title-block { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .t1-game-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .t1-game-os {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .t1-game-trust {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+    white-space: nowrap;
+    color: var(--ink-muted);
+    line-height: 1.2;
+  }
+  .t1-game-trust.amber { color: var(--amber); border-color: var(--amber-soft); background: rgba(199,148,58,.05); }
+  .t1-game-trust.sage  { color: var(--sage);  border-color: rgba(106,140,90,.4); }
+  .t1-game-trust.terra { color: var(--terra); border-color: rgba(176,122,90,.4); }
+
+  .t1-game-spark {
+    height: 32px;
+    margin: 2px -2px 0;
+  }
+  .t1-game-spark svg { display: block; width: 100%; height: 100%; }
+
+  .t1-game-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+  }
+  .t1-game-metrics .m { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .t1-game-metrics .m .lbl {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .t1-game-metrics .m .val {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .t1-game-note {
+    border-top: 1px dashed var(--border);
+    padding-top: 10px;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+  .t1-game-note::before {
+    content: "● ";
+    margin-right: 2px;
+  }
+  .t1-game-note.flag::before      { color: var(--amber); }
+  .t1-game-note.win::before       { color: var(--sage); }
+  .t1-game-note.candidate::before { color: var(--terra); }
+  .t1-game-note.stable { color: var(--ink-faint); }
+  .t1-game-note.stable::before { content: "○ "; color: var(--ink-faint); }
+
+  @media (max-width: 1024px) { .t1-games { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .t1-games { grid-template-columns: 1fr; } }
+
+  /* Stacked area chart */
+  .t1-chart-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px 16px;
+    margin-bottom: 36px;
+  }
+  .t1-chart-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .t1-chart-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--ink); font-weight: 500; }
+  .t1-chart-cap   { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .t1-chart-canvas { height: 290px; position: relative; }
+
+  /* Today's 3 Actions */
+  .t1-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .t1-action {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--action-color, var(--amber));
+    border-radius: 4px;
+    padding: 18px 22px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .t1-action.flag       { --action-color: var(--amber); }
+  .t1-action.win        { --action-color: var(--sage); }
+  .t1-action.candidate  { --action-color: var(--terra); }
+
+  .t1-action-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .t1-action-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--action-color);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .t1-action-tag {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .t1-action-headline {
+    font-family: var(--font-display);
+    font-size: 1.0rem;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .t1-action-body {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .t1-action-step {
+    border-top: 1px dashed var(--border);
+    padding-top: 10px;
+    font-size: 0.86rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .t1-action-step .lbl {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--action-color);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  @media (max-width: 1024px) { .t1-actions { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1079,11 +1315,188 @@
 
   <section class="tab-panel layout-dashboard is-active" data-panel="1">
     <div class="panel-header">
-      <div class="panel-eyebrow">01 · Executive Dashboard</div>
-      <h1 class="panel-title">Portfolio at a glance</h1>
-      <p class="panel-lede">Tab 1 placeholder — KPI strip, four game cards, channel-stack chart, and Today's 3 Actions land here.</p>
+      <div class="panel-eyebrow">01 · UA Workbench · MobilityWare Portfolio</div>
+      <h1 class="panel-title">Portfolio at a glance — Director-round leave-behind</h1>
     </div>
-    <div class="placeholder">Tab 1 content pending</div>
+
+    <p class="t1-lede">UA data at any modern studio lives in eight-plus silos — networks, MMP, SKAN postbacks, store consoles, internal warehouse, ad mediation. Each reports its own version of the truth, and they disagree by double digits. The first job of an analyst here isn't to make charts — it's to make the data trustworthy. This workbench walks through how I'd build that spine (<strong>Tab 2</strong>), then use it across channel work, creative, cohorts, experiments, and live operations. The three actions at the bottom of this page are what I'd recommend running today if I were already on the team.</p>
+
+    <!-- ─── KPI strip ─── -->
+    <div class="t1-section-label">Portfolio · last 30 days</div>
+    <div class="t1-kpi-strip">
+      <div class="kpi">
+        <div class="kpi-label">Spend</div>
+        <div class="kpi-value">$4.21M</div>
+        <div class="kpi-delta up">+6.3% w/w</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Installs</div>
+        <div class="kpi-value">1.84M</div>
+        <div class="kpi-delta up good">+3.1% w/w</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Blended CPI</div>
+        <div class="kpi-value">$2.28</div>
+        <div class="kpi-delta up bad">+3.1% w/w</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">ROAS · D7</div>
+        <div class="kpi-value">18.7%</div>
+        <div class="kpi-delta up good">+1.4 pp w/w</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">ROAS · D30</div>
+        <div class="kpi-value">51.2%</div>
+        <div class="kpi-delta down bad">−0.8 pp w/w</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Payback</div>
+        <div class="kpi-value">142 d</div>
+        <div class="kpi-delta up bad">+4 d w/w</div>
+      </div>
+    </div>
+
+    <!-- ─── Game cards ─── -->
+    <div class="t1-section-label">Titles · 30-day rollup</div>
+    <div class="t1-games">
+
+      <div class="t1-game">
+        <div class="t1-game-head">
+          <div class="t1-game-title-block">
+            <div class="t1-game-name">Solitaire</div>
+            <div class="t1-game-os">flagship · iOS + Android</div>
+          </div>
+          <div class="t1-game-trust amber">trust 4.0 · flagged</div>
+        </div>
+        <div class="t1-game-spark" id="spark-solitaire"></div>
+        <div class="t1-game-metrics">
+          <div class="m"><span class="lbl">Spend</span><span class="val">$1.64M</span></div>
+          <div class="m"><span class="lbl">Installs</span><span class="val">718K</span></div>
+          <div class="m"><span class="lbl">CPI</span><span class="val">$2.28</span></div>
+          <div class="m"><span class="lbl">ROAS D7</span><span class="val">19.2%</span></div>
+          <div class="m"><span class="lbl">ROAS D30</span><span class="val">52.8%</span></div>
+          <div class="m"><span class="lbl">D7 Ret</span><span class="val">14.8%</span></div>
+        </div>
+        <div class="t1-game-note flag">Moloco iOS · SKAN composition shift surfaced today (Section&nbsp;D worked example).</div>
+      </div>
+
+      <div class="t1-game">
+        <div class="t1-game-head">
+          <div class="t1-game-title-block">
+            <div class="t1-game-name">Spider Solitaire</div>
+            <div class="t1-game-os">iOS + Android</div>
+          </div>
+          <div class="t1-game-trust">trust 3.9</div>
+        </div>
+        <div class="t1-game-spark" id="spark-spider"></div>
+        <div class="t1-game-metrics">
+          <div class="m"><span class="lbl">Spend</span><span class="val">$610K</span></div>
+          <div class="m"><span class="lbl">Installs</span><span class="val">280K</span></div>
+          <div class="m"><span class="lbl">CPI</span><span class="val">$2.18</span></div>
+          <div class="m"><span class="lbl">ROAS D7</span><span class="val">17.4%</span></div>
+          <div class="m"><span class="lbl">ROAS D30</span><span class="val">49.1%</span></div>
+          <div class="m"><span class="lbl">D7 Ret</span><span class="val">13.2%</span></div>
+        </div>
+        <div class="t1-game-note stable">Stable · nothing notable today.</div>
+      </div>
+
+      <div class="t1-game">
+        <div class="t1-game-head">
+          <div class="t1-game-title-block">
+            <div class="t1-game-name">TriPeaks</div>
+            <div class="t1-game-os">iOS + Android</div>
+          </div>
+          <div class="t1-game-trust sage">trust 4.1 · win</div>
+        </div>
+        <div class="t1-game-spark" id="spark-tripeaks"></div>
+        <div class="t1-game-metrics">
+          <div class="m"><span class="lbl">Spend</span><span class="val">$890K</span></div>
+          <div class="m"><span class="lbl">Installs</span><span class="val">392K</span></div>
+          <div class="m"><span class="lbl">CPI</span><span class="val">$2.27</span></div>
+          <div class="m"><span class="lbl">ROAS D7</span><span class="val">19.8%</span></div>
+          <div class="m"><span class="lbl">ROAS D30</span><span class="val">53.4%</span></div>
+          <div class="m"><span class="lbl">D7 Ret</span><span class="val">15.1%</span></div>
+        </div>
+        <div class="t1-game-note win">AppLovin Android · creatives V12–V14 driving D7 retention +3.1&nbsp;pp.</div>
+      </div>
+
+      <div class="t1-game">
+        <div class="t1-game-head">
+          <div class="t1-game-title-block">
+            <div class="t1-game-name">Bubble Shooter Pop</div>
+            <div class="t1-game-os">iOS + Android</div>
+          </div>
+          <div class="t1-game-trust terra">trust 3.8 · scale</div>
+        </div>
+        <div class="t1-game-spark" id="spark-bubble"></div>
+        <div class="t1-game-metrics">
+          <div class="m"><span class="lbl">Spend</span><span class="val">$1.07M</span></div>
+          <div class="m"><span class="lbl">Installs</span><span class="val">451K</span></div>
+          <div class="m"><span class="lbl">CPI</span><span class="val">$2.37</span></div>
+          <div class="m"><span class="lbl">ROAS D7</span><span class="val">17.8%</span></div>
+          <div class="m"><span class="lbl">ROAS D30</span><span class="val">49.6%</span></div>
+          <div class="m"><span class="lbl">D7 Ret</span><span class="val">12.7%</span></div>
+        </div>
+        <div class="t1-game-note candidate">TikTok BR iOS · CPI 22% below portfolio avg with retention parity.</div>
+      </div>
+
+    </div>
+
+    <!-- ─── Stacked area chart ─── -->
+    <div class="t1-chart-wrap">
+      <div class="t1-chart-head">
+        <div class="t1-chart-title">Daily spend by channel · 30 days</div>
+        <div class="t1-chart-cap">10 channels · stacked · USD</div>
+      </div>
+      <div class="t1-chart-canvas"><canvas id="t1-spend-chart"></canvas></div>
+    </div>
+
+    <!-- ─── Today's 3 Actions ─── -->
+    <div class="t1-section-label">Today · 2026-05-04 · three actions I'd run</div>
+    <div class="t1-actions">
+
+      <div class="t1-action flag">
+        <div class="t1-action-meta">
+          <span class="t1-action-num">Action 01</span>
+          <span class="t1-action-tag">Trust · alert</span>
+        </div>
+        <div class="t1-action-headline">Solitaire iOS · Moloco — SKAN composition shift detected</div>
+        <p class="t1-action-body">Probabilistic install share dropped 40% w/w while SKAN holds steady. Total install count is unchanged (1,189 anchored) but the source mix is fragile — likely a Moloco SDK or postback regression. Worked through in Tab 2 Section&nbsp;D.</p>
+        <div class="t1-action-step">
+          <span class="lbl">Next step</span>
+          Open ticket with Moloco AM today. Hold incremental Solitaire iOS / Moloco budget at the current $30K/wk pending diagnosis. Re-evaluate in 48h.
+        </div>
+      </div>
+
+      <div class="t1-action win">
+        <div class="t1-action-meta">
+          <span class="t1-action-num">Action 02</span>
+          <span class="t1-action-tag">Creative · scale</span>
+        </div>
+        <div class="t1-action-headline">TriPeaks Android · AppLovin — V12–V14 winning on D7 retention</div>
+        <p class="t1-action-body">Story-driven creatives V12, V13, V14 showing D7 retention +3.1&nbsp;pp vs portfolio average over 9 days. CPI within range, install volume growing, fatigue curve still healthy.</p>
+        <div class="t1-action-step">
+          <span class="lbl">Next step</span>
+          Lift TriPeaks Android / AppLovin spend +25% this week ($14K → $17.5K/day). Brief Creative on next iteration of the story-driven hook ahead of the Q3 calendar.
+        </div>
+      </div>
+
+      <div class="t1-action candidate">
+        <div class="t1-action-meta">
+          <span class="t1-action-num">Action 03</span>
+          <span class="t1-action-tag">Geo · expansion</span>
+        </div>
+        <div class="t1-action-headline">Bubble Shooter Pop iOS · TikTok BR — CPI 22% below portfolio average</div>
+        <p class="t1-action-body">Brazil iOS CPI $1.78 vs Bubble portfolio avg $2.29 over the last 14 days. D7 retention parity within 0.4&nbsp;pp. Local-language "jogo offline" creative driving CTR.</p>
+        <div class="t1-action-step">
+          <span class="lbl">Next step</span>
+          Propose +30% spend lift this week ($5.6K → $7.3K/day in BR). Hold D7 retention ≥ 12% as guardrail; pull back if the CPI gap narrows below 10% as Brazil scale loads.
+        </div>
+      </div>
+
+    </div>
+
+    <p class="footnote">All numbers on this page are simulated against public industry benchmarks (CPI, ROAS, retention, channel mix shares). The analytical frameworks, the data architecture, and the operator decisions are real. <em>[Your Name]</em> · director-round leave-behind.</p>
   </section>
 
   <section class="tab-panel layout-narrative" data-panel="2">
@@ -2046,7 +2459,7 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
 <span class="field">window</span>        <span class="val">2026-04-08 → 2026-04-29 · readout 2026-05-30</span><br>
 <span class="field">decision_rule</span> <span class="val">posterior P(lift ≥ MDE) ≥ 0.80 → ship</span><br>
 <span class="field">result</span>        <span class="val">+14.1% relative · P(lift ≥ MDE) = 0.83 · SHIPPED</span><br>
-<span class="field">links</span>         <span class="val">slack/#exp-uac-bid · sql/exp_2026_04_08.sql · readout/exp-01.md</span>
+<span class="field">links</span>         <span class="val">[ slack/#exp-uac-bid · sql/exp_2026_04_08.sql · readout/exp-01-tcpi-vs-troas.md ]</span>
       </div>
 
       <p>The registry lives as version-controlled YAML in the analytics repo, one file per experiment. New analysts read backwards through it during onboarding — that's how institutional memory transfers without depending on whoever happened to be in the room when the original decision was made. The five-bullet build list in Tab&nbsp;2 Section&nbsp;I doesn't include this artifact explicitly; the registry is a sixth one, scheduled for the second 30-day cycle. After ~60 tests, the registry stops being a log and starts being a model — what kinds of tests we win, where our priors are well-calibrated, where we keep being surprised. That's the asset.</p>
@@ -2422,6 +2835,150 @@ WHERE s.report_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
       btn.classList.add('on'); calcState.power = +btn.dataset.val; recalc();
     }));
     recalc();
+  }
+
+  // ─── Tab 1 sparklines (game cards, render once on load) ───
+  function genSparkline(seed, base, opts) {
+    const r = mulberry32(seed);
+    const days = 30;
+    const data = [];
+    for (let i = 0; i < days; i++) {
+      const dow = i % 7;
+      const wknd = (dow === 5 || dow === 6) ? 1.05 : 1;
+      const trend = 1 + ((opts.trend || 0) * i / days);
+      let v = base * wknd * trend * (1 + (r() - 0.5) * 0.14);
+      if (opts.recentDip && i >= days - 4) v *= 0.78;
+      if (opts.recentSpike && i >= days - 5) v *= (1 + 0.08 * (i - (days - 5)));
+      data.push(v);
+    }
+    return data;
+  }
+  function sparklinePath(data, w, h, pad) {
+    pad = pad || 1;
+    const min = Math.min(...data), max = Math.max(...data);
+    const range = Math.max(max - min, 0.001);
+    const innerH = h - pad * 2;
+    const stepX = (w - pad * 2) / (data.length - 1);
+    return data.map((v, i) => {
+      const x = pad + i * stepX;
+      const y = pad + innerH - ((v - min) / range) * innerH;
+      return (i === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }).join(' ');
+  }
+  const SPARKS = [
+    { id: 'spark-solitaire',  seed: 1011, base: 56, trend: -0.02, recentDip: true,  color: PALETTE.amber },
+    { id: 'spark-spider',     seed: 2021, base: 21, trend: -0.01,                    color: PALETTE.muted },
+    { id: 'spark-tripeaks',   seed: 3031, base: 30, trend:  0.08,                    color: PALETTE.sage },
+    { id: 'spark-bubble',     seed: 4041, base: 36, trend:  0.05, recentSpike: true, color: PALETTE.terra }
+  ];
+  SPARKS.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (!el) return;
+    const data = genSparkline(s.seed, s.base, s);
+    const W = 280, H = 32;
+    const path = sparklinePath(data, W, H, 2);
+    const fillPath = path + ` L ${W - 2} ${H - 2} L 2 ${H - 2} Z`;
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+      <path d="${fillPath}" fill="${s.color}" fill-opacity="0.10" stroke="none"/>
+      <path d="${path}" fill="none" stroke="${s.color}" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>`;
+  });
+
+  // ─── Tab 1 stacked-area channel-spend chart ───
+  window.__chartInit['1'] = (function() {
+    let drawn = false;
+    return function() {
+      if (drawn) return;
+      const canvas = document.getElementById('t1-spend-chart');
+      if (!canvas || !window.Chart) return;
+
+      const days = 30, labels = [];
+      const today = new Date('2026-05-04');
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(today); d.setDate(d.getDate() - i);
+        labels.push(`${d.getMonth() + 1}/${d.getDate()}`);
+      }
+      function gen(seed, mean, opts) {
+        const r = mulberry32(seed);
+        const out = [];
+        for (let i = 0; i < days; i++) {
+          const dow = (today.getDay() - (days - 1 - i) + 7 * 5) % 7;
+          const wknd = (dow === 0 || dow === 6) ? 1.07 : 1;
+          let v = mean * wknd * (1 + (r() - 0.5) * 0.14);
+          if (opts && opts.recentDip && i >= days - 4) v *= 0.74;
+          out.push(Math.round(v));
+        }
+        return out;
+      }
+
+      const channels = [
+        { name: 'Google UAC',  mean: 42000, color: PALETTE.crimson, seed: 11 },
+        { name: 'Meta',        mean: 28000, color: PALETTE.amber,   seed: 12 },
+        { name: 'ASA',         mean: 18000, color: PALETTE.sage,    seed: 13 },
+        { name: 'AppLovin',    mean: 17000, color: PALETTE.slate,   seed: 14 },
+        { name: 'Unity',       mean: 14000, color: PALETTE.plum,    seed: 15 },
+        { name: 'Moloco',      mean: 10000, color: PALETTE.terra,   seed: 16, recentDip: true },
+        { name: 'ironSource',  mean:  7000, color: '#7A6A6A',       seed: 17 },
+        { name: 'TikTok',      mean:  5600, color: '#6A6A6A',       seed: 18 },
+        { name: 'InMobi',      mean:  4200, color: '#5E5C56',       seed: 19 },
+        { name: 'Liftoff',     mean:  4200, color: '#4A4A48',       seed: 20 }
+      ];
+
+      const datasets = channels.map(c => ({
+        label: c.name,
+        data: gen(c.seed, c.mean, { recentDip: c.recentDip }),
+        backgroundColor: c.color + '99',
+        borderColor: c.color,
+        borderWidth: 0.8,
+        fill: true,
+        pointRadius: 0,
+        tension: 0.25
+      }));
+
+      new Chart(canvas, {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              align: 'start',
+              labels: { boxWidth: 10, boxHeight: 10, padding: 10, font: { size: 10 } }
+            },
+            tooltip: {
+              mode: 'index', intersect: false,
+              callbacks: {
+                label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`,
+                footer: items => 'Total: $' + items.reduce((s, i) => s + i.parsed.y, 0).toLocaleString()
+              }
+            }
+          },
+          scales: {
+            x: {
+              stacked: true,
+              grid: { color: 'rgba(255,255,255,0.025)' },
+              ticks: { maxTicksLimit: 10, color: '#5E5C56', font: { size: 10 } }
+            },
+            y: {
+              stacked: true,
+              grid: { color: 'rgba(255,255,255,0.035)' },
+              ticks: {
+                color: '#8E8C84', font: { size: 10 },
+                callback: v => '$' + (v / 1000).toFixed(0) + 'K'
+              }
+            }
+          },
+          interaction: { mode: 'index', intersect: false }
+        }
+      });
+      drawn = true;
+    };
+  })();
+  // Tab 1 is the default-active tab — initialize its chart now since the click handler won't fire.
+  if (document.querySelector('.tab-panel[data-panel="1"].is-active')) {
+    requestAnimationFrame(() => window.__chartInit['1']());
   }
 
   // ─── Tab 6 Experiment 2 parallel-trends chart ───
